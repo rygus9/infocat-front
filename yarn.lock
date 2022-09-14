@@ -271,6 +271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prettier@npm:^2":
+  version: 2.7.0
+  resolution: "@types/prettier@npm:2.7.0"
+  checksum: bf5d0c7c1270909b39399539ac106d20ddaa85fe92eb1d59922dc99159604b4f8d5e41b0045fb29c8011585cf5bca2350b7441ef3d9816c08bd0e10ebd4b31d4
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -1101,6 +1108,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-config-prettier@npm:^8.5.0":
+  version: 8.5.0
+  resolution: "eslint-config-prettier@npm:8.5.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
+  languageName: node
+  linkType: hard
+
 "eslint-import-resolver-node@npm:^0.3.6":
   version: 0.3.6
   resolution: "eslint-import-resolver-node@npm:0.3.6"
@@ -1253,7 +1271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.23.1":
+"eslint@npm:^8.23.1":
   version: 8.23.1
   resolution: "eslint@npm:8.23.1"
   dependencies:
@@ -2722,6 +2740,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier-plugin-tailwindcss@npm:^0.1.13":
+  version: 0.1.13
+  resolution: "prettier-plugin-tailwindcss@npm:0.1.13"
+  peerDependencies:
+    prettier: ">=2.2.0"
+  checksum: 1b9000686e661be81de7d36d514c5ee34a98b11639b538bce8dd3a482c073c0148feb9d54b526babaede681d1c5ecb318ad97f38e8d71dd5cc26c33dfcaf8344
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "prettier@npm:2.7.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  languageName: node
+  linkType: hard
+
 "promise-inflight@npm:^1.0.1":
   version: 1.0.1
   resolution: "promise-inflight@npm:1.0.1"
@@ -2917,13 +2953,17 @@ __metadata:
   resolution: "resumerry-front-2.0@workspace:."
   dependencies:
     "@types/node": 18.7.17
+    "@types/prettier": ^2
     "@types/react": 18.0.19
     "@types/react-dom": 18.0.6
     autoprefixer: ^10.4.9
-    eslint: 8.23.1
+    eslint: ^8.23.1
     eslint-config-next: 12.3.0
+    eslint-config-prettier: ^8.5.0
     next: 12.3.0
     postcss: ^8.4.16
+    prettier: ^2.7.1
+    prettier-plugin-tailwindcss: ^0.1.13
     react: 18.2.0
     react-dom: 18.2.0
     tailwindcss: ^3.1.8
