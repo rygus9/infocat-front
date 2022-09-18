@@ -2,17 +2,11 @@ import Button from '@/components/shared/Button';
 import cls from '@/utils/cls';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Bars3Icon } from '@heroicons/react/24/solid';
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const router = useRouter();
   const makeRouteFunc = (path: string) => () => {
     router.push(path);
-  };
-  const toggleMenu = () => {
-    setMobileOpen((elem) => !elem);
   };
 
   return (
@@ -67,7 +61,7 @@ const AuthPanel = ({
       buttonStyle="fill"
       color="gray"
       size="text-sm w-16 h-7 sm:w-20 md:w-24 md:h-8 md:text-base"
-      onClick={makeRouteFunc('/join')}
+      onClick={makeRouteFunc('/signup')}
     >
       회원가입
     </Button>
