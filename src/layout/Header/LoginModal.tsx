@@ -46,10 +46,10 @@ export default function LoginModal({ isOpen, closeModal }: LoginModalProps) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title as="h3" className="text-center text-xl font-medium uppercase leading-6 text-purple-600">
+                <Dialog.Title as="h3" className="text-center text-2xl font-medium uppercase leading-6 text-purple-600">
                   Resumerry
                 </Dialog.Title>
-                <p className="pt-1 text-center text-gray-500">Resumerry에 오신걸 환영합니다.</p>
+                <p className="pt-2 text-center text-gray-500">Resumerry에 오신걸 환영합니다.</p>
                 <form>
                   <section className="mt-4 space-y-2">
                     <WrapLabel label="이메일" id="email">
