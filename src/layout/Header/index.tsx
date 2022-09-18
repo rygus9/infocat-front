@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <>
-      <header
+      <nav
         className={cls(
           'fixed z-40 h-20 w-full bg-white shadow-md shadow-gray-200 md:h-14',
           'px-4 md:px-10'
@@ -35,8 +35,8 @@ export default function Header() {
         <div className="flex h-8 items-start justify-start md:hidden">
           <PathList></PathList>
         </div>
-      </header>
-      <div className="h-24 w-full md:h-20"></div>
+      </nav>
+      <div className="h-20 w-full md:h-16"></div>
     </>
   );
 }
