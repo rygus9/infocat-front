@@ -1,7 +1,7 @@
 import { ResiterForm } from '.';
 import { UseFormReturn } from 'react-hook-form/dist/types';
 import TextInput from '@/components/shared/input/TextInput';
-import WrapLabel from './WrapLabel';
+import WrapLabel from '../../shared/input/WrapLabel';
 import Button from '@/components/shared/common/Button';
 
 interface FirstForm {
