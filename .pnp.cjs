@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/manager-webpack5", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:6.5.12"],\
             ["@storybook/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:6.5.12"],\
             ["@storybook/testing-library", "npm:0.0.13"],\
+            ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
             ["@testing-library/cypress", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:8.0.3"],\
             ["@types/babel__core", "npm:7.1.19"],\
             ["@types/node", "npm:18.7.17"],\
@@ -67,6 +68,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier-plugin-tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.1.13"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
+            ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\
             ["sb", "npm:6.5.12"],\
             ["tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.1.8"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
@@ -7125,6 +7127,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@szmarczak/http-timer", "npm:1.1.2"],\
             ["defer-to-connect", "npm:1.1.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@tailwindcss/forms", [\
+        ["npm:0.5.3", {\
+          "packageLocation": "./.yarn/cache/@tailwindcss-forms-npm-0.5.3-4d75c0dfda-9eddb4dbd0.zip/node_modules/@tailwindcss/forms/",\
+          "packageDependencies": [\
+            ["@tailwindcss/forms", "npm:0.5.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3", {\
+          "packageLocation": "./.yarn/__virtual__/@tailwindcss-forms-virtual-1982797ac4/0/cache/@tailwindcss-forms-npm-0.5.3-4d75c0dfda-9eddb4dbd0.zip/node_modules/@tailwindcss/forms/",\
+          "packageDependencies": [\
+            ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
+            ["@types/tailwindcss", null],\
+            ["mini-svg-data-uri", "npm:1.4.4"],\
+            ["tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.1.8"]\
+          ],\
+          "packagePeers": [\
+            "@types/tailwindcss",\
+            "tailwindcss"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -16773,6 +16798,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["mini-svg-data-uri", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/mini-svg-data-uri-npm-1.4.4-929f6f1119-997f1fbd8d.zip/node_modules/mini-svg-data-uri/",\
+          "packageDependencies": [\
+            ["mini-svg-data-uri", "npm:1.4.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["minimalistic-assert", [\
         ["npm:1.0.1", {\
           "packageLocation": "./.yarn/cache/minimalistic-assert-npm-1.0.1-dc8bb23d29-cc7974a926.zip/node_modules/minimalistic-assert/",\
@@ -19225,6 +19259,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-hook-form", [\
+        ["npm:7.35.0", {\
+          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.35.0-249f80081f-e0e78de4a0.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "npm:7.35.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-7b8fbfd3a0/0/cache/react-hook-form-npm-7.35.0-249f80081f-e0e78de4a0.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\
+            ["@types/react", "npm:18.0.19"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-inspector", [\
         ["npm:5.1.1", {\
           "packageLocation": "./.yarn/cache/react-inspector-npm-5.1.1-20c125b3fd-ca9e4c1fed.zip/node_modules/react-inspector/",\
@@ -19833,6 +19889,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/manager-webpack5", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:6.5.12"],\
             ["@storybook/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:6.5.12"],\
             ["@storybook/testing-library", "npm:0.0.13"],\
+            ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
             ["@testing-library/cypress", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:8.0.3"],\
             ["@types/babel__core", "npm:7.1.19"],\
             ["@types/node", "npm:18.7.17"],\
@@ -19854,6 +19911,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier-plugin-tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.1.13"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
+            ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\
             ["sb", "npm:6.5.12"],\
             ["tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.1.8"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\

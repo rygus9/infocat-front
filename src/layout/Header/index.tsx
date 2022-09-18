@@ -1,4 +1,4 @@
-import Button from '@/components/shared/Button';
+import Button from '@/components/shared/common/Button';
 import cls from '@/utils/cls';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

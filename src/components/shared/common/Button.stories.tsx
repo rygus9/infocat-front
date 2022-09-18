@@ -1,7 +1,7 @@
-import Button from '.';
+import Button from './Button';
 
 export default {
-  title: 'components/shared/Button',
+  title: 'components/shared/common/Button',
   component: Button,
   argTypes: {
     size: { defaultValue: 'px-3 py-1.5', control: 'text' },
