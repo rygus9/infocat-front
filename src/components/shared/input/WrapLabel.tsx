@@ -13,7 +13,7 @@ export default function WrapLabel({ label, errorMessage, id = label, children }:
         {label}
       </label>
       {children}
-      <div>{errorMessage}</div>
+      <div className="text-sm text-red-500">{errorMessage}</div>
     </div>
   );
 }

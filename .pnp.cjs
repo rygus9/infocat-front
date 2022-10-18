@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@headlessui/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:1.7.2"],\
             ["@heroicons/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:2.0.11"],\
+            ["@hookform/resolvers", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:2.9.8"],\
             ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:13.4.0"],\
@@ -60,9 +61,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
             ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\
             ["react-query", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.39.2"],\
+            ["recoil", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.7.5"],\
             ["tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.1.8"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
-            ["webpack", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:5.74.0"]\
+            ["webpack", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:5.74.0"],\
+            ["zod", "npm:3.19.1"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -945,6 +948,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/react",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@hookform/resolvers", [\
+        ["npm:2.9.8", {\
+          "packageLocation": "./.yarn/cache/@hookform-resolvers-npm-2.9.8-cccf5856b5-3b8389a32b.zip/node_modules/@hookform/resolvers/",\
+          "packageDependencies": [\
+            ["@hookform/resolvers", "npm:2.9.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:2.9.8", {\
+          "packageLocation": "./.yarn/__virtual__/@hookform-resolvers-virtual-81cad8f223/0/cache/@hookform-resolvers-npm-2.9.8-cccf5856b5-3b8389a32b.zip/node_modules/@hookform/resolvers/",\
+          "packageDependencies": [\
+            ["@hookform/resolvers", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:2.9.8"],\
+            ["@types/react-hook-form", null],\
+            ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-hook-form",\
+            "react-hook-form"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4058,6 +4083,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["hamt_plus", [\
+        ["npm:1.0.2", {\
+          "packageLocation": "./.yarn/cache/hamt_plus-npm-1.0.2-67a52ee1df-af26ea32db.zip/node_modules/hamt_plus/",\
+          "packageDependencies": [\
+            ["hamt_plus", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["has", [\
         ["npm:1.0.3", {\
           "packageLocation": "./.yarn/cache/has-npm-1.0.3-b7f00631c1-b9ad53d53b.zip/node_modules/has/",\
@@ -6487,6 +6521,37 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["recoil", [\
+        ["npm:0.7.5", {\
+          "packageLocation": "./.yarn/cache/recoil-npm-0.7.5-b0fe76743a-19b410cca6.zip/node_modules/recoil/",\
+          "packageDependencies": [\
+            ["recoil", "npm:0.7.5"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.7.5", {\
+          "packageLocation": "./.yarn/__virtual__/recoil-virtual-39379561a3/0/cache/recoil-npm-0.7.5-b0fe76743a-19b410cca6.zip/node_modules/recoil/",\
+          "packageDependencies": [\
+            ["recoil", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.7.5"],\
+            ["@types/react", "npm:18.0.19"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["@types/react-native", null],\
+            ["hamt_plus", "npm:1.0.2"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
+            ["react-native", null]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react-native",\
+            "@types/react",\
+            "react-dom",\
+            "react-native",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["redent", [\
         ["npm:3.0.0", {\
           "packageLocation": "./.yarn/cache/redent-npm-3.0.0-31892f4906-fa1ef20404.zip/node_modules/redent/",\
@@ -6597,6 +6662,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["resumerry-front-2.0", "workspace:."],\
             ["@headlessui/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:1.7.2"],\
             ["@heroicons/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:2.0.11"],\
+            ["@hookform/resolvers", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:2.9.8"],\
             ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:13.4.0"],\
@@ -6622,9 +6688,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
             ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\
             ["react-query", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.39.2"],\
+            ["recoil", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.7.5"],\
             ["tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:3.1.8"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
-            ["webpack", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:5.74.0"]\
+            ["webpack", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:5.74.0"],\
+            ["zod", "npm:3.19.1"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -7779,6 +7847,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yocto-queue-npm-0.1.0-c6c9a7db29-f77b3d8d00.zip/node_modules/yocto-queue/",\
           "packageDependencies": [\
             ["yocto-queue", "npm:0.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["zod", [\
+        ["npm:3.19.1", {\
+          "packageLocation": "./.yarn/cache/zod-npm-3.19.1-5084a5dfc9-56e420ea58.zip/node_modules/zod/",\
+          "packageDependencies": [\
+            ["zod", "npm:3.19.1"]\
           ],\
           "linkType": "HARD"\
         }]\
