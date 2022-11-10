@@ -65,12 +65,16 @@ const AuthPanel = ({ makeRouteFunc, openLogin }: { makeRouteFunc: (path: string)
 
 const menus = [
   {
-    title: '질문 게시판',
-    path: '/post',
+    title: '멘토링',
+    path: '/mentoring',
   },
   {
-    title: '이력서 보기',
-    path: '/resume',
+    title: '블로그',
+    path: '/blog',
+  },
+  {
+    title: '커뮤니티',
+    path: '/community',
   },
 ];
 
