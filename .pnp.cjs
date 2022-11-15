@@ -67,6 +67,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-loader", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.0.1"],\
             ["prettier", "npm:2.7.1"],\
             ["prettier-plugin-tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.1.13"],\
+            ["rambda", "npm:7.3.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
             ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\
@@ -19093,6 +19094,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["rambda", [\
+        ["npm:7.3.0", {\
+          "packageLocation": "./.yarn/cache/rambda-npm-7.3.0-8e84a1ec21-28dce46049.zip/node_modules/rambda/",\
+          "packageDependencies": [\
+            ["rambda", "npm:7.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ramda", [\
         ["npm:0.28.0", {\
           "packageLocation": "./.yarn/cache/ramda-npm-0.28.0-6a5fe8f6cc-44ea6e5010.zip/node_modules/ramda/",\
@@ -19937,6 +19947,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-loader", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.0.1"],\
             ["prettier", "npm:2.7.1"],\
             ["prettier-plugin-tailwindcss", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.1.13"],\
+            ["rambda", "npm:7.3.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:18.2.0"],\
             ["react-hook-form", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.35.0"],\

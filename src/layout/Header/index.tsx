@@ -40,7 +40,7 @@ export default function Header() {
           <PathList></PathList>
         </div>
       </nav>
-      <div className="h-20 w-full md:h-16"></div>
+      <div className="h-20 w-full md:h-14"></div>
       <LoginModal isOpen={loginOpen} closeModal={closeLogin}></LoginModal>
     </>
   );
