@@ -25,7 +25,7 @@ export default function Header() {
   const closeLogin = () => setLoginOpen(false);
 
   const router = useRouter();
-  const onRegistClick = () => router.push('/register');
+  const onRegistClick = () => router.push('/signup');
 
   return (
     <>
