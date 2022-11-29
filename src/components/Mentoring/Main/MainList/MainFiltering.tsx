@@ -2,7 +2,6 @@ import PopTransition from '@/components/shared/common/PopTransition';
 import cls from '@/utils/cls';
 import { Menu, Popover } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-import { PropsWithChildren } from 'react';
 
 export default function MainFiltering() {
   return (
@@ -11,7 +10,7 @@ export default function MainFiltering() {
         <div className="relative w-fit">
           <input
             className={cls(
-              'h-fit w-96 rounded-sm border border-gray-500 py-1.5 pl-3 text-lg',
+              'h-fit w-96 rounded-md border border-gray-400 py-2 pl-3 pr-10 text-lg',
               'focus:outline-none focus:ring-1 focus:ring-black'
             )}
             placeholder="제목을 입력해주세요."
@@ -85,7 +84,7 @@ function OrderMenu() {
               className="absolute right-0 mt-2 w-fit divide-y divide-gray-100 rounded-md bg-white shadow-lg focus:outline-none"
             >
               {orderCategory.map((menu) => (
-                <Menu.Item>
+                <Menu.Item key={menu}>
                   {({ active }) => (
                     <li
                       className={`${

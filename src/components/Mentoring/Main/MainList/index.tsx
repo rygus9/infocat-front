@@ -61,7 +61,7 @@ const cardList = [
 
 export default function MainList() {
   return (
-    <main className="m-auto max-w-6xl">
+    <main className="m-auto max-w-5xl">
       <MainFiltering></MainFiltering>
       <section className="grid w-full grid-cols-3 justify-items-center py-0">
         {cardList.map((elem) => (

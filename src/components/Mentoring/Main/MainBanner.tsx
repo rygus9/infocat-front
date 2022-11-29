@@ -1,7 +1,7 @@
 export default function MainBanner() {
   return (
-    <section className="h-[450px] w-full bg-[#8d8d8d]">
-      <div className="m-auto flex h-full w-full max-w-6xl items-stretch px-10">
+    <section className="h-[400px] w-full bg-[#a1a1a1]">
+      <div className="m-auto flex h-full w-full max-w-5xl items-stretch px-10">
         <section className="flex flex-1 flex-col justify-center px-10 text-white">
           <h3 className="text-[30px]">1:1 멘토링</h3>
           <p className="text-[18px]">
