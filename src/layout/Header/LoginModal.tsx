@@ -5,6 +5,10 @@ import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
+import { XMarkIcon } from '@heroicons/react/20/solid';
+import { useMutation } from 'react-query';
+import loginApi from '@/api/auth/loginApi';
+import testCookieApi from '@/api/auth/testCookieApi';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -17,7 +21,21 @@ interface LoginForm {
 }
 
 export default function LoginModal({ isOpen, closeModal }: LoginModalProps) {
-  const { register } = useForm<LoginForm>();
+  const { mutateAsync: loginMutate, isLoading: loginLoading } = useMutation(loginApi);
+
+  const { register, handleSubmit } = useForm<LoginForm>();
+
+  const onSubmit = async (data: LoginForm) => {
+    const result = await loginMutate(data);
+    console.log(result);
+  };
+
+  const onClick = async () => {
+    const data = await testCookieApi();
+    console.log(data);
+  };
+
+  const onError = () => {};
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -45,12 +63,13 @@ export default function LoginModal({ isOpen, closeModal }: LoginModalProps) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="relative w-full max-w-sm transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title as="h3" className="text-center text-2xl font-medium uppercase leading-6 text-purple-600">
                   Resumerry
                 </Dialog.Title>
                 <p className="pt-2 text-center text-gray-500">Resumerry에 오신걸 환영합니다.</p>
-                <form>
+                <XMarkIcon className="absolute right-4 top-2 h-6 w-6 cursor-pointer text-purple-600" onClick={closeModal}></XMarkIcon>
+                <form onSubmit={handleSubmit(onSubmit, onError)}>
                   <section className="mt-4 space-y-2">
                     <WrapLabel label="이메일" id="email">
                       <TextInput id="email" register={register('email')} type="email" placeholder="이메일"></TextInput>
@@ -63,6 +82,9 @@ export default function LoginModal({ isOpen, closeModal }: LoginModalProps) {
                   <div className="pt-6">
                     <Button type="submit" color="purple" buttonStyle="fill" size="w-full h-10">
                       로그인
+                    </Button>
+                    <Button type="button" onClick={onClick}>
+                      쿠키텟트
                     </Button>
                   </div>
                   <div className="pt-2 text-center text-sm text-gray-500">
