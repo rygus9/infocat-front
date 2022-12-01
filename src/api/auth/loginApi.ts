@@ -10,6 +10,6 @@ interface LoginApiReturn {
   refreshToken: string;
 }
 
-const loginApi = ({ ...elem }: LoginApiProps): Promise<LoginApiReturn> => axiosCase(client.post('/auth/login', { ...elem }));
+const loginApi = ({ ...elem }: LoginApiProps): Promise<LoginApiReturn> => axiosCase(client.post('/api/v1/auth/login', { ...elem }));
 
 export default loginApi;

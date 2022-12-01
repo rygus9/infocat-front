@@ -12,6 +12,6 @@ interface SignUpValidationApiReturn {
 }
 
 const signUpValidationApi = ({ ...elem }: SignUpValidationApiProps): Promise<SignUpValidationApiReturn> =>
-  axiosCase(client.post('/auth/validation', { ...elem }));
+  axiosCase(client.post('/api/v1/auth/validation', { ...elem }));
 
 export default signUpValidationApi;

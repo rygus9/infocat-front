@@ -15,7 +15,7 @@ interface SighUpApiReturn {
 const signUpApi = ({ ...elem }: SignUpApiProps): Promise<SighUpApiReturn> =>
   axiosCase(
     client.post(
-      '/auth/sign-up',
+      '/api/v1/auth/sign-up',
       {
         email: elem.email,
         nickname: elem.nickname,

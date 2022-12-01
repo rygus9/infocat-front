@@ -1,4 +1,4 @@
-import { AxiosPromise } from 'axios';
+import removeUndefined from '@/utils/removeUndefined';
 import axiosClient from '../common/client';
 import axiosCase from '../common/promiseCase';
 
@@ -11,6 +11,6 @@ interface ResetPasswordReturn {
 }
 
 const resetPasswordApi = ({ ...elem }: ResetPasswordProps): Promise<ResetPasswordReturn> =>
-  axiosCase(axiosClient.post('/auth/reset_password', { ...elem }));
+  axiosCase(axiosClient.post('/api/v1/auth/reset_password', removeUndefined({ ...elem })));
 
 export default resetPasswordApi;
