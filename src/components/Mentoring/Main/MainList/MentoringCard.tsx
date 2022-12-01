@@ -1,24 +1,17 @@
+import { MentoringCardParams } from '@/api/mentoring/mentoringListSearchApi';
+import yearToRank from '@/utils/yearToRank';
 import { PropsWithChildren } from 'react';
 
-interface MentoringCard {
-  title: string;
-  role: string;
-  years: string;
-  company: string;
-  stars: number;
-  image?: string;
-}
-
-export default function MentoringCard({ title, role, years, company, stars, image }: MentoringCard) {
+export default function MentoringCard({ title, role, years, company, stars, image }: MentoringCardParams) {
   return (
-    <article className="h-72 w-80 rounded-md bg-white py-8 px-[2.25rem] shadow-md">
+    <article className="h-full w-full max-w-[22rem] rounded-md bg-white p-6 shadow-md sm:p-6">
       <header className="flex items-center space-x-4">
-        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"></div>
+        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-lightGray"></div>
         <h3 className="text-lg leading-6">{title}</h3>
       </header>
-      <section className="space-y-2 py-10 px-6 text-base">
+      <section className="space-y-2 pl-3 pt-4 pb-0 text-base">
         <LabelContent title="직무">{role}</LabelContent>
-        <LabelContent title="경력">{years}</LabelContent>
+        <LabelContent title="경력">{yearToRank(years)}</LabelContent>
         <LabelContent title="현직">{company}</LabelContent>
         <LabelContent title="평가">{stars} / 5.0</LabelContent>
       </section>

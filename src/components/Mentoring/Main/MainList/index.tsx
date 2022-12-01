@@ -1,77 +1,61 @@
+import mentoringListSearchApi from '@/api/mentoring/mentoringListSearchApi';
+import cls from '@/utils/cls';
+import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 import MainFiltering from './MainFiltering';
 import MentoringCard from './MentoringCard';
 import PageNav from './PageNav';
 
-const cardList = [
-  {
-    id: 1,
-    title: '[대기업 전용] 개발자 자소서 첨삭 및 커리어 상담',
-    role: 'SW엔지니어',
-    years: '1',
-    company: '삼성전자',
-    stars: 4.5,
-    image: 's3',
-  },
-  {
-    id: 2,
-    title: '[대기업 전용] 개발자 자소서 첨삭 및 커리어 상담',
-    role: 'SW엔지니어',
-    years: '1',
-    company: '삼성전자',
-    stars: 4.5,
-    image: 's3',
-  },
-  {
-    id: 3,
-    title: '[대기업 전용] 개발자 자소서 첨삭 및 커리어 상담',
-    role: 'SW엔지니어',
-    years: '1',
-    company: '삼성전자',
-    stars: 4.5,
-    image: 's3',
-  },
-  {
-    id: 4,
-    title: '[대기업 전용] 개발자 자소서 첨삭 및 커리어 상담',
-    role: 'SW엔지니어',
-    years: '1',
-    company: '삼성전자',
-    stars: 4.5,
-    image: 's3',
-  },
-  {
-    id: 5,
-    title: '[대기업 전용] 개발자 자소서 첨삭 및 커리어 상담',
-    role: 'SW엔지니어',
-    years: '1',
-    company: '삼성전자',
-    stars: 4.5,
-    image: 's3',
-  },
-  {
-    id: 6,
-    title: '[대기업 전용] 개발자 자소서 첨삭 및 커리어 상담',
-    role: 'SW엔지니어',
-    years: '1',
-    company: '삼성전자',
-    stars: 4.5,
-    image: 's3',
-  },
-];
-
 export default function MainList() {
+  const router = useRouter();
+  const { page, category, sorted, field, title } = router.query;
+
+  const { status, data } = useQuery({
+    queryKey: [`mentoringList_${JSON.stringify(router.query)}`],
+    queryFn: () =>
+      mentoringListSearchApi({
+        category,
+        page,
+        sorted: sorted || 'recent',
+        field,
+        title,
+      }),
+    onSuccess: () => {},
+  });
+
   return (
-    <main className="m-auto max-w-5xl">
-      <MainFiltering></MainFiltering>
-      <section className="grid w-full grid-cols-3 justify-items-center py-0">
-        {cardList.map((elem) => (
-          <div key={elem.id} className="p-3">
-            <MentoringCard {...elem} />
-          </div>
-        ))}
+    <main className="m-auto w-fit">
+      {status === 'success' ? (
+        <MainFiltering totalNums={data.totalElements}></MainFiltering>
+      ) : (
+        <MainFiltering totalNums=".."></MainFiltering>
+      )}
+      <section
+        className={cls(
+          'm-auto grid w-fit grid-cols-1 gap-4 py-0 px-4 pt-3',
+          'xs:grid-cols-2 xs:gap-2 xs:px-6',
+          'sm:gap-5',
+          'md:grid-cols-3 md:gap-2',
+          'lg:gap-4',
+          'xl:gap-5'
+        )}
+      >
+        {status === 'success' ? (
+          data?.content.map((elem) => (
+            <div key={elem.id}>
+              <MentoringCard {...elem} />
+            </div>
+          ))
+        ) : (
+          <div>로딩중</div>
+        )}
       </section>
       <nav className="pb-20 pt-5">
-        <PageNav></PageNav>
+        {status === 'success' ? (
+          <PageNav pageNum={page === undefined ? 1 : parseInt(page as string)} endPage={parseInt(data.totalPages)}></PageNav>
+        ) : (
+          <div></div>
+        )}
       </nav>
     </main>
   );
