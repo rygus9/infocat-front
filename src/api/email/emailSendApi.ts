@@ -10,6 +10,6 @@ interface EmailSendApiReturn {
 }
 
 const emailSendApi = ({ ...elem }: EmailSendApiProps): Promise<EmailSendApiReturn> =>
-  axiosCase(client.get('/email', { params: { email: elem.email } }));
+  axiosCase(client.get('/api/v1/email', { params: { email: elem.email } }));
 
 export default emailSendApi;

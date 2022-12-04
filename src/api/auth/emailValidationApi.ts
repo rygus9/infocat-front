@@ -11,6 +11,6 @@ interface EmailValidationApiReturn {
 }
 
 const emailValidationApi = ({ ...elem }: EmailValidationApiProps): Promise<EmailValidationApiReturn> =>
-  axiosCase(client.post('/email', { ...elem }));
+  axiosCase(client.post('/api/v1/email', { ...elem }));
 
 export default emailValidationApi;
