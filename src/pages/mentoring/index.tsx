@@ -4,7 +4,7 @@ import { NextPage } from 'next';
 
 const Mentoring: NextPage = () => {
   return (
-    <main className="bg-[#f2f2f2]">
+    <main className="bg-darkWhite">
       <MainBanner />
       <MainList />
     </main>

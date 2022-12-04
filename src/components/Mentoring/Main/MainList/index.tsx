@@ -21,12 +21,17 @@ export default function MainList() {
         title,
       }),
     onSuccess: () => {},
-  });
+    useErrorBoundary: false,
+    suspense: false,
+  }); /** 이제는 이렇게 해줘야 하는구나. */
+  console.log(status, data);
 
   return (
     <main className="m-auto w-fit">
       {status === 'success' ? (
-        <MainFiltering totalNums={data.totalElements}></MainFiltering>
+        <>
+          <MainFiltering totalNums={data?.totalElements}></MainFiltering>
+        </>
       ) : (
         <MainFiltering totalNums=".."></MainFiltering>
       )}
@@ -52,7 +57,7 @@ export default function MainList() {
       </section>
       <nav className="pb-20 pt-5">
         {status === 'success' ? (
-          <PageNav pageNum={page === undefined ? 1 : parseInt(page as string)} endPage={parseInt(data.totalPages)}></PageNav>
+          <PageNav pageNum={page === undefined ? 1 : parseInt(page as string)} endPage={parseInt(data?.totalPages)}></PageNav>
         ) : (
           <div></div>
         )}
