@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="bg-myBlack" lang="ko" style={{ scrollBehavior: 'smooth' }}>
+      <Html className="bg-myBlack" lang="ko">
         <Head>
           {/* favicon */}
           <link rel="apple-touch-icon" sizes="57x57" href="/image/favi/apple-icon-57x57.png" />
