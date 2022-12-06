@@ -16,8 +16,8 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Header></Header>
       <RecoilRoot>
+        <Header></Header>
         <Component {...pageProps} />
       </RecoilRoot>
     </QueryClientProvider>
