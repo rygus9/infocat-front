@@ -15,10 +15,10 @@ const TextInput = ({ register, ...rest }: TextInputProps) => {
       {...register}
       autoComplete="off"
       className={cls(
-        'w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 shadow-sm',
-        'text-base text-gray-600',
-        'placeholder:text placeholder:text-gray-400',
-        'focus:border-purple-500 focus:ring-0'
+        'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
+        'text-base text-darkGray',
+        'placeholder:text placeholder:text-lightGray',
+        'focus:border-darkPurPle focus:ring-0'
       )}
     ></input>
   );

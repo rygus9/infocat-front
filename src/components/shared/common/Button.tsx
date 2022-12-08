@@ -37,8 +37,8 @@ interface makeButtonClassNameProps {
 const makeButtonClassName = ({ color, buttonStyle }: makeButtonClassNameProps) => {
   if (color == 'purple') {
     if (buttonStyle == 'fill')
-      return 'bg-purple-600 text-white hover:bg-purple-500 disabled:bg-purple-500 disabled:hover:bg-purple-500 disabled:cursor-not-allowed';
-    if (buttonStyle == 'border') return 'border border-purple-400 text-purple-500 hover:ring-1 hover:ring-purple-400';
+      return 'bg-lightPurple text-white hover:bg-lightPurple disabled:bg-lightPurple disabled:hover:bg-lightPurple disabled:cursor-not-allowed';
+    if (buttonStyle == 'border') return 'border border-purple-400 text-lightPurple hover:ring-1 hover:ring-purple-400';
   }
   if (color == 'gray') {
     if (buttonStyle == 'fill') return 'bg-gray-700 text-white hover:bg-gray-600';

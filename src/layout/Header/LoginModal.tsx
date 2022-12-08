@@ -9,6 +9,7 @@ import { XMarkIcon } from '@heroicons/react/20/solid';
 import { useMutation } from 'react-query';
 import loginApi from '@/api/auth/loginApi';
 import testCookieApi from '@/api/auth/testCookieApi';
+import HeaderLogo from './HeaderLogo';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -64,10 +65,14 @@ export default function LoginModal({ isOpen, closeModal }: LoginModalProps) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="relative w-full max-w-sm transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title as="h3" className="text-center text-2xl font-medium uppercase leading-6 text-purple-600">
-                  Resumerry
+                <Dialog.Title as="h3" className="relative top-1 flex items-center justify-center pt-2 font-bold">
+                  <figure className="h-10 w-40">
+                    <HeaderLogo></HeaderLogo>
+                  </figure>
                 </Dialog.Title>
-                <p className="pt-2 text-center text-gray-500">Resumerry에 오신걸 환영합니다.</p>
+                {/* <p className="text-gray-500 pt-2 text-center">
+                  <span className="pr-1 font-bold text-darkPurPle">INFO CAT</span>에 오신걸 환영합니다.
+                </p> */}
                 <XMarkIcon className="absolute right-4 top-2 h-6 w-6 cursor-pointer text-purple-600" onClick={closeModal}></XMarkIcon>
                 <form onSubmit={handleSubmit(onSubmit, onError)}>
                   <section className="mt-4 space-y-2">
@@ -83,11 +88,8 @@ export default function LoginModal({ isOpen, closeModal }: LoginModalProps) {
                     <Button type="submit" color="purple" buttonStyle="fill" size="w-full h-10">
                       로그인
                     </Button>
-                    <Button type="button" onClick={onClick}>
-                      쿠키텟트
-                    </Button>
                   </div>
-                  <div className="pt-2 text-center text-sm text-gray-500">
+                  <div className="text-gray-500 pt-2 text-center text-sm">
                     아직 회원이 아니신가요?{' '}
                     <Link href="/signup">
                       <a onClick={closeModal} className="pl-1 text-base text-purple-500 hover:underline hover:underline-offset-2">
