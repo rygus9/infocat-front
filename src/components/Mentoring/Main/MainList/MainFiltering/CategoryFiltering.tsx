@@ -1,20 +1,10 @@
 import PopTransition from '@/components/shared/common/PopTransition';
+import { jobCategoryOption } from '@/contents';
 import cls from '@/utils/cls';
 import { Popover } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { useForm, UseFormRegisterReturn } from 'react-hook-form';
-
-const categoryOption = {
-  'IT/개발자': [
-    { name: 'SW 엔지니어', value: '101' },
-    { name: 'QA 엔지니어', value: '102' },
-    { name: '프론트엔드 엔지니어', value: '103' },
-    { name: '서버 엔지니어', value: '104' },
-    { name: '데이터 사이언티스트', value: '105' },
-  ],
-  '미디어/디자인': [{ name: 'UX/UI 디자이너', value: '201' }],
-} as { [key: string]: { name: string; value: string }[] };
 
 const fieldOption = [
   { name: '국내 자기소개서/이력서', value: '1' },
@@ -32,7 +22,6 @@ export default function CategoryFiltering() {
   const { register, handleSubmit, watch } = useForm<FilterValue>();
   const [majorCategory, setMajorCategory] = useState('');
 
-  console.log(watch());
   return (
     <Popover className="relative text-gray">
       {({ open }) => (
@@ -48,9 +37,9 @@ export default function CategoryFiltering() {
                   <section className="p-5">
                     <h3 className="text-lg text-black">멘토링 직무</h3>
                     <ul className="text-gray-500 space-y-2 py-3 pl-3">
-                      {Object.keys(categoryOption).map((name) => (
-                        <li onClick={() => setMajorCategory(name)} key={name}>
-                          {name}
+                      {jobCategoryOption.map((mainCategory) => (
+                        <li onClick={() => setMajorCategory(mainCategory.mainCategory)} key={mainCategory.mainCategory}>
+                          {mainCategory.mainCategory}
                         </li>
                       ))}
                     </ul>
@@ -58,16 +47,18 @@ export default function CategoryFiltering() {
                   <section className="p-5">
                     {majorCategory && (
                       <ul className="text-gray-500 space-y-2 py-3 pl-3">
-                        {categoryOption[majorCategory].map((option) => (
-                          <div key={option.value}>
-                            <ToggleInput
-                              label={option.name}
-                              register={register('category')}
-                              type="checkbox"
-                              value={option.value}
-                            ></ToggleInput>
-                          </div>
-                        ))}
+                        {jobCategoryOption
+                          .filter((elem) => elem.mainCategory === majorCategory)[0]
+                          .options.map((option) => (
+                            <div key={option.subCategory}>
+                              <ToggleInput
+                                label={option.subCategory}
+                                register={register('category')}
+                                type="checkbox"
+                                value={option.subValue}
+                              ></ToggleInput>
+                            </div>
+                          ))}
                       </ul>
                     )}
                   </section>
