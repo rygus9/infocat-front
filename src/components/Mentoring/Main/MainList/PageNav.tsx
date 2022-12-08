@@ -48,7 +48,7 @@ export default function PageNav({ pageNum, endPage }: PageNavParams) {
     }
   };
 
-  const pages = PageNums(pageNum, endPage);
+  const pages = endPage - pageNum < 5 ? range(endPage - 4, endPage + 1) : PageNums(pageNum, endPage);
 
   return (
     <section className="flex items-center justify-center space-x-2">
@@ -70,7 +70,7 @@ export default function PageNav({ pageNum, endPage }: PageNavParams) {
         </Fragment>
       ))}
 
-      {share(pageNum - 1, SHOW_PAGE) * SHOW_PAGE + SHOW_PAGE < endPage && (
+      {endPage - pageNum >= 5 && (
         <>
           <PageButton onClick={pageClick(pages[4] + 1)}>
             <EllipsisHorizontalIcon className="h-5 w-5" />
@@ -97,7 +97,7 @@ function PageButton({ children, onClick, highlight, disabled }: PropsWithChildre
       type="button"
       className={cls(
         'flex h-8 w-8 items-center justify-center px-2 shadow-md',
-        highlight ? 'bg-darkPurPle text-white' : 'bg-white text-darkGray',
+        highlight ? 'bg-lightPurple text-white' : 'bg-white text-darkGray',
         disabled ? 'bg-transparent text-lightGray shadow-none' : ''
       )}
       onClick={onClick}

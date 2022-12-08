@@ -3,14 +3,12 @@ import removeUndefined from '@/utils/removeUndefined';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import useMentoringListQuery from '../../hooks/useMentoringListQuery';
 import CategoryFiltering from './CategoryFiltering';
 import OrderMenu from './OrderMenu';
 
-interface MainFilteringParams {
-  totalNums: string;
-}
-
-export default function MainFiltering({ totalNums }: MainFilteringParams) {
+export default function MainFiltering() {
+  const { data: mentoringListQuery } = useMentoringListQuery(false);
   const [title, setTitle] = useState('');
   const router = useRouter();
   useEffect(() => {
@@ -45,7 +43,9 @@ export default function MainFiltering({ totalNums }: MainFilteringParams) {
         <CategoryFiltering />
       </div>
       <div className="flex w-full items-center justify-between">
-        <span className="text-sm text-darkGray">총 {totalNums}개의 멘토링</span>
+        <span className="text-sm text-darkGray">
+          총 {mentoringListQuery?.totalElements ? mentoringListQuery?.totalElements : '..'}개의 멘토링
+        </span>
         <OrderMenu />
       </div>
     </section>
