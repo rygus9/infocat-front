@@ -8,7 +8,6 @@ const Mentoring: NextPage = () => {
   return (
     <main className="bg-darkWhite">
       <MainBanner />
-      {/* <MainList /> */}
       <MainListNotSSR></MainListNotSSR>
     </main>
   );

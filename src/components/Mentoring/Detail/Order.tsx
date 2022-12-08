@@ -2,7 +2,7 @@ import { StarIcon } from '@heroicons/react/24/outline';
 
 export default function Order() {
   return (
-    <div className="fixed right-40 top-40 z-10 w-fit">
+    <div className="sticky top-20 z-10 w-fit pt-16 sm:sticky">
       <section className="w-80 rounded-xl border border-[rgba(0,0,0,0.1)] bg-white px-6 py-8 text-[#707070] shadow-xl">
         <h3 className="text-xl font-bold">예비 IT 개발자를 위한 취업 준비 가이드 : 자기소개서 특강</h3>
         <div className="space-y-1 py-2 text-sm">
@@ -22,9 +22,9 @@ export default function Order() {
           <p>전) 삼성전자 무선사업부 신입 공채 합격</p>
         </div>
       </section>
-      <nav className="mt-6 flex h-fit items-stretch justify-between">
-        <button className="h-20 rounded-xl bg-[#a272de] px-10 text-3xl text-white">신청하기</button>
-        <button className="flex h-20 w-20 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.1)] bg-white shadow-md">
+      <nav className="mt-4 flex h-fit items-stretch justify-start space-x-4">
+        <button className="h-16 rounded-xl bg-[#a272de] px-10 text-xl text-white">신청하기</button>
+        <button className="flex h-16 w-16 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.1)] bg-white shadow-md">
           <StarIcon className="h-6 w-6"></StarIcon>
         </button>
       </nav>

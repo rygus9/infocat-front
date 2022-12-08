@@ -6,8 +6,8 @@ const nextConfig = {
     if (process.env.NODE_ENV !== 'production') {
       return [
         {
-          destination: 'http://localhost:8080/:path*',
-          source: '/:path*',
+          destination: 'http://localhost:8080/api/v1/:path*',
+          source: '/api/v1/:path*',
         },
       ];
     }
