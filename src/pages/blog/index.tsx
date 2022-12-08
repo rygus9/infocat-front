@@ -1,3 +1,3 @@
-const Blog = () => <h2>BLOG PAGE</h2>;
+const Blog = () => <section>BLOG PAGE</section>;
 
 export default Blog;

@@ -1,8 +1,8 @@
 export default function DetailBody() {
   return (
-    <section>
+    <section className="w-fit flex-1 sm:px-3">
       <div className="m-auto max-w-5xl">
-        <section className="w-3/5 space-y-6 py-16 text-[#707070]">
+        <section className="w-full space-y-6 py-16 text-[#707070]">
           <h3 className="text-2xl">멘토링 소개</h3>
           <p className="w-fit bg-[#e8d6ff]">"안녕하세요 전)카카오뱅크 / 현)LINE 신기용입니다.</p>
           <p>
@@ -35,18 +35,18 @@ export default function DetailBody() {
           </p>
         </section>
       </div>
-      <hr />
+      <hr className="text-lightGray" />
       <div className="m-auto max-w-5xl">
-        <section className="w-3/5 space-y-6 py-12 text-[#707070]">
+        <section className="w-full space-y-6 py-12 text-[#707070]">
           <h3 className="text-2xl">멘토 소개</h3>
-          <section className="flex w-fit items-center">
+          <section className="flex w-full flex-col items-center sm:flex-row">
             <div className="w-fit">
               <div className="h-24 w-24 rounded-full bg-[#8d8d8d]"></div>
               <div className="mt-2 w-full text-center text-[#707070]">
                 <span className="text-lg">신기용</span> 멘토
               </div>
             </div>
-            <div className="ml-16 min-w-[400px] rounded-xl bg-[#f2f2f2] p-6">
+            <div className="mt-8 w-fit rounded-xl bg-[#f2f2f2] p-6 sm:mt-0 sm:ml-16">
               <p className="mb-4 font-bold">7년차 벡엔드 개발</p>
               <p>현) 카카오뱅크 개발</p>
               <p>전) LINE+ 신입 공채 합격 및 입사</p>
@@ -55,7 +55,7 @@ export default function DetailBody() {
           </section>
         </section>
       </div>
-      <hr />
+      <hr className="text-lightGray" />
       <div className="py-8"></div>
     </section>
   );
