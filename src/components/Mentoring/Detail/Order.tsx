@@ -1,4 +1,5 @@
 import { StarIcon } from '@heroicons/react/24/outline';
+import ApplyButton from './ApplyButton';
 
 export default function Order() {
   return (
@@ -23,7 +24,7 @@ export default function Order() {
         </div>
       </section>
       <nav className="mt-4 flex h-fit items-stretch justify-start space-x-4">
-        <button className="h-16 rounded-xl bg-[#a272de] px-10 text-xl text-white">신청하기</button>
+        <ApplyButton designType="desktop"></ApplyButton>
         <button className="flex h-16 w-16 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.1)] bg-white shadow-md">
           <StarIcon className="h-6 w-6"></StarIcon>
         </button>

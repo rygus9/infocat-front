@@ -1,3 +1,4 @@
+import ApplyButton from '@/components/Mentoring/Detail/ApplyButton';
 import DetailBanner from '@/components/Mentoring/Detail/DetailBanner';
 import DetailBody from '@/components/Mentoring/Detail/DetailBody';
 import Order from '@/components/Mentoring/Detail/Order';
@@ -16,7 +17,7 @@ const MentoringPage: NextPage = () => {
       </div>
       <div className="sticky bottom-0 border-t border-palePurple bg-white py-2 lg:hidden">
         <nav className="flex h-fit justify-center space-x-2 px-3">
-          <button className="h-12 w-full max-w-[370px] flex-1 rounded-xl bg-[#a272de] px-10 text-2xl text-white">신청하기</button>
+          <ApplyButton designType="mobile"></ApplyButton>
           <button className="flex h-12 w-12 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.1)] bg-white shadow-md">
             <StarIcon className="h-6 w-6"></StarIcon>
           </button>

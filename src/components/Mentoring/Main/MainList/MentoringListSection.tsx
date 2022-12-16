@@ -38,7 +38,10 @@ export default function MentoringListSection() {
       )}
 
       <nav className="pb-20 pt-10">
-        <PageNav pageNum={page === undefined ? 1 : parseInt(page as string)} endPage={12}></PageNav>
+        <PageNav
+          pageNum={page === undefined ? 1 : parseInt(page as string)}
+          endPage={parseInt(mentoringListQuery?.totalPages as string)}
+        ></PageNav>
       </nav>
     </>
   );
