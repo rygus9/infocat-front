@@ -1,8 +1,8 @@
 export const jobCategoryOption = [
   {
     mainCategory: 'IT/개발자',
-    mainValue: '100',
     options: [
+      { subCategory: '전체', subValue: '100' },
       { subCategory: 'SW 엔지니어', subValue: '101' },
       { subCategory: 'QA 엔지니어', subValue: '102' },
       { subCategory: '프론트엔드 엔지니어', subValue: '103' },
@@ -12,10 +12,22 @@ export const jobCategoryOption = [
   },
   {
     mainCategory: '미디어/디자인',
-    mainValue: '200',
-    options: [{ subCategory: 'UX/UI 디자이너', subValue: '201' }],
+    options: [
+      { subCategory: '전체', subValue: '200' },
+      { subCategory: 'UX/UI 디자이너', subValue: '201' },
+    ],
   },
 ];
+
+export interface JobCategoryOptionMain {
+  mainCategory: string;
+  options: JobCategoryOptionSub[];
+}
+
+export interface JobCategoryOptionSub {
+  subCategory: string;
+  subValue: string;
+}
 
 export const fieldCategoryOption = [
   {

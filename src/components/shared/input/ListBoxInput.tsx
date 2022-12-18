@@ -28,7 +28,7 @@ const ListBoxInput = ({ list, id, placeholder, ...props }: ListBoxProps & UseCon
           className={cls(
             'flex w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm ',
             'text-base text-darkGray',
-            'placeholder:text placeholder:text-lightGray',
+            'placeholder:text placeholder:text-lightBlack',
             'focus:border-darkPurPle focus:outline-none focus:ring-0'
           )}
         >

@@ -9,7 +9,7 @@ const ApplyPage: NextPage = () => {
   const onBack = () => setProgressStatus('first');
 
   return (
-    <div className="m-auto max-w-2xl">
+    <div className="m-auto max-w-xl">
       {progressStatus === 'first' ? (
         <ManteeInfoForm onNext={onNext}></ManteeInfoForm>
       ) : (

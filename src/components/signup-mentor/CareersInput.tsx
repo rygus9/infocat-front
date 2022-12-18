@@ -1,18 +1,13 @@
 import cls from '@/utils/cls';
 import { useFieldArray, UseFieldArrayProps, UseFormRegister } from 'react-hook-form';
 
-interface QuestionsInputProps {
+interface CareersInputProps {
   register: UseFormRegister<any>;
   placeholder?: string;
   buttonText?: string;
 }
 
-export default function QuestionsInput({
-  register,
-  placeholder,
-  buttonText,
-  ...props
-}: QuestionsInputProps & UseFieldArrayProps<any, any>) {
+export default function CareersInput({ register, placeholder, buttonText, ...props }: CareersInputProps & UseFieldArrayProps<any, any>) {
   const { fields, append, remove } = useFieldArray(props);
   const name = props.name;
   return (
@@ -21,7 +16,7 @@ export default function QuestionsInput({
         {fields.map((field, index) => {
           return (
             <div key={field.id} className={'justify-center" flex items-start space-x-2'}>
-              <textarea
+              <input
                 placeholder={placeholder}
                 {...register(`${name}.${index}.content` as const, {
                   required: true,
@@ -32,7 +27,6 @@ export default function QuestionsInput({
                   'placeholder:text placeholder:text-lightGray',
                   'focus:border-darkPurPle focus:ring-0'
                 )}
-                rows={3}
               />
               <button
                 type="button"

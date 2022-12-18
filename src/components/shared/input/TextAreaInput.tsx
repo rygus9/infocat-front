@@ -14,9 +14,9 @@ const TextAreaInput = ({ register, ...rest }: TextAreaInputProps) => {
       {...{ rows: 2, ...rest }}
       {...register}
       className={cls(
-        'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
+        'w-full border border-lightGray bg-white px-2 py-2 shadow-sm',
         'text-base text-darkGray',
-        'placeholder:text placeholder:text-lightGray',
+        'placeholder:text placeholder:text-lightBlack',
         'focus:border-darkPurPle focus:ring-0'
       )}
     ></textarea>

@@ -47,7 +47,7 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
 
   return (
     <>
-      <h1 className="mt-20 text-center text-3xl font-semibold text-darkGray">멘토링에 앞서, 이승연님을 소개해보세요.</h1>
+      <h1 className="mt-20 text-center text-2xl text-darkGray">멘토링에 앞서, 이승연님을 소개해보세요.</h1>
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
           <WrapLabel label="이름" id="name" moreInfo="실명으로 입력하세요." required errorMessage={errors.name?.message}>
@@ -56,13 +56,13 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
           <WrapLabel
             label="휴대전화 번호"
             id="phoneNumber"
-            moreInfo="-빼고 입력하세요."
+            moreInfo="멘토링관련 정보를 보내드립니다. 정확하게 기입해주세요!"
             required
             errorMessage={errors.phoneNumber?.message}
           >
-            <TextInput register={register('phoneNumber')} type="text" placeholder="휴대전화 번호를 입력하세요."></TextInput>
+            <TextInput register={register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></TextInput>
           </WrapLabel>
-          <WrapLabel label="현재 상태" id="status" required errorMessage={errors.status?.message}>
+          <WrapLabel label="상태" id="status" required errorMessage={errors.status?.message}>
             <ListBoxInput
               list={menteeStatusOption}
               control={control}
@@ -79,8 +79,8 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center py-5">
-          <button className="bg-lightPurple py-3 px-6 text-lg font-bold text-darkWhite" type="submit">
-            다음 단계
+          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+            다음
           </button>
         </section>
       </form>
