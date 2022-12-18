@@ -29,7 +29,7 @@ const ListBoxInput = ({ list, id, placeholder, ...props }: ListBoxProps & UseCon
             'flex w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm ',
             'text-base text-darkGray',
             'placeholder:text placeholder:text-lightGray',
-            'focus:border-darkPurPle focus:ring-0'
+            'focus:border-darkPurPle focus:outline-none focus:ring-0'
           )}
         >
           <span className="flex-1 truncate text-left">{value ? value.title : placeholder}</span>

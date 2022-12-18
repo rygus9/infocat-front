@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 let colStartClasses = ['', 'col-start-2', 'col-start-3', 'col-start-4', 'col-start-5', 'col-start-6', 'col-start-7'];
 
-export default function test2() {
+export default function CalendarInput() {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
@@ -18,6 +18,11 @@ export default function test2() {
     end: endOfMonth(firstDayCurrentMonth),
   });
 
+  let availableDays = eachDayOfInterval({
+    start: add(firstDayCurrentMonth, { days: 14 }),
+    end: add(endOfMonth(firstDayCurrentMonth), { days: -2 }),
+  }).map((elem) => elem.toISOString());
+
   const previousMonth = () => {
     let firstDayPrevMonth = add(firstDayCurrentMonth, { months: -1 });
     setCurrentMonth(format(firstDayPrevMonth, 'MMM-yyyy'));
@@ -29,21 +34,21 @@ export default function test2() {
   };
 
   return (
-    <section className="h-full w-full">
-      <div className="m-auto w-96">
-        <section className="flex items-center justify-between py-2 px-3">
-          <button type="button" onClick={previousMonth}>
+    <section className="h-full w-full border border-lightGray">
+      <div className="m-auto max-w-lg py-3">
+        <section className="text-gray-500 grid grid-cols-7 text-center leading-6">
+          <button type="button" onClick={previousMonth} className="col-start-1 flex items-center justify-center rounded-full">
             <span className="sr-only">Previous month</span>
-            <ChevronLeftIcon className="h-7 w-7 text-darkGray" aria-hidden="true" />
+            <ChevronLeftIcon className="h-5 w-5 font-light text-black" aria-hidden="true" />
           </button>
-          <h2 className="flex-auto text-center text-black">{format(firstDayCurrentMonth, 'yyyy.MM')}</h2>
-          <button onClick={nextMonth} type="button">
+          <h2 className="col-span-5 flex-auto py-3 text-center text-xl text-black">{format(firstDayCurrentMonth, 'yyyy.MM')}</h2>
+          <button onClick={nextMonth} type="button" className="col-start-7 flex items-center justify-center rounded-full">
             <span className="sr-only">Next month</span>
-            <ChevronRightIcon className="h-7 w-7 text-darkGray" aria-hidden="true" />
+            <ChevronRightIcon className="h-5 w-5 text-black" aria-hidden="true" />
           </button>
         </section>
         <section>
-          <div className="text-gray-500 mt-3 grid grid-cols-7 text-center text-xs leading-6">
+          <div className="text-gray-500 mt-3 grid grid-cols-7 text-center text-sm leading-6 text-darkGray">
             <div>일</div>
             <div>월</div>
             <div>화</div>
@@ -59,16 +64,12 @@ export default function test2() {
                   type="button"
                   onClick={() => setSelectedDay(day)}
                   className={cls(
-                    isEqual(day, selectedDay) && 'bg-black text-white',
-                    !isEqual(day, selectedDay) && isToday(day) && 'text-red-500',
-                    !isEqual(day, selectedDay) && !isToday(day) && isSameMonth(day, firstDayCurrentMonth) && 'text-gray-900',
-                    !isEqual(day, selectedDay) && !isToday(day) && !isSameMonth(day, firstDayCurrentMonth) && 'text-gray-400',
-                    isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
-                    isEqual(day, selectedDay) && !isToday(day) && 'bg-gray-900',
-                    !isEqual(day, selectedDay) && 'hover:bg-gray-200',
-                    (isEqual(day, selectedDay) || isToday(day)) && 'font-semibold',
-                    'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
+                    isEqual(day, selectedDay) && 'bg-darkPurPle text-white',
+                    isToday(day) && 'text-lightPurple',
+                    'mx-auto flex h-8 w-8 items-center justify-center rounded-full',
+                    'disabled:text-lightGray disabled:line-through'
                   )}
+                  disabled={availableDays.filter((ISODay) => isEqual(new Date(ISODay), day)).length === 0}
                 >
                   <time dateTime={format(day, 'yyyy-MM-dd')}>{format(day, 'd')}</time>
                 </button>

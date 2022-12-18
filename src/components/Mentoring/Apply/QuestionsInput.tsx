@@ -47,9 +47,14 @@ export default function QuestionsInput({ register, placeholder, ...props }: Ques
             content: '',
           })
         }
-        className="mt-2 mr-2 bg-lightPurple px-4 py-2 text-white"
+        // className="mt-2 mr-2 bg-lightPurple px-4 py-2 text-white"
+        className={cls(
+          'mt-2 w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
+          'text-base text-darkGray',
+          'focus:border-darkPurPle focus:outline-none focus:ring-0'
+        )}
       >
-        질문 추가
+        질문 추가하기
       </button>
     </fieldset>
   );

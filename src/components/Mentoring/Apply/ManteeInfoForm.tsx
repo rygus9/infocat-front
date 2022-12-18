@@ -23,11 +23,11 @@ const schema = z.object({
 
 export type ApplyFormAboutUser = z.infer<typeof schema>;
 
-interface ManteeInfoForm {
+interface ManteeInfoFormProps {
   onNext: () => void;
 }
 
-export default function ManteeInfoForm({ onNext }: ManteeInfoForm) {
+export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
   const {
     register,
     control,
@@ -79,7 +79,9 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoForm) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center py-5">
-          <button className="rounded-lg bg-lightPurple py-3 px-6 text-lg font-bold text-darkWhite">다음 단계</button>
+          <button className="bg-lightPurple py-3 px-6 text-lg font-bold text-darkWhite" type="submit">
+            다음 단계
+          </button>
         </section>
       </form>
     </>

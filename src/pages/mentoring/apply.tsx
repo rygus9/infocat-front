@@ -10,7 +10,11 @@ const ApplyPage: NextPage = () => {
 
   return (
     <div className="m-auto max-w-2xl">
-      {progressStatus === 'first' ? <ManteeInfoForm onNext={onNext}></ManteeInfoForm> : <MentoringInfoForm></MentoringInfoForm>}
+      {progressStatus === 'first' ? (
+        <ManteeInfoForm onNext={onNext}></ManteeInfoForm>
+      ) : (
+        <MentoringInfoForm onPrev={onBack}></MentoringInfoForm>
+      )}
     </div>
   );
 };
