@@ -74,6 +74,7 @@ export default function CalendarInput() {
     setSelectTime(time);
   };
 
+  console.log(serverSend.availableDays);
   const scheduleTable = createScheduleTable(serverSend.availableDays);
   const availableDays = Object.keys(scheduleTable);
   const nowTimeList = selectedDay ? scheduleTable[selectedDay.toISOString()].map((ISOFormat: string) => new Date(ISOFormat)) : [];

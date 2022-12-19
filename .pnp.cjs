@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:13.4.0"],\
+            ["@types/is-url", "npm:1.2.30"],\
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:18.7.17"],\
             ["@types/prettier", "npm:2.7.1"],\
@@ -1820,6 +1821,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-http-cache-semantics-npm-4.0.1-90863c7a3e-1048aacf62.zip/node_modules/@types/http-cache-semantics/",\
           "packageDependencies": [\
             ["@types/http-cache-semantics", "npm:4.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/is-url", [\
+        ["npm:1.2.30", {\
+          "packageLocation": "./.yarn/cache/@types-is-url-npm-1.2.30-14ee626521-81f337a744.zip/node_modules/@types/is-url/",\
+          "packageDependencies": [\
+            ["@types/is-url", "npm:1.2.30"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7498,6 +7508,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tailwindcss/forms", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:0.5.3"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:13.4.0"],\
+            ["@types/is-url", "npm:1.2.30"],\
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:18.7.17"],\
             ["@types/prettier", "npm:2.7.1"],\

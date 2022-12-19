@@ -1201,6 +1201,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/is-url@npm:^1":
+  version: 1.2.30
+  resolution: "@types/is-url@npm:1.2.30"
+  checksum: 81f337a7442f56d160ec0f63b2847cff368c5701f46a32c3c4fff5a1424b6afb4ad3eb7206febd26760a869680d61b7626e41f0ad652003f5783bcfda5b41d9e
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.4
   resolution: "@types/istanbul-lib-coverage@npm:2.0.4"
@@ -5981,6 +5988,7 @@ __metadata:
     "@tailwindcss/forms": ^0.5.3
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
+    "@types/is-url": ^1
     "@types/jest": ^29.1.1
     "@types/node": 18.7.17
     "@types/prettier": ^2

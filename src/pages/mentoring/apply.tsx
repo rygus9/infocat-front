@@ -6,14 +6,14 @@ import { useState } from 'react';
 const ApplyPage: NextPage = () => {
   const [progressStatus, setProgressStatus] = useState<'first' | 'second'>('first');
   const onNext = () => setProgressStatus('second');
-  const onBack = () => setProgressStatus('first');
+  const onPrev = () => setProgressStatus('first');
 
   return (
     <div className="m-auto max-w-xl">
       {progressStatus === 'first' ? (
         <ManteeInfoForm onNext={onNext}></ManteeInfoForm>
       ) : (
-        <MentoringInfoForm onPrev={onBack}></MentoringInfoForm>
+        <MentoringInfoForm onPrev={onPrev}></MentoringInfoForm>
       )}
     </div>
   );

@@ -1,87 +1,53 @@
-import WrapLabel from '@/components/shared/input/WrapLabel';
-import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '@/contents';
 import cls from '@/utils/cls';
-import { useEffect, useRef, useState } from 'react';
+import { range } from 'rambda';
+
+const weekends = ['', '월', '화', '수', '목', '금', '토', '일'];
+const TimeLines = [
+  '00:00',
+  '01:00',
+  '02:00',
+  '03:00',
+  '04:00',
+  '05:00',
+  '06:00',
+  '07:00',
+  '08:00',
+  '09:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+  '21:00',
+  '22:00',
+  '23:00',
+  '24:00',
+];
 
 const test = () => {
-  const [mainCategory, setMainCategory] = useState<string>();
-  const [subCategoryValue, setSubCategoryValue] = useState<string>();
-  const disclosureRef = useRef<HTMLElement>(null);
-
-  // useEffect(() => {
-  //   const { current } = disclosureRef;
-  //   if (current == null) return;
-
-  //   console.log('계속 오냐?');
-
-  //   let beforeScrollHeight = 0;
-  //   const observer = new ResizeObserver((entries) => {
-  //     for (let entry of entries) {
-  //       let nowScrollHeight = entry.target.scrollHeight;
-  //       if (beforeScrollHeight != nowScrollHeight)
-  //         current.style.setProperty('--content-height', nowScrollHeight.toString() + 'px'), (beforeScrollHeight = nowScrollHeight);
-  //     }
-  //   });
-  //   observer.observe(current);
-  // }, [disclosureRef]);
-
-  useEffect(() => {
-    const { current } = disclosureRef;
-    current?.style.setProperty('--content-height', current.scrollHeight.toString() + 'px');
-  }, [mainCategory]);
-
-  const onMain = (main: JobCategoryOptionMain) => {
-    setMainCategory(main.mainCategory);
-    setSubCategoryValue(main.options[0].subValue);
-  };
-
-  const onSub = (sub: JobCategoryOptionSub) => {
-    setSubCategoryValue(sub.subValue);
-  };
-
   return (
-    <div className="m-auto max-w-lg pt-20">
-      <WrapLabel label="분야 선택">
-        <>
-          <section className="flex items-center gap-2 pb-2">
-            {jobCategoryOption.map((main) => (
-              <button
-                className={cls(
-                  'border bg-white py-1.5 px-5 text-base',
-                  main.mainCategory === mainCategory ? 'border-darkPurPle text-darkPurPle' : 'border-lightGray text-darkGray'
-                )}
-                onClick={() => onMain(main)}
-                key={main.mainCategory}
-              >
-                {main.mainCategory}
-              </button>
+    <>
+      <div className="m-auto w-full max-w-lg pt-20">
+        <div className="pb-2 text-base text-darkGray">스케줄러</div>
+        <section className="h-fit w-full">
+          <section className="grid grid-cols-8 justify-items-center border border-lightGray py-2">
+            {weekends.map((weekend) => (
+              <div className="text-darkGray">{weekend}</div>
             ))}
           </section>
-          <section
-            className={cls('overflow-hidden transition-all duration-300', mainCategory ? 'max-h-[var(--content-height)]' : 'max-h-0')}
-            ref={disclosureRef}
-          >
-            <div className="flex flex-wrap items-center gap-2 bg-darkWhite p-2">
-              {mainCategory &&
-                jobCategoryOption
-                  .filter((main) => main.mainCategory === mainCategory)[0]
-                  .options.map((subOption) => (
-                    <button
-                      className={cls(
-                        'border bg-white py-1.5 px-5 text-base',
-                        subOption.subValue === subCategoryValue ? 'border-darkPurPle text-darkPurPle' : 'border-lightGray text-darkGray'
-                      )}
-                      onClick={() => onSub(subOption)}
-                      key={subOption.subValue}
-                    >
-                      {subOption.subCategory}
-                    </button>
-                  ))}
-            </div>
-          </section>
-        </>
-      </WrapLabel>
-    </div>
+          <section className="grid h-64 grid-cols-8 overflow-y-auto border border-t-0 border-lightGray"></section>
+        </section>
+      </div>
+      <div className="m-auto w-full max-w-lg pt-20">
+        <div className="pb-2 text-base text-darkGray">텍스트 에디터</div>
+      </div>
+    </>
   );
 };
 
