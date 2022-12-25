@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.28.0"],\
             ["jest", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:29.3.1"],\
+            ["localforage", "npm:1.10.0"],\
             ["next", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:12.3.0"],\
             ["postcss", "npm:8.4.19"],\
             ["postcss-loader", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.0.1"],\
@@ -4737,6 +4738,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["immediate", [\
+        ["npm:3.0.6", {\
+          "packageLocation": "./.yarn/cache/immediate-npm-3.0.6-c27588a2d3-f9b3486477.zip/node_modules/immediate/",\
+          "packageDependencies": [\
+            ["immediate", "npm:3.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["import-fresh", [\
         ["npm:3.3.0", {\
           "packageLocation": "./.yarn/cache/import-fresh-npm-3.3.0-3e34265ca9-2cacfad06e.zip/node_modules/import-fresh/",\
@@ -5923,6 +5933,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["lie", [\
+        ["npm:3.1.1", {\
+          "packageLocation": "./.yarn/cache/lie-npm-3.1.1-91350720d9-6da9f2121d.zip/node_modules/lie/",\
+          "packageDependencies": [\
+            ["lie", "npm:3.1.1"],\
+            ["immediate", "npm:3.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["lilconfig", [\
         ["npm:2.0.6", {\
           "packageLocation": "./.yarn/cache/lilconfig-npm-2.0.6-6231346eaf-40a3cd72f1.zip/node_modules/lilconfig/",\
@@ -5946,6 +5966,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/loader-runner-npm-4.3.0-9ca67df372-a90e00dee9.zip/node_modules/loader-runner/",\
           "packageDependencies": [\
             ["loader-runner", "npm:4.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["localforage", [\
+        ["npm:1.10.0", {\
+          "packageLocation": "./.yarn/cache/localforage-npm-1.10.0-cf9ea9a436-f2978b434d.zip/node_modules/localforage/",\
+          "packageDependencies": [\
+            ["localforage", "npm:1.10.0"],\
+            ["lie", "npm:3.1.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7523,6 +7553,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.28.0"],\
             ["jest", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:29.3.1"],\
+            ["localforage", "npm:1.10.0"],\
             ["next", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:12.3.0"],\
             ["postcss", "npm:8.4.19"],\
             ["postcss-loader", "virtual:3b4e0fbbb0909e5aef836fbda83e5ab87d3082b505f157d23cdace43428eb4c9b790be201359ddfbc1b541edb5e6f363ad3a53e3e8033b1ac81e36293b6e42e6#npm:7.0.1"],\

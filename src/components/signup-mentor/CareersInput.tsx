@@ -54,7 +54,7 @@ export default function CareersInput({ register, placeholder, buttonText, ...pro
           'focus:border-darkPurPle focus:outline-none focus:ring-0'
         )}
       >
-        {buttonText ? buttonText : '질문 추가하기'}
+        {buttonText ? buttonText : '경력 추가하기'}
       </button>
     </fieldset>
   );

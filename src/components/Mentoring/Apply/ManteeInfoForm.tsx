@@ -71,7 +71,13 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
               defaultValue={menteeStatusOption[0]}
             ></ListBoxInput>
           </WrapLabel>
-          <WrapLabel label="전공" id="major" required errorMessage={errors.major?.message}>
+          <WrapLabel
+            label="전공"
+            id="major"
+            required
+            errorMessage={errors.major?.message}
+            moreInfo="전공을 정확하게 입력해주세요. 예) 컴퓨터공학과, 경영학과"
+          >
             <TextInput register={register('major')} type="text" placeholder="전공을 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="자기소개" id="introduce" required errorMessage={errors.introduce?.message}>

@@ -3,27 +3,31 @@ import TextInput from '@/components/shared/input/TextInput';
 import Button from '@/components/shared/common/Button';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
-import joinInfoAtom from '@/recoil/atom/joinInfoAtom';
+import joinInfoAtom from '@/recoil/form/joinAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useMutation } from 'react-query';
 import signUpApi from '@/api/auth/signUpApi';
 import { useState } from 'react';
 import emailValidationApi from '@/api/auth/emailValidationApi';
+import { getErrorMessage } from '@/contents/errorMessage';
+import emailSendApi from '@/api/email/emailSendApi';
 
 interface SecondForm {
   backStep: () => void;
+  finalStep: () => void;
 }
 
-export default function SecondForm({ backStep }: SecondForm) {
+export default function SecondForm({ backStep, finalStep }: SecondForm) {
   const { mutateAsync: signUpMutate, isLoading: signUpLoading } = useMutation(signUpApi);
-  const { mutateAsync: emailValidationMutate, isLoading: emailValidationloading } = useMutation(emailValidationApi);
+  const { mutateAsync: emailValidationMutate, isLoading: emailValidationLoading } = useMutation(emailValidationApi);
+  const { mutateAsync: emailSendMutate, isLoading: emailSendLoading } = useMutation(emailSendApi);
   const joinInfo = useRecoilValue(joinInfoAtom);
-  const [showModal, setShowModal] = useState(false);
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<{ validationCode: string }>({
     resolver: zodResolver(
@@ -32,24 +36,43 @@ export default function SecondForm({ backStep }: SecondForm) {
       })
     ),
   });
+
   const onSubmit = async (data: { validationCode: string }) => {
-    const emailValidation = await emailValidationMutate({ email: joinInfo.email, validationCode: data.validationCode });
-    if (!emailValidation) return;
+    let validationToken = '';
+    try {
+      const result = await emailValidationMutate({ email: joinInfo.email, validationCode: data.validationCode });
+      validationToken = result.validationToken;
+    } catch (errorCode) {
+      setError('validationCode', { message: getErrorMessage(errorCode as string) });
+      return;
+    }
+    console.log(validationToken);
     const signUp = await signUpMutate({
       email: joinInfo.email,
       nickname: joinInfo.nickName,
       password: joinInfo.aboutPassword.password,
-      validationToken: emailValidation.validationToken,
+      validationToken,
     });
     if (!signUp) return;
-    setShowModal(true);
+    finalStep();
   };
+
   const onError = () => {};
+
+  const onRetry = async () => {
+    await emailSendMutate({ email: joinInfo.email });
+  };
 
   return (
     <>
+      <header>
+        <h2 className="text-gray-800 text-center text-[1.6rem] md:text-3xl">회원가입</h2>
+        <p className="text-gray-600  pt-2 text-center text-base">
+          <span className="pr-1 font-bold text-darkPurPle">INFO CAT</span>에서 커리어를 준비하세요
+        </p>
+      </header>
       <form className="pt-10 pb-10" onSubmit={handleSubmit(onSubmit, onError)}>
-        <div className="rounded-md border border-purple-500 px-5 py-2 text-gray-500">
+        <div className="text-gray-500 rounded-md border border-purple-500 px-5 py-2">
           <p>
             현재 입력하신 이메일은 <span className="text-purple-500">{joinInfo.email}</span>입니다.
           </p>
@@ -64,8 +87,8 @@ export default function SecondForm({ backStep }: SecondForm) {
                 type="text"
                 placeholder="인증 코드를 입력하세요."
               ></TextInput>
-              <Button color="gray" buttonStyle="border" type="button" size="w-20">
-                전송
+              <Button color="gray" buttonStyle="border" type="button" size="w-20" onClick={onRetry} disabled={emailSendLoading}>
+                {emailSendLoading ? '전송중...' : '재전송'}
               </Button>
             </div>
           </WrapLabel>
@@ -79,7 +102,6 @@ export default function SecondForm({ backStep }: SecondForm) {
           </Button>
         </div>
       </form>
-      {showModal}
     </>
   );
 }
