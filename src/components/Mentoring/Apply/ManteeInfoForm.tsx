@@ -21,7 +21,7 @@ const schema = z.object({
   introduce: z.string().min(10, '최소한 10글자 이상은 입력해주세요.'),
 });
 
-export type ApplyFormAboutUser = z.infer<typeof schema>;
+export type ApplyFormType = z.infer<typeof schema>;
 
 interface ManteeInfoFormProps {
   onNext: () => void;
@@ -33,7 +33,7 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ApplyFormAboutUser>({
+  } = useForm<ApplyFormType>({
     resolver: zodResolver(schema),
     mode: 'onChange',
   });

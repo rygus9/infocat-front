@@ -2,7 +2,7 @@ import currentUserAtom from '@/recoil/user/currentUserAtom';
 import cls from '@/utils/cls';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { PropsWithChildren, useLayoutEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import HeaderLogo from './HeaderLogo';
 
@@ -33,7 +33,7 @@ export default function Header() {
     router.reload();
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     currentUser ? setIsLogind(true) : setIsLogind(false);
   }, [currentUser]);
 

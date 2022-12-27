@@ -32,19 +32,19 @@ export interface JobCategoryOptionSub {
 export const fieldCategoryOption = [
   {
     value: '1',
-    name: '국내 자기소개서/이력서',
+    title: '국내 자기소개서/이력서',
   },
   {
     value: '2',
-    name: '국외 자기소개서/이력서',
+    title: '국외 자기소개서/이력서',
   },
   {
     value: '3',
-    name: '포트폴리오',
+    title: '포트폴리오',
   },
   {
     value: '4',
-    name: '면접',
+    title: '면접',
   },
 ];
 
