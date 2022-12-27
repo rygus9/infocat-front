@@ -37,7 +37,7 @@ const ListBoxInput = ({ list, id, placeholder, ...props }: ListBoxProps & UseCon
         </Listbox.Button>
         <Listbox.Options
           className={cls(
-            'absolute z-10 mt-2 max-h-60 w-full overflow-scroll border border-lightGray bg-white shadow-md',
+            'absolute z-20 mt-2 max-h-60 w-full overflow-scroll border border-lightGray bg-white shadow-md',
             'text-darkGray',
             'focus:border-lightGray focus:outline-none focus:ring-0'
           )}

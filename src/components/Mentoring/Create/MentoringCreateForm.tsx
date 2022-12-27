@@ -2,11 +2,13 @@ import ListBoxInput from '@/components/shared/input/ListBoxInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import FieldInput from '@/components/signup-mentor/FieldInput';
-import { fieldCategoryOption } from '@/contents';
+import { fieldCategoryOption, timeScaleOption } from '@/contents';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { FormProvider, useForm, useFormContext, UseFormRegister } from 'react-hook-form';
 import { z } from 'zod';
 import EditorWithForm from './EditorWithForm';
+import WeekSchedulerWithForm from './WeekSchedulerWithForm';
 
 const schema = z.object({
   mentoringName: z.string().min(1, '멘토링 이름은 필수 입력입니다.').max(50, '멘토링 이름은 50자 이하입니다.'),
@@ -14,25 +16,29 @@ const schema = z.object({
   mentoringField: z.object({ value: z.string(), name: z.string() }),
   mentoringContent: z.string(),
   price: z.string().min(1, '포인트 가격은 필수 입력입니다.'),
-  hour: z.object({ value: z.string(), name: z.string() }),
-  schedule: z.array(z.string()).min(1, '시간 하나 이상은 필수입력입니다.'),
+  timeScale: z.object({ value: z.string(), name: z.string() }),
+  startTimes: z.array(z.string()).min(1, '시간 하나 이상은 필수입력입니다.'),
 });
 
 export type MentoringFormType = z.infer<typeof schema>;
 
 export default function MentoringCreateForm() {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<MentoringFormType>({
+  const method = useForm<MentoringFormType>({
     resolver: zodResolver(schema),
     mode: 'onChange',
     defaultValues: {
       mentoringField: fieldCategoryOption[0],
+      timeScale: timeScaleOption[0],
+      startTimes: [],
     },
   });
+  const {
+    watch,
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = method;
   const onSubmit = (data: any) => {
     console.log('Mentoring Create Data', data);
   };
@@ -66,8 +72,35 @@ export default function MentoringCreateForm() {
           </WrapLabel>
         </section>
         <hr className="my-5 text-gray"></hr>
-        <section className="space-y-5"></section>
+        <section className="space-y-5">
+          <FormProvider {...method}>
+            <SchedulePart />
+          </FormProvider>
+        </section>
       </form>
+    </>
+  );
+}
+
+function SchedulePart() {
+  const {
+    register,
+    watch,
+    control,
+    formState: { errors },
+  } = useFormContext<MentoringFormType>();
+  useEffect(() => {}, [watch().timeScale]);
+  return (
+    <>
+      <WrapLabel label="회당 포인트 가격" id="price" required moreInfo="숫자만 포인트 단위로 입력해주세요. 예) 10000p -> 10000">
+        <TextInput type="number" register={register('price')} placeholder="여기에 입력해주세요."></TextInput>
+      </WrapLabel>
+      <WrapLabel id="timeScale" label="회당 멘토링 시간." errorMessage={errors.timeScale?.message} required>
+        <ListBoxInput list={timeScaleOption} name="timeScale" control={control}></ListBoxInput>
+      </WrapLabel>
+      <WrapLabel id="" label="스케줄 선택" required>
+        <WeekSchedulerWithForm control={control} name="startTimes" timeScale={parseInt(watch().timeScale.value)}></WeekSchedulerWithForm>
+      </WrapLabel>
     </>
   );
 }
