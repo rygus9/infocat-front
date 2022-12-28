@@ -11,11 +11,13 @@ const schema = z.object({
     .min(1, '연차는 필수 입력입니다.')
     .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
   role: z.string().min(1, '직무는 필수 입력입니다.'),
-  careers: z.array(
-    z.object({
-      content: z.string(),
-    })
-  ),
+  careers: z
+    .array(
+      z.object({
+        content: z.string().min(1, '이력 사항은 필수 입력입니다.'),
+      })
+    )
+    .min(1),
 });
 
 export type CareerFormType = z.infer<typeof schema>;
@@ -38,6 +40,14 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
     },
   });
 
+  const onSubmit = (data: CareerFormType) => {
+    console.log(data);
+  };
+
+  const onError = (err: any) => {
+    console.log(err);
+  };
+
   return (
     <>
       <header className="pt-20 pb-1">
@@ -46,7 +56,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           <p>당신의 커리어를 등록해주세요.</p>
         </h3>
       </header>
-      <form className="pt-6 pb-10">
+      <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-4">
           <WrapLabel label="직무" id="role" errorMessage={errors.role?.message} moreInfo="예) 웹프론트엔드, 앱디자이너, 서비스PM" required>
             <TextInput id="role" register={register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
@@ -54,7 +64,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           <WrapLabel label="연차" id="years" errorMessage={errors.years?.message} moreInfo="숫자만 입력해주세요. 예) 5년차 -> 5" required>
             <TextInput id="years" register={register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
           </WrapLabel>
-          <WrapLabel label="커리어" id="careers" errorMessage={errors.careers?.message} required>
+          <WrapLabel label="커리어" id="careers" errorMessage={errors.careers && '이력 사항을 입력하세요.'} required>
             <CareersInput
               register={register}
               name={'careers'}
@@ -67,7 +77,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onPrev}>
             이전
           </button>
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="button">
+          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
             등록하기
           </button>
         </section>

@@ -24,7 +24,6 @@ interface BasicFormProps {
 
 export default function BasicForm({ onNext }: BasicFormProps) {
   const [basicFormState, setBasicFormState] = useRecoilState(basicFormAtom);
-  console.log('렌더링 되냐.');
 
   const {
     register,
@@ -60,7 +59,7 @@ export default function BasicForm({ onNext }: BasicFormProps) {
           <WrapLabel
             label="회사 이메일"
             id="companyEmail"
-            errorMessage={errors.companyEmail?.message}
+            errorMessage={errors.companyEmail?.message || errors.emailCode?.message}
             moreInfo="근무하시는 회사 이메일로 입력해주세요. 위 이메일로 근무사실을 검증합니다."
             required
           >
