@@ -54,13 +54,13 @@ export default function MypageCase({ children }: { children: ReactNode }) {
         {/* navigation Part */}
         <section className="divide-y divide-darkWhite">
           {LinkInfo.map((mainSection) => (
-            <div key={mainSection.title} className="space-y-2 py-4 pr-6">
+            <div key={mainSection.title} className="space-y-2 py-4 pr-10">
               <h4 className="text-lg font-semibold text-darkGray">{mainSection.title}</h4>
               <div className="space-y-2">
                 {mainSection.subLinks.map((subSection) => (
                   <div key={subSection.title}>
                     <Link href={subSection.link}>
-                      <a className="text-gray">{subSection.title}</a>
+                      <a className="text-lg text-gray">{subSection.title}</a>
                     </Link>
                   </div>
                 ))}
@@ -69,7 +69,7 @@ export default function MypageCase({ children }: { children: ReactNode }) {
           ))}
         </section>
         {/* management Part */}
-        <section className="flex-1 py-4">{children}</section>
+        <section className="flex-1 py-4 pl-16">{children}</section>
       </div>
     </main>
   );
