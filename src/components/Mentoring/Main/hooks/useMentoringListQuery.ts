@@ -5,7 +5,6 @@ import { useQuery } from 'react-query';
 function useMentoringListQuery(suspense = true) {
   const router = useRouter();
   const { page, category, sorted, field, title } = router.query;
-  console.log(page, category);
 
   const { data } = useQuery({
     queryKey: [`mentoringList_${JSON.stringify(router.query)}`],

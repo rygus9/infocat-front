@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 export default function MainBanner() {
   const router = useRouter();
   const onMentorSignUpClick = () => {
-    router.push('signup/mentor');
+    router.push('signup/informer');
   };
 
   return (
@@ -18,7 +18,7 @@ export default function MainBanner() {
         </section>
         <section className="absolute right-10 top-10 md:top-1/2 md:-translate-y-1/2 ">
           <button className="w-full pb-2 text-right text-lg text-white" onClick={onMentorSignUpClick}>
-            멘토 지원하기
+            인포머 지원하기
           </button>
           <figure className="hidden aspect-square h-52 w-80 overflow-hidden rounded-md md:block">
             <img src="/mentoring.webp" className="h-full w-full object-cover"></img>

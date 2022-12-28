@@ -1,9 +1,10 @@
+import currentUserAtom from '@/recoil/user/currentUserAtom';
 import cls from '@/utils/cls';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import HeaderLogo from './HeaderLogo';
-import LoginModal from './LoginModal';
 
 const MenuList = [
   {
@@ -21,13 +22,20 @@ const MenuList = [
 ];
 
 export default function Header() {
-  const [loginOpen, setLoginOpen] = useState(false);
-  const openLogin = () => setLoginOpen(true);
-  const closeLogin = () => setLoginOpen(false);
-
   const router = useRouter();
-  const onRegistClick = () => router.push('/signup');
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+  const [isLogined, setIsLogind] = useState(false);
   const onLogoClick = () => router.push('/');
+  const onLoginClick = () => router.push('/login');
+  const onMyPageClick = () => router.push('/mypage');
+  const onLogout = () => {
+    setCurrentUser(null);
+    router.reload();
+  };
+
+  useEffect(() => {
+    currentUser ? setIsLogind(true) : setIsLogind(false);
+  }, [currentUser]);
 
   return (
     <header className="sticky top-0 z-40 h-[6.5rem] w-full bg-white shadow-md">
@@ -36,8 +44,13 @@ export default function Header() {
           <HeaderLogo />
         </figure>
         <div className="flex items-center justify-center space-x-2">
-          <Button onClick={openLogin}>로그인</Button>
-          <Button onClick={onRegistClick}>회원가입</Button>
+          {isLogined ? (
+            <>
+              <Button onClick={onMyPageClick}>마이페이지</Button> <Button onClick={onLogout}>로그아웃</Button>
+            </>
+          ) : (
+            <Button onClick={onLoginClick}>로그인</Button>
+          )}
         </div>
       </div>
       <nav className="flex h-10 items-center justify-center bg-lightPurple">
@@ -54,7 +67,6 @@ export default function Header() {
           </Link>
         ))}
       </nav>
-      <LoginModal isOpen={loginOpen} closeModal={closeLogin}></LoginModal>
     </header>
   );
 }

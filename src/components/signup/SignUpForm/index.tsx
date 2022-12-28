@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FinalPage from './FinalPage';
 import FirstForm from './FirstForm';
 import SecondForm from './SecondForm';
 
@@ -12,10 +13,15 @@ export default function ResiterForm() {
     setStep((elem) => elem - 1);
   };
 
+  const finalStep = () => {
+    setStep((elem) => 3);
+  };
+
   return (
     <>
-      {step == 1 && <FirstForm nextStep={nextStep}></FirstForm>}
-      {step == 2 && <SecondForm backStep={backStep}></SecondForm>}
+      {step === 1 && <FirstForm nextStep={nextStep}></FirstForm>}
+      {step === 2 && <SecondForm backStep={backStep} finalStep={finalStep}></SecondForm>}
+      {step === 3 && <FinalPage></FinalPage>}
     </>
   );
 }
