@@ -35,14 +35,6 @@ const prevTime = (row: number, col: number) => {
   }
   return [next_row, col];
 };
-// useState 불변성 처리를 위해 겉 포장지만 새로 생성하는 함수.
-const createTableCopy = (timeTable: number[][]) => {
-  let nextTable = [];
-  for (let arr of timeTable) {
-    nextTable.push(arr);
-  }
-  return nextTable;
-};
 // row와 col을 주:시각:분으로 나타내는 함수.
 const indexToStartTime = (row: number, col: number) => {
   let hour = (row / 2) << 0;

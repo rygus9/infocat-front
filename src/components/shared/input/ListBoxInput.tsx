@@ -32,7 +32,7 @@ const ListBoxInput = ({ list, id, placeholder, ...props }: ListBoxProps & UseCon
             'focus:border-darkPurPle focus:outline-none focus:ring-0'
           )}
         >
-          <span className="flex-1 truncate text-left">{value ? value.title : placeholder}</span>
+          <span className="flex-1 truncate text-left">{value && value.title ? value.title : placeholder}</span>
           <ChevronUpDownIcon className="text-gray-400 h-full w-6" aria-hidden="true" />
         </Listbox.Button>
         <Listbox.Options

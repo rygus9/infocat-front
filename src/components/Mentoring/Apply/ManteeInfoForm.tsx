@@ -3,8 +3,10 @@ import TextAreaInput from '@/components/shared/input/TextAreaInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import { menteeStatusOption } from '@/contents';
+import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -21,24 +23,28 @@ const schema = z.object({
   introduce: z.string().min(10, '최소한 10글자 이상은 입력해주세요.'),
 });
 
-export type ApplyFormType = z.infer<typeof schema>;
+export type MentoringApplyMenteeType = z.infer<typeof schema>;
 
 interface ManteeInfoFormProps {
   onNext: () => void;
 }
 
 export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
+  const [menteeFormState, setMenteeFormState] = useRecoilState(menteeFormAtom);
+
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ApplyFormType>({
+  } = useForm<MentoringApplyMenteeType>({
     resolver: zodResolver(schema),
     mode: 'onChange',
+    defaultValues: menteeFormState,
   });
   const onSubmit = (data: any) => {
     console.log('ManteeForm Data', data);
+    setMenteeFormState(data);
     onNext();
   };
   const onError = (error: any) => {
@@ -62,13 +68,13 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
           >
             <TextInput register={register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></TextInput>
           </WrapLabel>
-          <WrapLabel label="상태" id="status" required errorMessage={errors.status?.message}>
+          <WrapLabel label="상태" id="status" required errorMessage={errors.status?.title?.message}>
             <ListBoxInput
               list={menteeStatusOption}
               control={control}
               name={'status'}
               id={'status'}
-              defaultValue={menteeStatusOption[0]}
+              placeholder="눌러서 선택"
             ></ListBoxInput>
           </WrapLabel>
           <WrapLabel

@@ -9,6 +9,7 @@ let colStartClasses = ['', 'col-start-2', 'col-start-3', 'col-start-4', 'col-sta
 /* 서버에서 보낼 데이터 생성 중 */
 let today = startOfToday();
 
+/* 서버에서 날라올 시간들의 나열 */
 let availableDays = eachDayOfInterval({
   start: add(today, { days: 3 }),
   end: add(today, { days: 14 }),
@@ -28,6 +29,7 @@ const serverSend = {
   availableDays,
 };
 
+/* 서버서는 01:30 이런 식으로 날라옴 */
 function durationParse(duration: string) {
   let [hours, minutes] = duration.split(':').map((timeStr) => parseInt(timeStr));
   return {
@@ -47,11 +49,15 @@ function createScheduleTable(availableDays: string[]) {
   return obj;
 }
 
-export default function CalendarInput() {
+interface CalendarInputProps {
+  selectTime: Date | null;
+  setSelectTime: (time: Date) => void;
+}
+
+export default function CalendarInput({ selectTime, setSelectTime }: CalendarInputProps) {
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
   const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
   const firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
-  const [selectTime, setSelectTime] = useState<Date | undefined>(undefined);
   // parse는 data-fns => new Date로 바꾸어줌. (현재 date-fns 포맷을 알면)
   // 기본적으로 Date 객체를 기반으로 한다.
 
@@ -74,7 +80,11 @@ export default function CalendarInput() {
     setSelectTime(time);
   };
 
-  console.log(serverSend.availableDays);
+  const onDayButton = (day: Date) => {
+    setSelectedDay(day);
+    setSelectTime(scheduleTable[day.toISOString()].map((ISOFormat: string) => new Date(ISOFormat))[0]);
+  };
+
   const scheduleTable = createScheduleTable(serverSend.availableDays);
   const availableDays = Object.keys(scheduleTable);
   const nowTimeList = selectedDay ? scheduleTable[selectedDay.toISOString()].map((ISOFormat: string) => new Date(ISOFormat)) : [];
@@ -109,7 +119,7 @@ export default function CalendarInput() {
                 <div key={day.toString()} className={cls(dayIdx === 0 && colStartClasses[getDay(day)], 'py-1.5')}>
                   <button
                     type="button"
-                    onClick={() => setSelectedDay(day)}
+                    onClick={() => onDayButton(day)}
                     className={cls(
                       selectedDay !== undefined && isEqual(day, selectedDay) && 'bg-lightPurple text-white',
                       'mx-auto flex h-8 w-8 items-center justify-center rounded-full',

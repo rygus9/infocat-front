@@ -1,14 +1,16 @@
+import basicFormAtom from '@/recoil/form/informerRegist/basicFormAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 import TextInput from '../shared/input/TextInput';
 import WrapLabel from '../shared/input/WrapLabel';
 
 const schema = z.object({
   companyEmail: z.string().email('잘못된 이메일 형식입니다.'),
-  emailCode: z.string(),
+  emailCode: z.string().min(1, '인증 코드는 필수입니다.'),
   name: z.string().min(1, '이름은 필수 입력입니다.'),
-  phoneNumber: z
+  phone: z
     .string()
     .min(1, '휴대전화 번호는 필수 입력입니다.')
     .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
@@ -21,18 +23,21 @@ interface BasicFormProps {
 }
 
 export default function BasicForm({ onNext }: BasicFormProps) {
+  const [basicFormState, setBasicFormState] = useRecoilState(basicFormAtom);
+  console.log('렌더링 되냐.');
+
   const {
     register,
     formState: { errors },
-    control,
     handleSubmit,
   } = useForm<BasicFormType>({
     resolver: zodResolver(schema),
     mode: 'onChange',
+    defaultValues: basicFormState,
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    setBasicFormState(data);
     onNext();
   };
 
@@ -49,8 +54,8 @@ export default function BasicForm({ onNext }: BasicFormProps) {
           <WrapLabel label="이름(실명)" id="name" errorMessage={errors.name?.message} required>
             <TextInput id="name" register={register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
           </WrapLabel>
-          <WrapLabel label="연락처" id="phoneNumber" errorMessage={errors.phoneNumber?.message} required>
-            <TextInput id="phoneNumber" register={register('phoneNumber')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
+          <WrapLabel label="연락처" id="phone" errorMessage={errors.phone?.message} required>
+            <TextInput id="phone" register={register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel
             label="회사 이메일"
