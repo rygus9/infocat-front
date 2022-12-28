@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import cls from '@/utils/cls';
 
 const LinkInfo = [
   {
@@ -48,6 +50,9 @@ const LinkInfo = [
 ];
 
 export default function MypageCase({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const nowPath = router.route;
+
   return (
     <main className="m-auto w-full max-w-4xl px-4">
       <div className="flex pt-10">
@@ -60,7 +65,7 @@ export default function MypageCase({ children }: { children: ReactNode }) {
                 {mainSection.subLinks.map((subSection) => (
                   <div key={subSection.title}>
                     <Link href={subSection.link}>
-                      <a className="text-lg text-gray">{subSection.title}</a>
+                      <a className={cls('text-lg', nowPath === subSection.link ? 'text-lightPurple' : 'text-gray')}>{subSection.title}</a>
                     </Link>
                   </div>
                 ))}
