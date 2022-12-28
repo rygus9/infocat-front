@@ -4,24 +4,16 @@ import WrapLabel from '@/components/shared/input/WrapLabel';
 import CareersInput from '@/components/signup-mentor/CareersInput';
 import FieldInput from '@/components/signup-mentor/FieldInput';
 import { fieldCategoryOption, timeScaleOption } from '@/contents';
+import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import Link from 'next/link';
+import { ReactNode, useEffect } from 'react';
 import { FormProvider, useForm, useFormContext, UseFormRegister } from 'react-hook-form';
 import { z } from 'zod';
 import EditorWithForm from './EditorWithForm';
 import WeekSchedulerWithForm from './WeekSchedulerWithForm';
 
 const schema = z.object({
-  name: z.string().min(1, '이름은 필수 입력입니다.'),
-  phoneNumber: z
-    .string()
-    .min(1, '휴대전화 번호는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-  job: z.string().min(1, '직무는 필수 입력입니다.'),
-  years: z
-    .string()
-    .min(1, '연차는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
   careers: z.array(
     z.object({
       content: z.string(),
@@ -66,41 +58,25 @@ export default function MentoringCreateForm() {
   return (
     <>
       <h1 className="mt-20 text-center text-2xl text-darkGray">인포머님 멘토링을 생성해보세요.</h1>
-      <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
-        <section className="space-y-5">
-          <h3 className="text-xl text-darkGray">계정 정보</h3>
-          <WrapLabel label="이름" id="name" moreInfo="실명으로 입력하세요." required errorMessage={errors.name?.message}>
-            <TextInput register={register('name')} type="text" placeholder="이름을 입력하세요."></TextInput>
-          </WrapLabel>
-          <WrapLabel
-            label="휴대전화 번호"
-            id="phoneNumber"
-            moreInfo="멘토링관련 정보를 보내드립니다. 정확하게 기입해주세요!"
-            required
-            errorMessage={errors.phoneNumber?.message}
-          >
-            <TextInput register={register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></TextInput>
-          </WrapLabel>
+      <section className="pt-10">
+        <div className="flex items-center justify-between pt-6">
+          <h3 className="text-xl text-darkGray">등록된 인포머 정보</h3>
+          <Link href="/mypage">
+            <a className="inline-flex text-lightPurple">
+              수정하기 <ArrowRightIcon className="h-6 w-6"></ArrowRightIcon>
+            </a>
+          </Link>
+        </div>
+        <section className="space-y-2 py-3">
+          <InfoViewer label="이름">구교현</InfoViewer>
+          <InfoViewer label="전화번호">01048756823</InfoViewer>
+          <InfoViewer label="회사">아주대학교</InfoViewer>
+          <InfoViewer label="직무">프론트엔드</InfoViewer>
+          <InfoViewer label="연차">4</InfoViewer>
         </section>
-        <hr className="my-5 text-lightGray"></hr>
-        <section className="space-y-5">
-          <h3 className="pt-6 text-xl text-darkGray">인포머 정보</h3>
-          <WrapLabel label="직무" id="job" errorMessage={errors.job?.message} moreInfo="예) 웹프론트엔드, 앱디자이너, 서비스PM" required>
-            <TextInput id="job" register={register('job')} type="text" placeholder="직무를 입력해주세요."></TextInput>
-          </WrapLabel>
-          <WrapLabel label="연차" id="years" errorMessage={errors.years?.message} moreInfo="숫자만 입력해주세요. 예) 5년차 -> 5" required>
-            <TextInput id="years" register={register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
-          </WrapLabel>
-          <WrapLabel label="커리어" id="careers" errorMessage={errors.careers?.message}>
-            <CareersInput
-              register={register}
-              name={'careers'}
-              control={control}
-              placeholder="가장 최신의 경력 사항부터 입력해주세요."
-            ></CareersInput>
-          </WrapLabel>
-        </section>
-        <hr className="my-5 text-lightGray"></hr>
+      </section>
+      <hr className="my-5 text-lightGray"></hr>
+      <form className="pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
           <h3 className="pt-6 text-xl text-darkGray">멘토링 정보</h3>
           <WrapLabel label="멘토링 이름" id="mentoringName" required errorMessage={errors.mentoringName?.message}>
@@ -121,6 +97,14 @@ export default function MentoringCreateForm() {
           </WrapLabel>
           <WrapLabel label="멘토링 소개" id="mentoringContent" required errorMessage={errors.mentoringContent?.message}>
             <EditorWithForm name="mentoringContent" control={control}></EditorWithForm>
+          </WrapLabel>
+          <WrapLabel label="이력사항" id="careers" errorMessage={errors.careers?.message}>
+            <CareersInput
+              register={register}
+              name={'careers'}
+              control={control}
+              placeholder="가장 최신의 경력 사항부터 입력해주세요."
+            ></CareersInput>
           </WrapLabel>
         </section>
         <hr className="my-5 text-lightGray"></hr>
@@ -160,5 +144,18 @@ function SchedulePart() {
         <WeekSchedulerWithForm control={control} name="startTimes" timeScale={parseInt(watch().timeScale.value)}></WeekSchedulerWithForm>
       </WrapLabel>
     </>
+  );
+}
+
+interface SimpleInfoViewerProps {
+  label: string;
+  children: ReactNode;
+}
+
+function InfoViewer({ label, children }: SimpleInfoViewerProps) {
+  return (
+    <div className="flex items-center justify-start text-base">
+      <div className="w-24 text-left font-semibold text-darkGray">{label}</div> <div className="text-gray">{children}</div>
+    </div>
   );
 }
