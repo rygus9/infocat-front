@@ -22,7 +22,7 @@ const MyProfile = () => {
         {/* Profile Part */}
         <div className="flex items-center space-x-6">
           <figure>
-            <div className="h-32 w-32 rounded-full bg-lightGray"></div>
+            <div className="h-20 w-20 rounded-full bg-lightGray sm:h-32 sm:w-32"></div>
           </figure>
           <div className="flex flex-col justify-center">
             <span className="text-2xl text-darkGray">승꽁</span>

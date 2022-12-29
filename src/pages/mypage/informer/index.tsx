@@ -61,7 +61,7 @@ const mypageInformer = () => {
           <WrapLabelShort label="회사">
             <TextDisabledInput value={informer.company}></TextDisabledInput>
           </WrapLabelShort>
-          <div className="flex items-center justify-start space-x-2">
+          <div className="flex flex-col items-start justify-start space-y-2 sm:flex-row sm:items-center sm:space-x-2">
             <WrapLabelShort label="이메일">
               <TextDisabledInput value={informer.email}></TextDisabledInput>
             </WrapLabelShort>

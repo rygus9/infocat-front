@@ -15,30 +15,28 @@ export default function CareersInput({ register, placeholder, buttonText, ...pro
       <section className="space-y-2">
         {fields.map((field, index) => {
           return (
-            <>
-              <div key={field.id} className={'justify-center" flex items-start space-x-2'}>
-                <input
-                  placeholder={placeholder}
-                  {...register(`${name}.${index}.content` as const, {
-                    required: '이력 사항은 필수 입력입니다.',
-                  })}
-                  className={cls(
-                    'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
-                    'text-base text-darkGray',
-                    'placeholder:text placeholder:text-lightGray',
-                    'focus:border-darkPurPle focus:outline-none focus:ring-0'
-                  )}
-                />
-                <button
-                  type="button"
-                  onClick={() => remove(index)}
-                  className={cls('w-20 bg-lightPurple py-2 text-white', 'disabled:bg-darkWhite disabled:text-darkGray')}
-                  disabled={fields.length === 1 ? true : false}
-                >
-                  삭제
-                </button>
-              </div>
-            </>
+            <div key={field.id} className={'justify-center" flex items-start space-x-2'}>
+              <input
+                placeholder={placeholder}
+                {...register(`${name}.${index}.content` as const, {
+                  required: '이력 사항은 필수 입력입니다.',
+                })}
+                className={cls(
+                  'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
+                  'text-base text-darkGray',
+                  'placeholder:text placeholder:text-lightGray',
+                  'focus:border-darkPurPle focus:outline-none focus:ring-0'
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => remove(index)}
+                className={cls('w-20 bg-lightPurple py-2 text-white', 'disabled:bg-darkWhite disabled:text-darkGray')}
+                disabled={fields.length === 1 ? true : false}
+              >
+                삭제
+              </button>
+            </div>
           );
         })}
       </section>
