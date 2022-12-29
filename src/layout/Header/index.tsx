@@ -30,7 +30,7 @@ export default function Header() {
   const onMyPageClick = () => router.push('/mypage');
   const onLogout = () => {
     setCurrentUser(null);
-    router.reload();
+    router.replace('/');
   };
 
   useEffect(() => {

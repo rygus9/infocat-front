@@ -1,4 +1,5 @@
 import MypageCase from '@/components/mypage/MypageCase';
+import WrapLabelShort from '@/components/mypage/WrapLabelShort';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
 import TextInput from '@/components/shared/input/TextInput';
 import { useForm } from 'react-hook-form';
@@ -20,36 +21,27 @@ const account = () => {
       <div>
         {/* just show Eamil */}
         <div>
-          <div className="flex w-96 items-center">
-            <label htmlFor="nickname" className="w-28 flex-shrink-0 text-gray">
-              이메일
-            </label>
+          <WrapLabelShort label="이메일" htmlFor="email">
             <TextDisabledInput value="rygus9@naver.com"></TextDisabledInput>
-          </div>
+          </WrapLabelShort>
         </div>
         {/* change password */}
         <hr className="my-5 text-lightGray"></hr>
         <div>
           <h4 className="pb-4 text-lg text-darkGray">비밀번호 변경</h4>
           <form className="space-y-3">
-            <div className="flex w-96 items-center">
-              <label htmlFor="nowPassword" className="inline-block w-28 flex-shrink-0 text-gray">
-                현재 비밀번호
-              </label>
-              <TextInput type="text" register={register('nowPassword')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
-            </div>
-            <div className="flex w-96 items-center">
-              <label htmlFor="changedPassword" className="block w-28 flex-shrink-0 text-gray">
-                변경할 비밀번호
-              </label>
-              <TextInput type="text" register={register('changedPassword')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
-            </div>
-            <div className="flex w-96 items-center">
-              <label htmlFor="confirmPassword" className="block w-28 flex-shrink-0 text-gray">
-                비밀번호 확인
-              </label>
-              <TextInput type="text" register={register('confirmPassword')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
-            </div>
+            <WrapLabelShort label="현재 비밀번호" htmlFor="nowPassword">
+              <TextInput type="password" register={register('nowPassword')} placeholder="현재 비밀번호를 입력하세요."></TextInput>
+            </WrapLabelShort>
+            <WrapLabelShort label="변경할 비밀번호" htmlFor="changedPassword">
+              <TextInput type="password" register={register('changedPassword')} placeholder="변경할 비밀번호를 입력하세요."></TextInput>
+            </WrapLabelShort>
+            <WrapLabelShort label="비밀번호 확인" htmlFor="confirmPassword">
+              <TextInput type="password" register={register('confirmPassword')} placeholder="비밀번호 확인"></TextInput>
+            </WrapLabelShort>
+            <button className="rounded-full bg-lightPurple px-4 py-1 text-base text-white" type="submit">
+              변경하기
+            </button>
           </form>
         </div>
         {/* 화원 탈퇴하기 */}

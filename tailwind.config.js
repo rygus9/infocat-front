@@ -16,6 +16,9 @@ module.exports = {
         lightBlack: '#b1b1b1',
         lightPurple: '#A272DE',
       },
+      boxShadow: {
+        custom: '0 1px 3px 0 rgba(0, 0, 0, 0.16)',
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

@@ -19,3 +19,7 @@
 .quill-editor .ql-toolbar {
   padding: 3px 5px !important;
 }
+
+th {
+  font-weight: 400;
+}

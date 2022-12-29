@@ -1,4 +1,5 @@
 import MypageCase from '@/components/mypage/MypageCase';
+import WrapLabelShort from '@/components/mypage/WrapLabelShort';
 import TextAreaInput from '@/components/shared/input/TextAreaInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
@@ -31,12 +32,9 @@ const MyProfile = () => {
 
         {/* edit Part */}
         <div className="space-y-4 py-10">
-          <div className="flex w-96 items-center space-x-3">
-            <label htmlFor="nickname" className="inline-block w-28 text-gray">
-              닉네임 수정
-            </label>
+          <WrapLabelShort label="닉네임 수정" htmlFor="nickname">
             <TextInput type="text" register={register('nickname')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
-          </div>
+          </WrapLabelShort>
           <div className="space-y-3">
             <label htmlFor="introduce" className="inline-block w-28 text-gray">
               자기 소개

@@ -23,7 +23,7 @@ const mentoringSessions = [
   },
 ];
 
-const mypageMentoring = () => {
+const mypageInformerMentoring = () => {
   const router = useRouter();
   const onDetailClick = (session: string) => {
     router.push(router.route + '/' + session);
@@ -36,4 +36,4 @@ const mypageMentoring = () => {
   );
 };
 
-export default mypageMentoring;
+export default mypageInformerMentoring;

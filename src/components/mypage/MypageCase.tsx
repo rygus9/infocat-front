@@ -38,12 +38,12 @@ const LinkInfo = [
     title: '인포머 관련 정보',
     subLinks: [
       {
-        title: '멘토링 관리하기',
-        link: '/mypage/informer/mentoring',
-      },
-      {
         title: '인포머 정보 관리',
         link: '/mypage/informer',
+      },
+      {
+        title: '멘토링 관리',
+        link: '/mypage/informer/mentoring',
       },
     ],
   },
@@ -59,13 +59,13 @@ export default function MypageCase({ children }: { children: ReactNode }) {
         {/* navigation Part */}
         <section className="divide-y divide-darkWhite">
           {LinkInfo.map((mainSection) => (
-            <div key={mainSection.title} className="space-y-2 py-4 pr-10">
-              <h4 className="text-lg font-semibold text-darkGray">{mainSection.title}</h4>
+            <div key={mainSection.title} className="space-y-2 py-4 pr-10 text-[1.05rem]">
+              <h4 className="font-semibold text-darkGray">{mainSection.title}</h4>
               <div className="space-y-2">
                 {mainSection.subLinks.map((subSection) => (
                   <div key={subSection.title}>
                     <Link href={subSection.link}>
-                      <a className={cls('text-lg', nowPath === subSection.link ? 'text-lightPurple' : 'text-gray')}>{subSection.title}</a>
+                      <a className={cls(nowPath === subSection.link ? 'text-lightPurple' : 'text-gray')}>{subSection.title}</a>
                     </Link>
                   </div>
                 ))}
