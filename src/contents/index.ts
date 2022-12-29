@@ -71,7 +71,16 @@ export const timeScaleOption = [
   },
 ];
 
+export const statusToLabel = {
+  pending: '승인대기',
+  assign: '승인완료',
+  mentorRefuse: '승인거부',
+  expiredDate: '기한만료',
+  complete: '완료',
+} as const;
+
 export const sortingOption = ['recent', 'popular', 'starts', 'high_price', 'low_price'];
+export type StatusType = 'pending' | 'assign' | 'mentorRefuse' | 'expiredDate' | 'complete';
 
 export const menteeStatusOption = [
   {

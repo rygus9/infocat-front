@@ -13,6 +13,7 @@ const TextInput = ({ register, ...rest }: TextInputProps) => {
     <input
       {...rest}
       {...register}
+      {...(rest.id ? {} : { id: register.name })}
       autoComplete="off"
       className={cls(
         'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
