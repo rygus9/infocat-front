@@ -35,12 +35,12 @@ export const fieldCategoryOption = [
     title: '국내 자기소개서/이력서',
   },
   {
-    value: '2',
-    title: '국외 자기소개서/이력서',
-  },
-  {
     value: '3',
     title: '포트폴리오',
+  },
+  {
+    value: '2',
+    title: '국외 자기소개서/이력서',
   },
   {
     value: '4',
@@ -64,10 +64,6 @@ export const timeScaleOption = [
   {
     value: '4',
     title: '02:00',
-  },
-  {
-    value: '5',
-    title: '02:30',
   },
 ];
 

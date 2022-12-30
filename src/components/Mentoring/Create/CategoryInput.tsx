@@ -2,9 +2,13 @@ import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '
 import cls from '@/utils/cls';
 import { useEffect, useRef, useState } from 'react';
 
-export default function FieldInput() {
+interface CategoryInputParams {
+  value: { subCategory: string; subValue: string };
+  onChange: (value: { subCategory: string; subValue: string }) => void;
+}
+
+export default function CategoryInput({ value, onChange }: CategoryInputParams) {
   const [mainCategory, setMainCategory] = useState<string>();
-  const [subCategoryValue, setSubCategoryValue] = useState<string>();
   const disclosureRef = useRef<HTMLElement>(null);
 
   // useEffect(() => {
@@ -31,11 +35,11 @@ export default function FieldInput() {
 
   const onMain = (main: JobCategoryOptionMain) => {
     setMainCategory(main.mainCategory);
-    setSubCategoryValue(main.options[0].subValue);
+    onChange(main.options[0]);
   };
 
   const onSub = (sub: JobCategoryOptionSub) => {
-    setSubCategoryValue(sub.subValue);
+    onChange(sub);
   };
 
   return (
@@ -44,7 +48,7 @@ export default function FieldInput() {
         {jobCategoryOption.map((main) => (
           <button
             className={cls(
-              'border bg-white py-1.5 px-5 text-base',
+              'border bg-white py-1.5 px-3  text-base',
               main.mainCategory === mainCategory ? 'border-darkPurPle text-darkPurPle' : 'border-lightGray text-darkGray'
             )}
             onClick={() => onMain(main)}
@@ -66,8 +70,8 @@ export default function FieldInput() {
               .options.map((subOption) => (
                 <button
                   className={cls(
-                    'border bg-white py-1.5 px-5 text-base',
-                    subOption.subValue === subCategoryValue ? 'border-darkPurPle text-darkPurPle' : 'border-lightGray text-darkGray'
+                    'border bg-white py-1.5 px-3 text-base',
+                    subOption.subCategory === value.subCategory ? 'border-darkPurPle text-darkPurPle' : 'border-lightGray text-darkGray'
                   )}
                   onClick={() => onSub(subOption)}
                   key={subOption.subValue}

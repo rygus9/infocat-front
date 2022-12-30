@@ -2,16 +2,20 @@ import ListBoxInput from '@/components/shared/input/ListBoxInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import CareersInput from '@/components/signup-mentor/CareersInput';
-import FieldInput from '@/components/signup-mentor/FieldInput';
 import { fieldCategoryOption, timeScaleOption } from '@/contents';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { ReactNode, useEffect } from 'react';
-import { FormProvider, useForm, useFormContext, UseFormRegister } from 'react-hook-form';
+import { ReactNode, useState } from 'react';
+import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 import EditorWithForm from './EditorWithForm';
 import WeekSchedulerWithForm from './WeekSchedulerWithForm';
+import MultiChoiceInput from '@/components/shared/input/MultiChoiceInput';
+import CategoryInputWithForm from './CategoryInputWithForm';
+import mentoringCreateApi from '@/api/mentoring/mentoringCreateApi';
+import { useMutation } from 'react-query';
+import CreateSuccessModal from './CreateSuccessModal';
 
 const schema = z.object({
   careers: z.array(
@@ -21,35 +25,63 @@ const schema = z.object({
   ),
   mentoringName: z.string().min(1, '멘토링 이름은 필수 입력입니다.').max(50, '멘토링 이름은 50자 이하입니다.'),
   mentoringShortIntro: z.string().min(1, '멘토링 짧은 소개는 필수 입력입니다.').max(200, '짧은 소개는 200자 이하 입니다.'),
-  mentoringField: z.object({ value: z.string(), name: z.string() }),
-  mentoringContent: z.string(),
+  // mentoringField: z.object({ value: z.string(), name: z.string() }),
+  mentoringField: z.array(z.string()).min(1, '희망 분야는 적어도 한 개 이상 선택해야 합니다.'),
+  mentoringCategory: z.object({ subCategory: z.string(), subValue: z.string() }, { required_error: '카테고리는 필수 입력입니다.' }),
+  mentoringContent: z.string().min(1, '멘토링 소개는 필수 입력입니다.'),
   price: z.string().min(1, '포인트 가격은 필수 입력입니다.'),
-  timeScale: z.object({ value: z.string(), name: z.string() }),
+  timeScale: z.object({ value: z.string(), title: z.string() }),
   startTimes: z.array(z.string()).min(1, '시간 하나 이상은 필수입력입니다.'),
 });
 
 export type MentoringFormType = z.infer<typeof schema>;
 
 export default function MentoringCreateForm() {
+  const { mutateAsync: mentoringCreateMutate, status: mentoringCreateState } = useMutation(mentoringCreateApi);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
   const method = useForm<MentoringFormType>({
     resolver: zodResolver(schema),
     mode: 'onChange',
     defaultValues: {
-      mentoringField: fieldCategoryOption[0],
+      mentoringField: [],
       timeScale: timeScaleOption[0],
       startTimes: [],
       careers: [{ content: '' }],
+      mentoringContent: '',
     },
   });
   const {
-    watch,
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = method;
-  const onSubmit = (data: any) => {
-    console.log('Mentoring Create Data', data);
+
+  const onSubmit = async (data: MentoringFormType) => {
+    try {
+      const sendData = {
+        title: data.mentoringName,
+        content: data.mentoringContent,
+        field: data.mentoringField.map((field) => parseInt(field)),
+        price: parseInt(data.price),
+        shorts: data.mentoringShortIntro,
+        career: data.careers
+          .filter((career) => career.content)
+          .map((career) => career.content)
+          .join('|'),
+        duration: data.timeScale.title,
+        image: '/image/mentoring/default.jpeg',
+        role: parseInt(data.mentoringCategory.subValue),
+        times: data.startTimes,
+      };
+      console.log(sendData);
+      const res = await mentoringCreateMutate(sendData);
+      if (res.result) {
+        setSuccessModalOpen(true);
+      }
+    } catch (err: any) {
+      console.log(err);
+    }
   };
   const onError = (error: any) => {
     console.log('Mentoring Create Error : ', error);
@@ -61,7 +93,7 @@ export default function MentoringCreateForm() {
       <section className="pt-10">
         <div className="flex items-center justify-between pt-6">
           <h3 className="text-xl text-darkGray">등록된 인포머 정보</h3>
-          <Link href="/mypage">
+          <Link href="/mypage/informer">
             <a className="inline-flex text-lightPurple">
               수정하기 <ArrowRightIcon className="h-6 w-6"></ArrowRightIcon>
             </a>
@@ -90,10 +122,16 @@ export default function MentoringCreateForm() {
             ></TextInput>
           </WrapLabel>
           <WrapLabel id="mentoringField" label="멘토링 희망분야" errorMessage={errors.mentoringField?.message}>
-            <ListBoxInput list={fieldCategoryOption} name="mentoringField" control={control}></ListBoxInput>
+            {/* <ListBoxInput list={fieldCategoryOption} name="mentoringField" control={control}></ListBoxInput> */}
+            <MultiChoiceInput
+              id="mentoringField"
+              type="checkbox"
+              options={fieldCategoryOption}
+              register={register('mentoringField')}
+            ></MultiChoiceInput>
           </WrapLabel>
-          <WrapLabel id="mentoringCategory" label="멘토링 카테고리">
-            <FieldInput></FieldInput>
+          <WrapLabel id="mentoringCategory" label="멘토링 카테고리" errorMessage={errors.mentoringCategory?.message}>
+            <CategoryInputWithForm name={'mentoringCategory'} control={control}></CategoryInputWithForm>
           </WrapLabel>
           <WrapLabel label="멘토링 소개" id="mentoringContent" required errorMessage={errors.mentoringContent?.message}>
             <EditorWithForm name="mentoringContent" control={control}></EditorWithForm>
@@ -116,10 +154,11 @@ export default function MentoringCreateForm() {
         </section>
         <section className="flex items-center justify-center pt-10">
           <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
-            등록하기
+            {isSubmitting ? '등록 중' : '등록하기'}
           </button>
         </section>
       </form>
+      <CreateSuccessModal isOpen={successModalOpen} closeModal={() => setSuccessModalOpen(false)}></CreateSuccessModal>
     </>
   );
 }
@@ -131,16 +170,21 @@ function SchedulePart() {
     control,
     formState: { errors },
   } = useFormContext<MentoringFormType>();
-  useEffect(() => {}, [watch().timeScale]);
   return (
     <>
-      <WrapLabel label="회당 포인트 가격" id="price" required moreInfo="숫자만 포인트 단위로 입력해주세요. 예) 10000p -> 10000">
+      <WrapLabel
+        label="회당 포인트 가격"
+        id="price"
+        required
+        moreInfo="숫자만 포인트 단위로 입력해주세요. 예) 10000p -> 10000"
+        errorMessage={errors.price?.message}
+      >
         <TextInput type="number" register={register('price')} placeholder="여기에 입력해주세요."></TextInput>
       </WrapLabel>
       <WrapLabel id="timeScale" label="회당 멘토링 시간." errorMessage={errors.timeScale?.message} required>
         <ListBoxInput list={timeScaleOption} name="timeScale" control={control}></ListBoxInput>
       </WrapLabel>
-      <WrapLabel id="" label="스케줄 선택" required>
+      <WrapLabel id="" label="스케줄 선택" required errorMessage={errors.startTimes?.message}>
         <WeekSchedulerWithForm control={control} name="startTimes" timeScale={parseInt(watch().timeScale.value)}></WeekSchedulerWithForm>
       </WrapLabel>
     </>

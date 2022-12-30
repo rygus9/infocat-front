@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import localStorageEffect from '../effect/localStorageEffect';
 
-interface ICurrentUserAtom {
+export interface ICurrentUserAtom {
   isInformer: boolean;
   nickName: string;
 }

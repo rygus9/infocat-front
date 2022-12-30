@@ -1,9 +1,18 @@
+import mentorRegistApi from '@/api/mentor/mentorRegistApi';
+import useCurrentUser from '@/hooks/useCurrentUser';
+import careerFormAtom from '@/recoil/form/informerRegist/careerFormAtom';
+import getBasicInfoSelector from '@/recoil/form/informerRegist/getBasicInfoSelector';
+import currentUserAtom from '@/recoil/user/currentUserAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { z } from 'zod';
 import TextInput from '../shared/input/TextInput';
 import WrapLabel from '../shared/input/WrapLabel';
 import CareersInput from './CareersInput';
+import SignUpSuccessModal from './SignUpSuccessModal';
 
 const schema = z.object({
   years: z
@@ -27,32 +36,67 @@ interface CareerFormProps {
 }
 
 export default function CareerForm({ onPrev }: CareerFormProps) {
+  const { mutateAsync: mentorRegistMutate, status: mentorRegistStatus } = useMutation(mentorRegistApi);
+  const [careerForm, setCareerForm] = useRecoilState(careerFormAtom);
+  const getBasicInfo = useRecoilValue(getBasicInfoSelector);
+  const userState = useCurrentUser();
+  const setCurrentUserState = useSetRecoilState(currentUserAtom);
+  const [successModal, setSuccessModal] = useState(false);
+
   const {
     register,
-    formState: { errors },
+    getValues,
+    formState: { errors, isSubmitting },
     control,
     handleSubmit,
   } = useForm<CareerFormType>({
     resolver: zodResolver(schema),
     mode: 'onChange',
-    defaultValues: {
-      careers: [{ content: '' }],
-    },
+    defaultValues: careerForm,
   });
 
-  const onSubmit = (data: CareerFormType) => {
-    console.log(data);
+  const onSubmit = async (data: CareerFormType) => {
+    try {
+      const res = await mentorRegistMutate({
+        ...getBasicInfo,
+        job: data.role,
+        years: data.years,
+        career: data.careers.join('|'),
+      });
+      if (res.result) {
+        setCurrentUserState({
+          isInformer: true,
+          nickName: userState?.nickName as string,
+        });
+        setSuccessModal(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onError = (err: any) => {
     console.log(err);
   };
 
+  const onPrevClick = () => {
+    setCareerForm({
+      careers: getValues('careers'),
+      role: getValues('role'),
+      years: getValues('years'),
+    });
+    onPrev();
+  };
+
   return (
     <>
       <header className="pt-20 pb-1">
-        <h3 className="w-fit space-y-1 text-left text-2xl text-darkGray">
-          <p>이승연님의 회사는 '아주대학교'입니다.</p>
+        <h3 className="w-fit space-y-1 text-left text-xl text-darkGray xs:text-2xl">
+          <p>
+            <>
+              {userState?.nickName} 님의 회사는 '{getBasicInfo.company}'입니다.
+            </>
+          </p>
           <p>당신의 커리어를 등록해주세요.</p>
         </h3>
       </header>
@@ -74,14 +118,15 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center space-x-2 pb-5 pt-10">
-          <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onPrev}>
+          <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onPrevClick}>
             이전
           </button>
           <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
-            등록하기
+            {isSubmitting ? '등록 중' : '등록하기'}
           </button>
         </section>
       </form>
+      <SignUpSuccessModal isOpen={successModal} closeModal={() => setSuccessModal(false)}></SignUpSuccessModal>
     </>
   );
 }
