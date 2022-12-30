@@ -18,9 +18,7 @@ export default function CareersInput({ register, placeholder, buttonText, ...pro
             <div key={field.id} className={'justify-center" flex items-start space-x-2'}>
               <input
                 placeholder={placeholder}
-                {...register(`${name}.${index}.content` as const, {
-                  required: '이력 사항은 필수 입력입니다.',
-                })}
+                {...register(`${name}.${index}.content` as const)}
                 className={cls(
                   'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
                   'text-base text-darkGray',

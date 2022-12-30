@@ -16,7 +16,7 @@ const schema = z.object({
     .min(1, '휴대전화 번호는 필수 입력입니다.')
     .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
   status: z.object({
-    title: z.string(),
+    title: z.string().min(1, '현재 상태는 필수 입력입니다.'),
     value: z.string(),
   }),
   major: z.string().min(1, '전공은 필수 입력입니다.'),

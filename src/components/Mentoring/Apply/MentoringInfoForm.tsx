@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import QuestionsInput from './QuestionsInput';
 import { z } from 'zod';
 import CalendarInputWithForm from './CalendarInputWithForm';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import mentoringFormAtom from '@/recoil/form/mentoringApply/mentoringFormAtom';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
   schedule: z.string().min(1, '스케줄 입력은 필수입니다.'),
@@ -26,7 +27,14 @@ interface MentoringInfoFormProps {
 export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
   const [mentoringFormState, setMentoringFormState] = useRecoilState(mentoringFormAtom);
 
-  const { register, control, handleSubmit, getValues } = useForm<MentoringApplyMentoringType>({
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<MentoringApplyMentoringType>({
+    resolver: zodResolver(schema),
     defaultValues: mentoringFormState,
   });
 
@@ -35,7 +43,9 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
     onPrev();
   };
 
-  const onSubmit = (data: MentoringApplyMentoringType) => {};
+  const onSubmit = (data: MentoringApplyMentoringType) => {
+    console.log('submit', data);
+  };
 
   const onError = (err: any) => {
     console.log(err);
@@ -46,7 +56,7 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
       <h1 className="mt-20 text-center text-2xl text-darkGray">인포머와 약속을 잡아보세요.</h1>
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
-          <WrapLabel label="날짜 및 시간 선택" id="schedule" required>
+          <WrapLabel label="날짜 및 시간 선택" id="schedule" required errorMessage={errors.schedule?.message}>
             <CalendarInputWithForm name="schedule" control={control}></CalendarInputWithForm>
           </WrapLabel>
           <WrapLabel

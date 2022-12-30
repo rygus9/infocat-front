@@ -55,9 +55,11 @@ interface CalendarInputProps {
 }
 
 export default function CalendarInput({ selectTime, setSelectTime }: CalendarInputProps) {
-  const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
-  const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
-  const firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date());
+  const [selectedDay, setSelectedDay] = useState<Date | undefined>(selectTime ? startOfDay(selectTime) : undefined);
+  const [currentMonth, setCurrentMonth] = useState(selectTime ? format(selectTime, 'MMM-yyyy') : format(today, 'MMM-yyyy'));
+  const firstDayCurrentMonth = selectTime
+    ? parse(currentMonth, 'MMM-yyyy', new Date(selectTime))
+    : parse(currentMonth, 'MMM-yyyy', new Date());
   // parse는 data-fns => new Date로 바꾸어줌. (현재 date-fns 포맷을 알면)
   // 기본적으로 Date 객체를 기반으로 한다.
 
@@ -135,7 +137,7 @@ export default function CalendarInput({ selectTime, setSelectTime }: CalendarInp
           </section>
         </div>
       </section>
-      <section className={cls('mt-3 border border-lightGray py-8', nowTimeList.length === 0 ? 'items-center' : 'items-start')}>
+      <section className={cls('mt-3 border border-lightGray py-8 px-4', nowTimeList.length === 0 ? 'items-center' : 'items-start')}>
         <div className="m-auto max-w-lg">
           {nowTimeList.length === 0 ? (
             <div className="w-full text-darkGray">날짜를 먼저 선택해주세요.</div>

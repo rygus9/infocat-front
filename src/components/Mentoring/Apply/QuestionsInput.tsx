@@ -23,9 +23,7 @@ export default function QuestionsInput({
             <div key={field.id} className={'justify-center" flex items-start space-x-2'}>
               <textarea
                 placeholder={placeholder}
-                {...register(`${name}.${index}.content` as const, {
-                  required: true,
-                })}
+                {...register(`${name}.${index}.content` as const)}
                 className={cls(
                   'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
                   'text-base text-darkGray',
