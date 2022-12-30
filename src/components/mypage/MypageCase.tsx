@@ -53,7 +53,13 @@ const LinkInfo = [
 
 export default function MypageCase({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const nowPath = router.route;
+  // [id] 빼버리기....
+  const nowPath =
+    '/' +
+    router.route
+      .split('/')
+      .filter((elem) => elem !== '[id]' && elem)
+      .join('/');
   const links = LinkInfo.flatMap((mainCategory) => mainCategory.subLinks);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -61,7 +67,7 @@ export default function MypageCase({ children }: { children: ReactNode }) {
     <main className="m-auto w-full max-w-4xl md:px-10">
       <div className="md:flex md:pt-10">
         {/* 데스크탑 네비게이션 */}
-        <section className="hidden divide-y divide-darkWhite md:block">
+        <section className="hidden divide-y divide-darkWhite pr-8 md:block">
           <NavigationPart></NavigationPart>
         </section>
         {/* 모바일 내비게이션 ㅠㅠ */}
@@ -127,7 +133,13 @@ function MobileNav({ onClose }: { onClose: () => void }) {
 
 function NavigationPart() {
   const router = useRouter();
-  const nowPath = router.route;
+  // [id] 빼버리기....
+  const nowPath =
+    '/' +
+    router.route
+      .split('/')
+      .filter((elem) => elem !== '[id]' && elem)
+      .join('/');
   const userState = useCurrentUser();
 
   return (

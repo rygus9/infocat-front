@@ -15,6 +15,7 @@ const MentoringPage: NextPage = () => {
           <Order />
         </div>
       </div>
+      {/* 모바일 버전 Order 대체용도 */}
       <div className="sticky bottom-0 border-t border-palePurple bg-white py-2 lg:hidden">
         <nav className="flex h-fit justify-center space-x-2 px-3">
           <ApplyButton designType="mobile"></ApplyButton>

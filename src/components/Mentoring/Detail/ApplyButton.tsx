@@ -8,7 +8,7 @@ const buttonDesign = {
 export default function ApplyButton({ designType }: { designType: 'mobile' | 'desktop' }) {
   const router = useRouter();
   const onClick = () => {
-    router.push('/mentoring/apply');
+    router.push(location.pathname + '/apply');
   };
 
   return (

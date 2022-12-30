@@ -50,7 +50,7 @@ export default function OrderMenu() {
             <ChevronUpIcon className={cls('ml-1 h-5 w-5 transition-transform', open ? 'rotate-180' : '')}></ChevronUpIcon>
           </Menu.Button>
           <PopTransition>
-            <Menu.Items as="ul" className="absolute right-0 mt-1 w-fit rounded-md bg-white shadow-lg focus:outline-none">
+            <Menu.Items as="ul" className="absolute right-0 z-20 mt-1 w-fit rounded-md bg-white shadow-lg focus:outline-none">
               {orderCategory.map((menu) => (
                 <Menu.Item key={menu.value}>
                   {({ active }) => (
