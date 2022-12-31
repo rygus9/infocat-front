@@ -8,6 +8,7 @@ interface LoginApiProps {
 
 interface LoginApiReturn {
   isMentor: boolean;
+  nickname: string;
 }
 
 const loginApi = ({ ...elem }: LoginApiProps): Promise<LoginApiReturn> => axiosCase(client.post('/api/v1/auth/login', { ...elem }));

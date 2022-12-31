@@ -1,3 +1,4 @@
+import logoutApi from '@/api/auth/logoutApi';
 import currentUserAtom from '@/recoil/user/currentUserAtom';
 import cls from '@/utils/cls';
 import Link from 'next/link';
@@ -28,8 +29,12 @@ export default function Header() {
   const onLogoClick = () => router.push('/');
   const onLoginClick = () => router.push('/login');
   const onMyPageClick = () => router.push('/mypage');
-  const onLogout = () => {
+  const onLogout = async () => {
+    await logoutApi();
     setCurrentUser(null);
+    //mocking용 추후 지워야 하는 부분
+    localStorage.removeItem('email');
+    //
     router.replace('/');
   };
 
