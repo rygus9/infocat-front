@@ -1,18 +1,28 @@
+import mentoringSearchApi, { MentoringSearchApiRes } from '@/api/mentoring/mentoringSearchApi';
 import ApplyButton from '@/components/Mentoring/Detail/ApplyButton';
 import DetailBanner from '@/components/Mentoring/Detail/DetailBanner';
 import DetailBody from '@/components/Mentoring/Detail/DetailBody';
 import Order from '@/components/Mentoring/Detail/Order';
 import { StarIcon } from '@heroicons/react/24/outline';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
-const MentoringPage: NextPage = () => {
+const MentoringPage: NextPage<{ data: MentoringSearchApiRes }> = ({ data }) => {
+  console.log(data);
+  data.career = data.career || '등록된 경력이 없습니다.';
   return (
     <main className="w-full">
-      <DetailBanner></DetailBanner>
+      <DetailBanner title={data.title} introduce={data.shorts} role={data.role}></DetailBanner>
       <div className="relative m-auto flex h-full max-w-5xl items-stretch px-4">
-        <DetailBody></DetailBody>
+        <DetailBody content={data.content} career={data.career} job={data.job} nickname={data.nickname} years={data.years}></DetailBody>
         <div className="relative hidden lg:block">
-          <Order />
+          <Order
+            career={data.career}
+            introduce={data.shorts}
+            job={data.job}
+            nickname={data.nickname}
+            title={data.title}
+            year={data.years}
+          />
         </div>
       </div>
       {/* 모바일 버전 Order 대체용도 */}
@@ -29,3 +39,17 @@ const MentoringPage: NextPage = () => {
 };
 
 export default MentoringPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Fetch data from external API
+  const { page } = context.query;
+  let data = undefined;
+  try {
+    data = await mentoringSearchApi(page as string);
+  } catch (err) {
+    console.log(err);
+  }
+  return { props: { data } };
+
+  // Pass data to the page via props
+};
