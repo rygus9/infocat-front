@@ -39,7 +39,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 h-[6.5rem] w-full bg-white shadow-md">
-      <div className="m-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="m-auto flex h-16 max-w-6xl items-center justify-between px-3 xs:px-6">
         <figure className="h-10 w-36 cursor-pointer text-xl font-bold" onClick={onLogoClick}>
           <HeaderLogo />
         </figure>

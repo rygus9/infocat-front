@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import cls from '@/utils/cls';
 import { Bars3Icon } from '@heroicons/react/20/solid';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 const LinkInfo = [
   {
@@ -52,29 +53,22 @@ const LinkInfo = [
 
 export default function MypageCase({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const nowPath = router.route;
+  // [id] 빼버리기....
+  const nowPath =
+    '/' +
+    router.route
+      .split('/')
+      .filter((elem) => elem !== '[id]' && elem)
+      .join('/');
   const links = LinkInfo.flatMap((mainCategory) => mainCategory.subLinks);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <main className="m-auto w-full max-w-4xl md:px-10">
       <div className="md:flex md:pt-10">
-        {/* navigation Part */}
-        <section className="hidden divide-y divide-darkWhite md:block">
-          {LinkInfo.map((mainSection) => (
-            <div key={mainSection.title} className="space-y-2 py-4 pr-10 text-[1.05rem]">
-              <h4 className="font-semibold text-darkGray">{mainSection.title}</h4>
-              <div className="space-y-2">
-                {mainSection.subLinks.map((subSection) => (
-                  <div key={subSection.title}>
-                    <Link href={subSection.link}>
-                      <a className={cls(nowPath === subSection.link ? 'text-lightPurple' : 'text-gray')}>{subSection.title}</a>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+        {/* 데스크탑 네비게이션 */}
+        <section className="hidden divide-y divide-darkWhite pr-8 md:block">
+          <NavigationPart></NavigationPart>
         </section>
         {/* 모바일 내비게이션 ㅠㅠ */}
         <section className={cls('m-auto flex w-full max-w-xl items-center justify-start py-4 pl-3', 'md:hidden')}>
@@ -93,8 +87,6 @@ export default function MypageCase({ children }: { children: ReactNode }) {
 
 function MobileNav({ onClose }: { onClose: () => void }) {
   const headerNavRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  const nowPath = router.route;
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -130,7 +122,30 @@ function MobileNav({ onClose }: { onClose: () => void }) {
         className="inner relative w-[13rem] transform-gpu animate-moveRight items-center overflow-y-scroll bg-white pl-6 pt-10 xs:w-[16rem]"
         ref={headerNavRef}
       >
-        {LinkInfo.map((mainSection) => (
+        <NavigationPart></NavigationPart>
+      </div>
+
+      {/* 화면 깔아줄 아이 */}
+      <div className="flex-auto"></div>
+    </div>
+  );
+}
+
+function NavigationPart() {
+  const router = useRouter();
+  // [id] 빼버리기....
+  const nowPath =
+    '/' +
+    router.route
+      .split('/')
+      .filter((elem) => elem !== '[id]' && elem)
+      .join('/');
+  const userState = useCurrentUser();
+
+  return (
+    <>
+      {LinkInfo.filter((mainSection) => (userState?.isInformer === true ? mainSection.title !== '인포머 정보 관련' : true)).map(
+        (mainSection) => (
           <div key={mainSection.title} className="space-y-2 py-4 text-[1.05rem]">
             <h4 className="font-semibold text-darkGray">{mainSection.title}</h4>
             <div className="space-y-2">
@@ -143,11 +158,8 @@ function MobileNav({ onClose }: { onClose: () => void }) {
               ))}
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* 화면 깔아줄 아이 */}
-      <div className="flex-auto"></div>
-    </div>
+        )
+      )}
+    </>
   );
 }

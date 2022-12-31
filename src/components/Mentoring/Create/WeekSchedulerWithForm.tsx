@@ -13,7 +13,7 @@ export default function WeekSchedulerWithForm({
   } = useController(props);
 
   useEffect(() => {
-    onChange([]);
+    if (value.length !== 0) onChange([]);
   }, [timeScale]);
 
   return (

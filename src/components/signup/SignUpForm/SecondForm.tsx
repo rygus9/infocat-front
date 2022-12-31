@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { useMutation } from 'react-query';
 import signUpApi from '@/api/auth/signUpApi';
 import { useState } from 'react';
-import emailValidationApi from '@/api/auth/emailValidationApi';
+import emailValidationApi from '@/api/email/emailValidationApi';
 import { getErrorMessage } from '@/contents/errorMessage';
 import emailSendApi from '@/api/email/emailSendApi';
 

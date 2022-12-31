@@ -6,6 +6,12 @@ import { z } from 'zod';
 import CalendarInputWithForm from './CalendarInputWithForm';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import mentoringFormAtom from '@/recoil/form/mentoringApply/mentoringFormAtom';
+import { zodResolver } from '@hookform/resolvers/zod';
+import mentoringApplyApi from '@/api/mentoring/mentoringApplyApi';
+import { useMutation } from 'react-query';
+import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
+import ApplySuccessModal from './ApplySuccessModal';
+import { useState } from 'react';
 
 const schema = z.object({
   schedule: z.string().min(1, '스케줄 입력은 필수입니다.'),
@@ -25,8 +31,18 @@ interface MentoringInfoFormProps {
 
 export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
   const [mentoringFormState, setMentoringFormState] = useRecoilState(mentoringFormAtom);
+  const { mutateAsync: mentoringApplyMutate, status: mentoringApplyState } = useMutation(mentoringApplyApi);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const menteeFormState = useRecoilValue(menteeFormAtom);
 
-  const { register, control, handleSubmit, getValues } = useForm<MentoringApplyMentoringType>({
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors, isSubmitting },
+  } = useForm<MentoringApplyMentoringType>({
+    resolver: zodResolver(schema),
     defaultValues: mentoringFormState,
   });
 
@@ -35,18 +51,43 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
     onPrev();
   };
 
-  const onSubmit = (data: MentoringApplyMentoringType) => {};
+  const onSubmit = async (data: MentoringApplyMentoringType) => {
+    const path = location.pathname.split('/')[2];
+    const serverData = {
+      introduce: menteeFormState.introduce,
+      major: menteeFormState.major,
+      name: menteeFormState.name,
+      phone: menteeFormState.phoneNumber,
+      userCondition: menteeFormState.status.title,
+      wanted: data.wanted,
+      schedule: data.schedule,
+      questions: data.questions
+        .map((elem) => elem.content)
+        .filter((elem) => elem)
+        .join('|'),
+      mentoringId: path,
+    };
+    console.log(serverData);
+
+    try {
+      const res = await mentoringApplyMutate(serverData);
+      if (res.result) {
+        setSuccessModalOpen(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onError = (err: any) => {
     console.log(err);
   };
-
   return (
     <>
       <h1 className="mt-20 text-center text-2xl text-darkGray">인포머와 약속을 잡아보세요.</h1>
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
-          <WrapLabel label="날짜 및 시간 선택" id="schedule" required>
+          <WrapLabel label="날짜 및 시간 선택" id="schedule" required errorMessage={errors.schedule?.message}>
             <CalendarInputWithForm name="schedule" control={control}></CalendarInputWithForm>
           </WrapLabel>
           <WrapLabel
@@ -65,10 +106,11 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
             이전
           </button>
           <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
-            제출하기
+            {isSubmitting ? '제출 중' : '제출하기'}
           </button>
         </section>
       </form>
+      <ApplySuccessModal isOpen={successModalOpen} closeModal={() => setSuccessModalOpen(false)}></ApplySuccessModal>
     </>
   );
 }

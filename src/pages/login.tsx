@@ -42,7 +42,7 @@ const Login = () => {
       <figure className="flex h-10 w-full items-center justify-center font-bold">
         <HeaderLogo></HeaderLogo>
       </figure>
-      <form onSubmit={handleSubmit(onSubmit, onError)}>
+      <form onSubmit={handleSubmit(onSubmit, onError)} className="px-4">
         <section className="mt-4 space-y-2">
           <WrapLabel label="이메일" id="email">
             <TextInput id="email" register={register('email')} type="text" placeholder="이메일"></TextInput>

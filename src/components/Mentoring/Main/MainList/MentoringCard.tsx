@@ -1,11 +1,21 @@
 import { MentoringCardParams } from '@/api/mentoring/mentoringListSearchApi';
+import usePathPush from '@/hooks/useReplace';
+import cls from '@/utils/cls';
 import yearToRank from '@/utils/yearToRank';
 import { range } from 'rambda';
 import { PropsWithChildren } from 'react';
 
-export default function MentoringCard({ title, role, years, company, stars, image }: MentoringCardParams) {
+export default function MentoringCard({ id, title, role, years, company, stars, image }: MentoringCardParams) {
+  const onMentoringPush = usePathPush('/mentoring/' + id);
+
   return (
-    <article className="h-full w-full max-w-[22rem] rounded-md bg-white p-6 shadow-md sm:p-6">
+    <article
+      className={cls(
+        'relative top-0 z-0 h-full w-full max-w-[22rem] cursor-pointer rounded-md bg-white p-6 shadow-md sm:p-6',
+        'transition-all duration-200 hover:-top-1'
+      )}
+      onClick={onMentoringPush}
+    >
       <header className="flex items-center space-x-4">
         <div className="h-10 w-10 flex-shrink-0 rounded-full bg-lightGray"></div>
         <h3 className="text-lg leading-6">{title}</h3>

@@ -1,10 +1,19 @@
+import emailValidationApi from '@/api/email/emailValidationApi';
+import emailSendApi from '@/api/email/emailSendApi';
+import useCurrentUser from '@/hooks/useCurrentUser';
 import basicFormAtom from '@/recoil/form/informerRegist/basicFormAtom';
+import cls from '@/utils/cls';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useMutation } from 'react-query';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { z } from 'zod';
 import TextInput from '../shared/input/TextInput';
 import WrapLabel from '../shared/input/WrapLabel';
+import emailCompanyApi from '@/api/auth/emailCompanyApi';
+import companyAtom from '@/recoil/form/informerRegist/companyAtom';
+import { useState } from 'react';
+import { getErrorMessage } from '@/contents/errorMessage';
 
 const schema = z.object({
   companyEmail: z.string().email('잘못된 이메일 형식입니다.'),
@@ -23,11 +32,18 @@ interface BasicFormProps {
 }
 
 export default function BasicForm({ onNext }: BasicFormProps) {
+  const userState = useCurrentUser();
+  const { mutateAsync: emailSendMutate, status: emailSendStatus } = useMutation(emailSendApi);
+  const { mutateAsync: emailValidationMutate, status: emailValidationStatus } = useMutation(emailValidationApi);
+  const { mutateAsync: emailCompanyMutate } = useMutation(emailCompanyApi);
+  const setCompany = useSetRecoilState(companyAtom);
   const [basicFormState, setBasicFormState] = useRecoilState(basicFormAtom);
+  const [emailValidationError, setEmailValidationError] = useState('');
 
   const {
+    getValues,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<BasicFormType>({
     resolver: zodResolver(schema),
@@ -35,16 +51,29 @@ export default function BasicForm({ onNext }: BasicFormProps) {
     defaultValues: basicFormState,
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: BasicFormType) => {
+    try {
+      await emailValidationMutate({ email: data.companyEmail, validationCode: data.emailCode });
+      const company = await emailCompanyMutate({ email: data.companyEmail });
+      setCompany(company);
+    } catch (err) {
+      setEmailValidationError(getErrorMessage(err as string));
+      return;
+    }
     setBasicFormState(data);
     onNext();
+  };
+
+  const emailSend = async () => {
+    const email = getValues('companyEmail');
+    await emailSendMutate({ email: email });
   };
 
   return (
     <>
       <header className="pt-20 pb-1">
-        <h3 className="w-fit space-y-1 text-left text-2xl text-darkGray">
-          <p>이승연님 안녕하세요.</p>
+        <h3 className="w-fit space-y-1 text-left text-xl text-darkGray xs:text-2xl">
+          <p>{userState?.nickName} 님 안녕하세요.</p>
           <p>인포머에 동참해주셔서 감사합니다.</p>
         </h3>
       </header>
@@ -63,21 +92,30 @@ export default function BasicForm({ onNext }: BasicFormProps) {
             moreInfo="근무하시는 회사 이메일로 입력해주세요. 위 이메일로 근무사실을 검증합니다."
             required
           >
-            <div className="mb-2 flex items-stretch space-x-2">
+            <div
+              className={cls('flex items-stretch space-x-2', emailSendStatus === 'error' || emailSendStatus === 'success' ? '' : 'mb-2')}
+            >
               <TextInput
                 id="companyEmail"
                 register={register('companyEmail')}
                 type="text"
                 placeholder="회사 이메일을 입력해주세요."
               ></TextInput>
-              <button className="w-16 bg-lightPurple text-white">전송</button>
+              <button className="w-16 bg-lightPurple text-white" onClick={emailSend} type="button">
+                {emailSendStatus === 'loading' ? '전송중' : '전송'}
+              </button>
             </div>
+            {emailSendStatus === 'error' && <span className="mb-2 inline-block text-sm text-red-500">이메일 전송에 실패했습니다.</span>}
+            {emailSendStatus === 'success' && (
+              <span className="mb-2 inline-block text-sm text-lightPurple">인증 코드가 전송되었습니다.</span>
+            )}
             <TextInput id="emailCode" register={register('emailCode')} placeholder="인증 코드를 입력해주세요." type="text"></TextInput>
+            {emailValidationStatus === 'error' && <span className="inline-block text-sm text-red-500">{emailValidationError}</span>}
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center pb-5 pt-10">
           <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
-            다음 단계
+            {isSubmitting ? '등록 중' : '다음 단계'}
           </button>
         </section>
       </form>

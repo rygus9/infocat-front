@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 
 const create: NextPage = () => {
   return (
-    <main className="m-auto max-w-xl">
+    <main className="m-auto max-w-xl px-4">
       <MentoringCreateForm></MentoringCreateForm>
     </main>
   );
