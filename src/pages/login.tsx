@@ -28,7 +28,11 @@ const Login = () => {
   const onSubmit = async (data: LoginForm) => {
     try {
       const loginResult = await loginMutate(data);
-      setCurrentUser({ isInformer: loginResult.isMentor, nickName: 'gugu' });
+      console.log(loginResult);
+      setCurrentUser({ isInformer: loginResult.isMentor, nickName: loginResult.nickname });
+      // mocking용 추후 지워야 하는 부분
+      localStorage.setItem('email', data.email);
+      //
       router.push('/');
     } catch (errorCode) {
       setServerError(getErrorMessage(errorCode as string));
