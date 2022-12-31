@@ -1,13 +1,13 @@
 import Modal from '@/components/shared/common/Modal';
 import usePathPush from '@/hooks/useReplace';
 
-interface CreateSuccessModal {
+interface CreateSuccessModalProps {
   isOpen: boolean;
   closeModal: () => void;
 }
 
-export default function CreateSuccessModal({ closeModal, isOpen }: CreateSuccessModal) {
-  const onGoHome = usePathPush('/');
+export default function CreateSuccessModal({ closeModal, isOpen }: CreateSuccessModalProps) {
+  const onGoHome = usePathPush('/mentoring');
 
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>

@@ -11,23 +11,6 @@ export default function CategoryInput({ value, onChange }: CategoryInputParams) 
   const [mainCategory, setMainCategory] = useState<string>();
   const disclosureRef = useRef<HTMLElement>(null);
 
-  // useEffect(() => {
-  //   const { current } = disclosureRef;
-  //   if (current == null) return;
-
-  //   console.log('계속 오냐?');
-
-  //   let beforeScrollHeight = 0;
-  //   const observer = new ResizeObserver((entries) => {
-  //     for (let entry of entries) {
-  //       let nowScrollHeight = entry.target.scrollHeight;
-  //       if (beforeScrollHeight != nowScrollHeight)
-  //         current.style.setProperty('--content-height', nowScrollHeight.toString() + 'px'), (beforeScrollHeight = nowScrollHeight);
-  //     }
-  //   });
-  //   observer.observe(current);
-  // }, [disclosureRef]);
-
   useEffect(() => {
     const { current } = disclosureRef;
     current?.style.setProperty('--content-height', current.scrollHeight.toString() + 'px');

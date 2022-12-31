@@ -16,6 +16,7 @@ import CategoryInputWithForm from './CategoryInputWithForm';
 import mentoringCreateApi from '@/api/mentoring/mentoringCreateApi';
 import { useMutation } from 'react-query';
 import CreateSuccessModal from './CreateSuccessModal';
+import useMentorInfo from '@/query/useMentorInfo';
 
 const schema = z.object({
   careers: z.array(
@@ -38,6 +39,10 @@ export type MentoringFormType = z.infer<typeof schema>;
 
 export default function MentoringCreateForm() {
   const { mutateAsync: mentoringCreateMutate, status: mentoringCreateState } = useMutation(mentoringCreateApi);
+  const { data: mentorState, status: mentorStateStatus } = useMentorInfo();
+
+  console.log(mentorState);
+
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const method = useForm<MentoringFormType>({
     resolver: zodResolver(schema),
@@ -69,7 +74,7 @@ export default function MentoringCreateForm() {
           .filter((career) => career.content)
           .map((career) => career.content)
           .join('|'),
-        duration: data.timeScale.title,
+        duration: data.timeScale.value,
         image: '/image/mentoring/default.jpeg',
         role: parseInt(data.mentoringCategory.subValue),
         times: data.startTimes,
@@ -100,11 +105,11 @@ export default function MentoringCreateForm() {
           </Link>
         </div>
         <section className="space-y-2 py-3">
-          <InfoViewer label="이름">구교현</InfoViewer>
-          <InfoViewer label="전화번호">01048756823</InfoViewer>
-          <InfoViewer label="회사">아주대학교</InfoViewer>
-          <InfoViewer label="직무">프론트엔드</InfoViewer>
-          <InfoViewer label="연차">4</InfoViewer>
+          <InfoViewer label="이름">{mentorState?.name || '로딩 중'}</InfoViewer>
+          <InfoViewer label="전화번호">{mentorState?.phoneNumber || '로딩 중'}</InfoViewer>
+          <InfoViewer label="회사">{mentorState?.company || '로딩 중'}</InfoViewer>
+          <InfoViewer label="직무">{mentorState?.job || '로딩 중'}</InfoViewer>
+          <InfoViewer label="연차">{mentorState?.years || '로딩 중'}</InfoViewer>
         </section>
       </section>
       <hr className="my-5 text-lightGray"></hr>
@@ -170,6 +175,7 @@ function SchedulePart() {
     control,
     formState: { errors },
   } = useFormContext<MentoringFormType>();
+
   return (
     <>
       <WrapLabel
