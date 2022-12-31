@@ -61,7 +61,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
         ...getBasicInfo,
         job: data.role,
         years: data.years,
-        career: data.careers.join('|'),
+        career: data.careers.map((elem) => elem.content).join('|'),
       });
       if (res.result) {
         setCurrentUserState({
