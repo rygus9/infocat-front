@@ -2,7 +2,7 @@ export const jobCategoryOption = [
   {
     mainCategory: 'IT/개발자',
     options: [
-      { subCategory: '전체', subValue: '100' },
+      // { subCategory: '전체', subValue: '100' },
       { subCategory: 'SW 엔지니어', subValue: '101' },
       { subCategory: 'QA 엔지니어', subValue: '102' },
       { subCategory: '프론트엔드 엔지니어', subValue: '103' },
@@ -13,7 +13,7 @@ export const jobCategoryOption = [
   {
     mainCategory: '미디어/디자인',
     options: [
-      { subCategory: '전체', subValue: '200' },
+      // { subCategory: '전체', subValue: '200' },
       { subCategory: 'UX/UI 디자이너', subValue: '201' },
     ],
   },
@@ -29,6 +29,11 @@ export interface JobCategoryOptionSub {
   subValue: string;
 }
 
+export interface GeneralOption {
+  value: string;
+  title: string;
+}
+
 export const fieldCategoryOption = [
   {
     value: '1',
@@ -39,12 +44,12 @@ export const fieldCategoryOption = [
     title: '포트폴리오',
   },
   {
-    value: '2',
-    title: '국외 자기소개서/이력서',
-  },
-  {
     value: '4',
     title: '면접',
+  },
+  {
+    value: '2',
+    title: '국외 자기소개서/이력서',
   },
 ];
 
@@ -68,15 +73,15 @@ export const timeScaleOption = [
 ];
 
 export const statusToLabel = {
-  pending: '승인대기',
-  assign: '승인완료',
-  mentorRefuse: '승인거부',
-  expiredDate: '기한만료',
-  complete: '완료',
+  Pending: '승인대기',
+  Assign: '승인완료',
+  MentorRefuse: '승인거부',
+  ExpiredDate: '기한만료',
+  Complete: '완료',
 } as const;
 
 export const sortingOption = ['recent', 'popular', 'starts', 'high_price', 'low_price'];
-export type StatusType = 'pending' | 'assign' | 'mentorRefuse' | 'expiredDate' | 'complete';
+export type StatusType = 'Pending' | 'Assign' | 'MentorRefuse' | 'ExpiredDate' | 'Complete';
 
 export const menteeStatusOption = [
   {

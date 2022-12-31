@@ -66,8 +66,8 @@ function MentoringCardContainer({ children }: { children: JSX.Element }) {
   return (
     <section
       className={cls(
-        'm-auto grid w-full grid-cols-1 gap-4 py-0 px-4 pt-3',
-        'xs:grid-cols-2 xs:gap-2 xs:px-6',
+        'm-auto grid w-full grid-cols-1 place-items-center gap-4 py-0 px-4 pt-3',
+        'xs:grid-cols-2 xs:place-items-stretch xs:gap-2 xs:px-6',
         'sm:gap-5',
         'md:grid-cols-3 md:gap-2',
         'lg:gap-4',

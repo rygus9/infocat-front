@@ -1,11 +1,11 @@
+import useCurrentUser from '@/hooks/useCurrentUser';
+import usePathPush from '@/hooks/useReplace';
 import cls from '@/utils/cls';
-import { useRouter } from 'next/router';
 
 export default function MainBanner() {
-  const router = useRouter();
-  const onMentorSignUpClick = () => {
-    router.push('signup/informer');
-  };
+  const currentUser = useCurrentUser();
+  const onMentorSignUpClick = usePathPush('signup/informer');
+  const onMentoringCreate = usePathPush('mentoring/create');
 
   return (
     <section className="h-56 w-full bg-[#1e344b] md:h-80 lg:h-[22rem]">
@@ -17,9 +17,19 @@ export default function MainBanner() {
           </p>
         </section>
         <section className="absolute right-10 top-10 md:top-1/2 md:-translate-y-1/2 ">
-          <button className="w-full pb-2 text-right text-lg text-white" onClick={onMentorSignUpClick}>
-            인포머 지원하기
-          </button>
+          {currentUser && currentUser.isInformer ? (
+            <button className="w-full pb-2 text-right text-lg text-white" onClick={onMentoringCreate}>
+              멘토링 생성하기
+            </button>
+          ) : (
+            <>
+              {currentUser && (
+                <button className="w-full pb-2 text-right text-lg text-white" onClick={onMentorSignUpClick}>
+                  인포머 지원하기
+                </button>
+              )}
+            </>
+          )}
           <figure className="hidden aspect-square h-52 w-80 overflow-hidden rounded-md md:block">
             <img src="/mentoring.webp" className="h-full w-full object-cover"></img>
           </figure>

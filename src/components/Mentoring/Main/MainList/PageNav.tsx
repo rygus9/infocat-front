@@ -52,6 +52,7 @@ export default function PageNav({ pageNum, endPage }: PageNavParams) {
 
   return (
     <section className="flex items-center justify-center space-x-2">
+      {/* 처음 부분 */}
       <PageButton onClick={prevClick} disabled={pageNum === 1}>
         <ChevronLeftIcon className="h-10 w-10"></ChevronLeftIcon>
       </PageButton>
@@ -64,12 +65,16 @@ export default function PageNav({ pageNum, endPage }: PageNavParams) {
         </>
       )}
 
-      {pages.map((page) => (
-        <Fragment key={page}>
-          {page === pageNum ? <PageButton highlight>{page}</PageButton> : <PageButton onClick={pageClick(page)}>{page}</PageButton>}
-        </Fragment>
-      ))}
+      {/* 중간 다섯 개 */}
+      {pages
+        .filter((page) => page >= 1)
+        .map((page) => (
+          <Fragment key={page}>
+            {page === pageNum ? <PageButton highlight>{page}</PageButton> : <PageButton onClick={pageClick(page)}>{page}</PageButton>}
+          </Fragment>
+        ))}
 
+      {/* 마지막 부분 */}
       {endPage - pageNum >= 5 && (
         <>
           <PageButton onClick={pageClick(pages[4] + 1)}>
