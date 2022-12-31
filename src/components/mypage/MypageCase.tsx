@@ -52,14 +52,7 @@ const LinkInfo = [
 ];
 
 export default function MypageCase({ children }: { children: ReactNode }) {
-  const router = useRouter();
-  // [id] 빼버리기....
-  const nowPath =
-    '/' +
-    router.route
-      .split('/')
-      .filter((elem) => elem !== '[id]' && elem)
-      .join('/');
+  const nowPath = useGetRoute();
   const links = LinkInfo.flatMap((mainCategory) => mainCategory.subLinks);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -132,19 +125,12 @@ function MobileNav({ onClose }: { onClose: () => void }) {
 }
 
 function NavigationPart() {
-  const router = useRouter();
-  // [id] 빼버리기....
-  const nowPath =
-    '/' +
-    router.route
-      .split('/')
-      .filter((elem) => elem !== '[id]' && elem)
-      .join('/');
+  const nowPath = useGetRoute();
   const userState = useCurrentUser();
 
   return (
     <>
-      {LinkInfo.filter((mainSection) => (userState?.isInformer === true ? mainSection.title !== '인포머 정보 관련' : true)).map(
+      {LinkInfo.filter((mainSection) => (userState?.isInformer === false ? mainSection.title !== '인포머 관련 정보' : true)).map(
         (mainSection) => (
           <div key={mainSection.title} className="space-y-2 py-4 text-[1.05rem]">
             <h4 className="font-semibold text-darkGray">{mainSection.title}</h4>
@@ -162,4 +148,16 @@ function NavigationPart() {
       )}
     </>
   );
+}
+
+function useGetRoute() {
+  const router = useRouter();
+  // [id] 빼버리기....
+  const nowPath =
+    '/' +
+    router.route
+      .split('/')
+      .filter((elem) => elem !== '[id]' && elem)
+      .join('/');
+  return nowPath;
 }

@@ -90,7 +90,7 @@ interface ControlPartParams {
 function ControlPart({ isInformer, status }: ControlPartParams) {
   return (
     <section className="mt-6 flex items-center justify-end space-x-2">
-      {status === 'pending' && isInformer && (
+      {status === 'Pending' && isInformer && (
         <>
           <button className="rounded-full border border-lightPurple px-4 py-1 text-base text-lightPurple" type="button">
             거절하기
@@ -100,7 +100,7 @@ function ControlPart({ isInformer, status }: ControlPartParams) {
           </button>
         </>
       )}
-      {status === 'mentorRefuse' && (
+      {status === 'MentorRefuse' && (
         <button className="rounded-full bg-lightPurple px-4 py-1 text-base text-darkWhite" type="button">
           거절사유보기
         </button>

@@ -4,18 +4,10 @@ import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import CareersInput from '@/components/signup-mentor/CareersInput';
+import useMentorInfo from '@/query/useMentorInfo';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-const informer = {
-  years: '1',
-  email: 'sdhg12@ajou.ac.kr',
-  career: '저는 카카오 모빌리티 5년 다녔습니다 | 백수입니다.',
-  job: '프론트엔드',
-  phone: '01048756823',
-  name: '구교현',
-  company: '아주대학교',
-};
 
 const schema = z.object({
   name: z.string().min(1, '이름은 필수 입력입니다.'),
@@ -40,30 +32,39 @@ const schema = z.object({
 export type BasicFormType = z.infer<typeof schema>;
 
 const mypageInformer = () => {
+  const { data: informer, status: informerState } = useMentorInfo();
+
   const {
     register,
     formState: { errors },
     control,
+    setValue,
   } = useForm<BasicFormType>({
-    defaultValues: {
-      name: informer.name,
-      careers: informer.career.split('|').map((career) => ({ content: career })),
-      phone: informer.phone,
-      role: informer.job,
-      years: informer.years,
-    },
+    defaultValues: {},
   });
+
+  useEffect(() => {
+    if (!informer) return;
+    setValue('name', informer.name);
+    setValue(
+      'careers',
+      informer.career.split('|').map((career) => ({ content: career }))
+    );
+    setValue('phone', informer.phoneNumber);
+    setValue('role', informer.job);
+    setValue('years', informer.years);
+  }, [informer]);
 
   return (
     <MypageCase>
       <div className="pb-10">
         <div className="space-y-2">
           <WrapLabelShort label="회사">
-            <TextDisabledInput value={informer.company}></TextDisabledInput>
+            <TextDisabledInput value={informer?.company || ''}></TextDisabledInput>
           </WrapLabelShort>
           <div className="flex flex-col items-start justify-start space-y-2 sm:flex-row sm:items-center sm:space-x-2">
             <WrapLabelShort label="이메일">
-              <TextDisabledInput value={informer.email}></TextDisabledInput>
+              <TextDisabledInput value={informer?.email || ''}></TextDisabledInput>
             </WrapLabelShort>
             <button className="rounded-full bg-lightPurple px-4 py-1 text-base text-darkWhite" type="button">
               재인증

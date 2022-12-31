@@ -2,6 +2,7 @@ import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
 import TextInput from '@/components/shared/input/TextInput';
+import LocalStorage from '@/recoil/effect/localStorage';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -16,13 +17,17 @@ type PasswordTransitionFrom = z.infer<typeof schema>;
 const account = () => {
   const { register, handleSubmit } = useForm<PasswordTransitionFrom>({});
 
+  // mocking 용 추후 지워야할 부분
+  const email = LocalStorage.getItem('email') || 'rygus9@ajou.ac.kr';
+  //
+
   return (
     <MypageCase>
       <div>
         {/* just show Eamil */}
         <div>
           <WrapLabelShort label="이메일" htmlFor="email">
-            <TextDisabledInput value="rygus9@naver.com"></TextDisabledInput>
+            <TextDisabledInput value={email}></TextDisabledInput>
           </WrapLabelShort>
         </div>
         {/* change password */}
