@@ -9,26 +9,6 @@ let colStartClasses = ['', 'col-start-2', 'col-start-3', 'col-start-4', 'col-sta
 /* 서버에서 보낼 데이터 생성 중 */
 let today = startOfToday();
 
-/* 서버에서 날라올 시간들의 나열 */
-let availableDays = eachDayOfInterval({
-  start: add(today, { days: 3 }),
-  end: add(today, { days: 14 }),
-})
-  .flatMap((time) => [
-    add(time, { hours: 10 }),
-    add(time, { hours: 12 }),
-    add(time, { hours: 14 }),
-    add(time, { hours: 16 }),
-    add(time, { hours: 18 }),
-    add(time, { hours: 20 }),
-  ])
-  .map((elem) => elem.toISOString());
-
-const serverSend = {
-  duration: '01:30',
-  availableDays,
-};
-
 /* 서버서는 01:30 이런 식으로 날라옴 */
 function durationParse(duration: string) {
   let [hours, minutes] = duration.split(':').map((timeStr) => parseInt(timeStr));
@@ -49,12 +29,21 @@ function createScheduleTable(availableDays: string[]) {
   return obj;
 }
 
+function alreadyReserved(bookingTimes: string[], day: Date) {
+  const time = day.toISOString();
+  console.log('현재 날짜 시간', time);
+  return bookingTimes.includes(time);
+}
+
 interface CalendarInputProps {
   selectTime: Date | null;
   setSelectTime: (time: Date) => void;
+  duration: string;
+  availableTimes: string[];
+  bookingTimes: string[];
 }
 
-export default function CalendarInput({ selectTime, setSelectTime }: CalendarInputProps) {
+export default function CalendarInput({ selectTime, setSelectTime, availableTimes, bookingTimes, duration }: CalendarInputProps) {
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(selectTime ? startOfDay(selectTime) : undefined);
   const [currentMonth, setCurrentMonth] = useState(selectTime ? format(selectTime, 'MMM-yyyy') : format(today, 'MMM-yyyy'));
   const firstDayCurrentMonth = selectTime
@@ -62,6 +51,8 @@ export default function CalendarInput({ selectTime, setSelectTime }: CalendarInp
     : parse(currentMonth, 'MMM-yyyy', new Date());
   // parse는 data-fns => new Date로 바꾸어줌. (현재 date-fns 포맷을 알면)
   // 기본적으로 Date 객체를 기반으로 한다.
+
+  console.log(bookingTimes);
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -84,10 +75,10 @@ export default function CalendarInput({ selectTime, setSelectTime }: CalendarInp
 
   const onDayButton = (day: Date) => {
     setSelectedDay(day);
-    setSelectTime(scheduleTable[day.toISOString()].map((ISOFormat: string) => new Date(ISOFormat))[0]);
+    // setSelectTime(scheduleTable[day.toISOString()].map((ISOFormat: string) => new Date(ISOFormat))[0]);
   };
 
-  const scheduleTable = createScheduleTable(serverSend.availableDays);
+  const scheduleTable = createScheduleTable(availableTimes);
   const availableDays = Object.keys(scheduleTable);
   const nowTimeList = selectedDay ? scheduleTable[selectedDay.toISOString()].map((ISOFormat: string) => new Date(ISOFormat)) : [];
 
@@ -149,13 +140,15 @@ export default function CalendarInput({ selectTime, setSelectTime }: CalendarInp
                   <button
                     key={format(day, 'yyyy-MM-HH:mm')}
                     className={cls(
-                      'rounded-2xl py-1.5 px-5 text-sm',
-                      selectTime && isEqual(day, selectTime) ? 'bg-lightPurple text-white' : 'bg-darkWhite text-darkGray'
+                      'rounded-2xl border border-darkWhite py-1.5 px-5 text-sm',
+                      selectTime && isEqual(day, selectTime) ? 'bg-lightPurple text-white' : 'bg-darkWhite text-darkGray',
+                      'disabled:border disabled:border-gray disabled:bg-white disabled:text-gray disabled:line-through'
                     )}
                     onClick={() => onTimeButton(day)}
+                    disabled={alreadyReserved(bookingTimes, day)}
                     type="button"
                   >
-                    {format(day, 'HH:mm')} - {format(add(day, durationParse(serverSend.duration)), 'HH:mm')}
+                    {format(day, 'HH:mm')} - {format(add(day, durationParse(duration)), 'HH:mm')}
                   </button>
                 ))}
               </section>

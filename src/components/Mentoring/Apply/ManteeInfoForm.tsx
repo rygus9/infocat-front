@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { z } from 'zod';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 const schema = z.object({
   name: z.string().min(1, '이름은 필수 입력입니다.'),
@@ -31,6 +32,7 @@ interface ManteeInfoFormProps {
 
 export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
   const [menteeFormState, setMenteeFormState] = useRecoilState(menteeFormAtom);
+  const currentUser = useCurrentUser();
 
   const {
     register,
@@ -53,7 +55,9 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
 
   return (
     <>
-      <h1 className="mt-20 text-center text-2xl text-darkGray">멘토링에 앞서, 이승연님을 소개해보세요.</h1>
+      <h1 className="mt-20 text-center text-2xl text-darkGray">
+        멘토링에 앞서, <span>{currentUser?.nickName}</span>님을 소개해보세요.
+      </h1>
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
           <WrapLabel label="이름" id="name" moreInfo="실명으로 입력하세요." required errorMessage={errors.name?.message}>
