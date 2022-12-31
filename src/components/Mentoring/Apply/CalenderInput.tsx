@@ -21,7 +21,8 @@ function durationParse(duration: string) {
 function createScheduleTable(availableDays: string[]) {
   const obj = new DefaultDict(Array) as any;
   availableDays.forEach((ISOstring) => {
-    const nowDate = new Date(ISOstring);
+    let nowDate = new Date(ISOstring);
+    nowDate = add(nowDate, { hours: -9 });
     const dayStart = startOfDay(nowDate);
 
     obj[dayStart.toISOString()].push(nowDate);
@@ -31,7 +32,6 @@ function createScheduleTable(availableDays: string[]) {
 
 function alreadyReserved(bookingTimes: string[], day: Date) {
   const time = day.toISOString();
-  console.log('현재 날짜 시간', time);
   return bookingTimes.includes(time);
 }
 
@@ -51,8 +51,6 @@ export default function CalendarInput({ selectTime, setSelectTime, availableTime
     : parse(currentMonth, 'MMM-yyyy', new Date());
   // parse는 data-fns => new Date로 바꾸어줌. (현재 date-fns 포맷을 알면)
   // 기본적으로 Date 객체를 기반으로 한다.
-
-  console.log(bookingTimes);
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,

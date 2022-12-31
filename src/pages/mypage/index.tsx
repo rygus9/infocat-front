@@ -2,7 +2,8 @@ import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
 import TextAreaInput from '@/components/shared/input/TextAreaInput';
 import TextInput from '@/components/shared/input/TextInput';
-import WrapLabel from '@/components/shared/input/WrapLabel';
+import useCurrentUser from '@/hooks/useCurrentUser';
+import LocalStorage from '@/recoil/effect/localStorage';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -14,7 +15,17 @@ const schema = z.object({
 type MyProfileForm = z.infer<typeof schema>;
 
 const MyProfile = () => {
-  const { register, handleSubmit } = useForm<MyProfileForm>({});
+  const currentUser = useCurrentUser();
+
+  const { register, handleSubmit } = useForm<MyProfileForm>({
+    defaultValues: {
+      nickname: currentUser?.nickName,
+    },
+  });
+
+  // mocking 용 추후 지워야 할 부분
+  const email = LocalStorage.getItem('email') || 'rygus9@ajou.ac.kr';
+  //
 
   return (
     <MypageCase>
@@ -25,8 +36,8 @@ const MyProfile = () => {
             <div className="h-20 w-20 rounded-full bg-lightGray sm:h-32 sm:w-32"></div>
           </figure>
           <div className="flex flex-col justify-center">
-            <span className="text-2xl text-darkGray">승꽁</span>
-            <span className="text-gray">been0822@naver.com</span>
+            <span className="text-2xl text-darkGray">{currentUser?.nickName}</span>
+            <span className="text-gray">{email}</span>
           </div>
         </div>
 

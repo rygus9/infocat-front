@@ -16,7 +16,6 @@ export default function CalendarInputWithForm({ ...props }: UseControllerProps<a
   const duration = data && getDurationTitle(data.duration);
   const availableTimes = data?.totalDays;
   const bookingTimes = data?.bookingDays;
-
   return (
     <CalendarInput
       selectTime={nowTime}
