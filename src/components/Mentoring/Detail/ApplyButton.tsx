@@ -1,4 +1,7 @@
+import useCurrentUser from '@/hooks/useCurrentUser';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+import DenyModal from './DenyModal';
 
 const buttonDesign = {
   desktop: 'h-16 rounded-xl bg-[#a272de] px-10 text-xl text-white',
@@ -6,14 +9,23 @@ const buttonDesign = {
 };
 
 export default function ApplyButton({ designType }: { designType: 'mobile' | 'desktop' }) {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
+  const currentUser = useCurrentUser();
   const onClick = () => {
-    router.push(location.pathname + '/apply');
+    if (!currentUser) {
+      setOpen(true);
+    } else {
+      router.push(location.pathname + '/apply');
+    }
   };
 
   return (
-    <button className={buttonDesign[designType]} onClick={onClick}>
-      신청하기
-    </button>
+    <>
+      <button className={buttonDesign[designType]} onClick={onClick}>
+        신청하기
+      </button>
+      <DenyModal isOpen={open} closeModal={() => setOpen(false)}></DenyModal>
+    </>
   );
 }
