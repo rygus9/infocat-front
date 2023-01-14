@@ -2,12 +2,12 @@ import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '
 import cls from '@/utils/cls';
 import { useEffect, useRef, useState } from 'react';
 
-interface CategoryInputParams {
+interface CategoryInputProps {
   value: { subCategory: string; subValue: string };
   onChange: (value: { subCategory: string; subValue: string }) => void;
 }
 
-export default function CategoryInput({ value, onChange }: CategoryInputParams) {
+export default function CategoryInput({ value, onChange }: CategoryInputProps) {
   const [mainCategory, setMainCategory] = useState<string>();
   const disclosureRef = useRef<HTMLElement>(null);
 

@@ -1,7 +1,7 @@
 import client from '../common/client';
 import axiosCase from '../common/promiseCase';
 
-interface SignUpApiProps {
+interface SignUpApiParams {
   email: string;
   nickname: string;
   password: string;
@@ -12,7 +12,7 @@ interface SighUpApiReturn {
   result: boolean;
 }
 
-const signUpApi = ({ ...elem }: SignUpApiProps): Promise<SighUpApiReturn> =>
+const signUpApi = ({ ...elem }: SignUpApiParams): Promise<SighUpApiReturn> =>
   axiosCase(
     client.post(
       '/api/v1/auth/sign-up',

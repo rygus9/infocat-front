@@ -5,7 +5,9 @@ import yearToRank from '@/utils/yearToRank';
 import { range } from 'rambda';
 import { PropsWithChildren } from 'react';
 
-export default function MentoringCard({ id, title, role, years, company, stars, image }: MentoringCardParams) {
+type MentoringCardProps = MentoringCardParams;
+
+export default function MentoringCard({ id, title, role, years, company, stars, image }: MentoringCardProps) {
   const onMentoringPush = usePathPush('/mentoring/' + id);
 
   return (

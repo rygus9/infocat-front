@@ -82,12 +82,12 @@ export default function MentoringSessionDetail({ mentoringSessionDetail, isInfor
   );
 }
 
-interface ControlPartParams {
+interface ControlPartProps {
   isInformer: boolean;
   status: string;
 }
 
-function ControlPart({ isInformer, status }: ControlPartParams) {
+function ControlPart({ isInformer, status }: ControlPartProps) {
   return (
     <section className="mt-6 flex items-center justify-end space-x-2">
       {status === 'Pending' && isInformer && (

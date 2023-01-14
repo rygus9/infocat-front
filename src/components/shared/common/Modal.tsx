@@ -1,12 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, PropsWithChildren } from 'react';
 
-interface ModalParams {
+interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
 }
 
-export default function Modal({ isOpen, closeModal, children }: PropsWithChildren<ModalParams>) {
+export default function Modal({ isOpen, closeModal, children }: PropsWithChildren<ModalProps>) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-40" onClose={closeModal}>

@@ -48,13 +48,13 @@ const startTimeToIndex = (startTime: string) => {
   return [hour * 2 + ((min / 30) << 0), week];
 };
 
-interface WeekSchedulerParams {
+interface WeekSchedulerProps {
   timeScale: number;
   onChange: (startTimes: string[]) => void;
   startTimes: string[];
 }
 
-export default function WeekScheduler({ timeScale, onChange, startTimes }: WeekSchedulerParams) {
+export default function WeekScheduler({ timeScale, onChange, startTimes }: WeekSchedulerProps) {
   const [timeTable, setTimeTable] = useState(createTimeTable);
   let scale = timeScale;
 
