@@ -1,5 +1,5 @@
-import BasicForm from '@/components/signup-mentor/BasicForm';
-import CareerForm from '@/components/signup-mentor/CareerForm';
+import BasicForm from '@/components/signup-informer/BasicForm';
+import CareerForm from '@/components/signup-informer/CareerForm';
 import { useState } from 'react';
 
 const Informer = () => {

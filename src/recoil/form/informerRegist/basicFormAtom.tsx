@@ -1,4 +1,4 @@
-import { BasicFormType } from '@/components/signup-mentor/BasicForm';
+import { BasicFormType } from '@/components/signup-informer/BasicForm';
 import { atom } from 'recoil';
 
 const basicFormAtom = atom<BasicFormType>({

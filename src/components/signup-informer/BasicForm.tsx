@@ -15,18 +15,9 @@ import companyAtom from '@/recoil/form/informerRegist/companyAtom';
 import { useState } from 'react';
 import { getErrorMessage } from '@/contents/errorMessage';
 import Button from '../shared/common/Button';
+import { BasicFormValidation } from '@/contents/validation/signUpInformerFormValidation';
 
-const schema = z.object({
-  companyEmail: z.string().email('잘못된 이메일 형식입니다.'),
-  emailCode: z.string().min(1, '인증 코드는 필수입니다.'),
-  name: z.string().min(1, '이름은 필수 입력입니다.'),
-  phone: z
-    .string()
-    .min(1, '휴대전화 번호는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-});
-
-export type BasicFormType = z.infer<typeof schema>;
+export type BasicFormType = z.infer<typeof BasicFormValidation>;
 
 interface BasicFormProps {
   onNext: () => void;
@@ -47,7 +38,7 @@ export default function BasicForm({ onNext }: BasicFormProps) {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<BasicFormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(BasicFormValidation),
     mode: 'onChange',
     defaultValues: basicFormState,
   });

@@ -1,4 +1,5 @@
 import mentorRegistApi from '@/api/mentor/mentorRegistApi';
+import { CareerFormValidation } from '@/contents/validation/signUpInformerFormValidation';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import careerFormAtom from '@/recoil/form/informerRegist/careerFormAtom';
 import getBasicInfoSelector from '@/recoil/form/informerRegist/getBasicInfoSelector';
@@ -15,22 +16,7 @@ import WrapLabel from '../shared/input/WrapLabel';
 import CareersInput from './CareersInput';
 import SignUpSuccessModal from './SignUpSuccessModal';
 
-const schema = z.object({
-  years: z
-    .string()
-    .min(1, '연차는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-  role: z.string().min(1, '직무는 필수 입력입니다.'),
-  careers: z
-    .array(
-      z.object({
-        content: z.string().min(1, '이력 사항은 필수 입력입니다.'),
-      })
-    )
-    .min(1),
-});
-
-export type CareerFormType = z.infer<typeof schema>;
+export type CareerFormType = z.infer<typeof CareerFormValidation>;
 
 interface CareerFormProps {
   onPrev: () => void;
@@ -51,7 +37,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
     control,
     handleSubmit,
   } = useForm<CareerFormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(CareerFormValidation),
     mode: 'onChange',
     defaultValues: careerForm,
   });

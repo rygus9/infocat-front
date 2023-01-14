@@ -1,6 +1,5 @@
-import { timeScaleOption } from '@/contents';
 import useMentoringSchedule from '@/query/useMentoringSchedule';
-import getDurationTitle from '@/utils/getDurationTitle';
+import getDurationTitle from '@/contents/translate/getDurationTitle';
 import { UseControllerProps, useController } from 'react-hook-form';
 import CalendarInput from './CalenderInput';
 

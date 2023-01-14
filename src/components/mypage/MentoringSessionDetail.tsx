@@ -1,5 +1,5 @@
-import { statusToLabel, StatusType } from '@/contents';
-import mentoringSchedule from '@/utils/mentoringSchedule';
+import { statusToLabel, StatusType } from '@/contents/option/mentoringSessionOption';
+import mentoringSchedule from '@/contents/translate/mentoringSchedule';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';

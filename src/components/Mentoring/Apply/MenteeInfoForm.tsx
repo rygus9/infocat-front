@@ -2,7 +2,7 @@ import ListBoxInput from '@/components/shared/input/ListBoxInput';
 import TextAreaInput from '@/components/shared/input/TextAreaInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
-import { menteeStatusOption } from '@/contents';
+import { menteeStatusOption } from '@/contents/option/menteeStatusOption';
 import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -10,28 +10,15 @@ import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import Button from '@/components/shared/common/Button';
+import { MenteeInfoFormValidation } from '@/contents/validation/mentoringApplyFormValidation';
 
-const schema = z.object({
-  name: z.string().min(1, '이름은 필수 입력입니다.'),
-  phoneNumber: z
-    .string()
-    .min(1, '휴대전화 번호는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-  status: z.object({
-    title: z.string().min(1, '현재 상태는 필수 입력입니다.'),
-    value: z.string(),
-  }),
-  major: z.string().min(1, '전공은 필수 입력입니다.'),
-  introduce: z.string().min(10, '최소한 10글자 이상은 입력해주세요.'),
-});
+export type MentoringApplyMenteeType = z.infer<typeof MenteeInfoFormValidation>;
 
-export type MentoringApplyMenteeType = z.infer<typeof schema>;
-
-interface ManteeInfoFormProps {
+interface MenteeInfoFormProps {
   onNext: () => void;
 }
 
-export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
+export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
   const [menteeFormState, setMenteeFormState] = useRecoilState(menteeFormAtom);
   const currentUser = useCurrentUser();
 
@@ -41,7 +28,7 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<MentoringApplyMenteeType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(MenteeInfoFormValidation),
     mode: 'onChange',
     defaultValues: menteeFormState,
   });

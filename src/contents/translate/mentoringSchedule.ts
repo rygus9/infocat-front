@@ -1,5 +1,9 @@
 import { add, format } from 'date-fns';
-import durationToTime from './durationToTime';
+
+function durationToTime(duration: string) {
+  let [hour, min] = duration.split(':').map((elem) => parseInt(elem));
+  return { hour, min };
+}
 
 // ISOString과 duration 받아서 { startDay : "맨토링 처음 시작 날짜 포맷", startTime: "시작 시간", endTime : "종료 시간"} 리턴
 export default function mentoringSchedule(ISOString: string, duration: string) {

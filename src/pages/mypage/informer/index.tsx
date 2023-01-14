@@ -4,7 +4,7 @@ import Button from '@/components/shared/common/Button';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
-import CareersInput from '@/components/signup-mentor/CareersInput';
+import CareersInput from '@/components/signup-informer/CareersInput';
 import useMentorInfo from '@/query/useMentorInfo';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';

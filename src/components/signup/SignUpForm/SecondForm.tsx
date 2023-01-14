@@ -46,7 +46,6 @@ export default function SecondForm({ backStep, finalStep }: SecondForm) {
       setError('validationCode', { message: getErrorMessage(errorCode as string) });
       return;
     }
-    console.log(validationToken);
     const signUp = await signUpMutate({
       email: joinInfo.email,
       nickname: joinInfo.nickName,

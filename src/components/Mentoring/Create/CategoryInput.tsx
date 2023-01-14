@@ -1,4 +1,4 @@
-import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '@/contents';
+import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '@/contents/option/mentoringFilteringOption';
 import cls from '@/utils/cls';
 import { useEffect, useRef, useState } from 'react';
 

@@ -13,18 +13,9 @@ import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
 import ApplySuccessModal from './ApplySuccessModal';
 import { useState } from 'react';
 import Button from '@/components/shared/common/Button';
+import { MentoringInfoFormValidation } from '@/contents/validation/mentoringApplyFormValidation';
 
-const schema = z.object({
-  schedule: z.string().min(1, '스케줄 입력은 필수입니다.'),
-  questions: z.array(
-    z.object({
-      content: z.string(),
-    })
-  ),
-  wanted: z.string(),
-});
-
-export type MentoringApplyMentoringType = z.infer<typeof schema>;
+export type MentoringApplyMentoringType = z.infer<typeof MentoringInfoFormValidation>;
 
 interface MentoringInfoFormProps {
   onPrev: () => void;
@@ -43,7 +34,7 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
     getValues,
     formState: { errors, isSubmitting },
   } = useForm<MentoringApplyMentoringType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(MentoringInfoFormValidation),
     defaultValues: mentoringFormState,
   });
 

@@ -1,7 +1,7 @@
 import { MentoringCardParams } from '@/api/mentoring/mentoringListSearchApi';
 import usePathPush from '@/hooks/useReplace';
 import cls from '@/utils/cls';
-import yearToRank from '@/utils/yearToRank';
+import yearToRank from '@/contents/translate/yearToRank';
 import { range } from 'rambda';
 import { PropsWithChildren } from 'react';
 
