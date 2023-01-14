@@ -1,6 +1,5 @@
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '../../shared/input/WrapLabel';
-import Button from '@/components/shared/common/Button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRecoilState } from 'recoil';
@@ -10,6 +9,7 @@ import { useMutation } from 'react-query';
 import signUpValidationApi from '@/api/auth/signUpValidationApi';
 import emailSendApi from '@/api/email/emailSendApi';
 import { getErrorMessage } from '@/contents/errorMessage';
+import Button from '@/components/shared/common/Button';
 
 interface FirstFormProps {
   nextStep: () => void;
@@ -100,8 +100,8 @@ export default function FirstForm({ nextStep }: FirstFormProps) {
           </WrapLabel>
         </section>
         <div className="flex items-center justify-center pt-10">
-          <Button type="submit" color="purple" buttonStyle="fill" size="w-full h-12 font-bold" isLoading={signUpLoading || emailLoading}>
-            다음단계
+          <Button type="submit" btnStyle="submitMain">
+            {signUpLoading || emailLoading ? '로딩중' : '다음단계'}
           </Button>
         </div>
       </form>

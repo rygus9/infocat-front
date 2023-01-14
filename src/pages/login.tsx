@@ -1,4 +1,3 @@
-import Button from '@/components/shared/common/Button';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import Link from 'next/link';
@@ -11,6 +10,7 @@ import { getErrorMessage } from '@/contents/errorMessage';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import currentUserAtom from '@/recoil/user/currentUserAtom';
+import Button from '@/components/shared/common/Button';
 
 interface LoginForm {
   email: string;
@@ -56,9 +56,9 @@ const Login = () => {
           </WrapLabel>
         </section>
 
-        <div className="pt-6">
+        <div className="pt-6 text-center">
           {serverError && <div className="pb-1 text-center text-sm text-red-500">{serverError}</div>}
-          <Button type="submit" color="purple" buttonStyle="fill" size="w-full h-10">
+          <Button type="submit" btnStyle="submitMain">
             {loginLoading ? '로딩 중...' : '로그인'}
           </Button>
         </div>

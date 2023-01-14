@@ -1,5 +1,6 @@
 import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
+import Button from '@/components/shared/common/Button';
 import TextAreaInput from '@/components/shared/input/TextAreaInput';
 import TextInput from '@/components/shared/input/TextInput';
 import useCurrentUser from '@/hooks/useCurrentUser';
@@ -53,9 +54,9 @@ const MyProfile = () => {
             <TextAreaInput register={register('introduce')} placeholder="자기 소개를 입력하세요." rows={8}></TextAreaInput>
           </div>
           <div className="flex w-full justify-center pt-5">
-            <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+            <Button btnStyle="submitMain" type="submit">
               저장하기
-            </button>
+            </Button>
           </div>
         </div>
       </div>

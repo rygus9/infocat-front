@@ -1,48 +1,25 @@
-import cls from '@/utils/cls';
-import { PropsWithChildren } from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-type ColorType = 'purple' | 'gray';
-type ButtonStyleType = 'fill' | 'border';
+const buttonStyle = {
+  submitMain: 'rounded-full bg-lightPurple px-7 py-1.5 text-lg text-darkWhite',
+  submitSub: 'rounded-full bg-darkWhite px-7 py-1.5 text-lg text-darkGray',
+  controlMain: 'rounded-lg bg-lightPurple py-1 px-3 text-sm text-white',
+  controlSub: 'rounded-lg bg-darkWhite py-1 px-3 text-sm text-gray',
+  inputBtn: 'w-20 bg-lightPurple text-white disabled:bg-darkWhite disabled:text-darkGray',
+  modalMain: 'rounded-lg bg-lightPurple px-4 py-1 text-base text-darkWhite',
+  modalSub: 'rounded-lg border border-lightPurple px-4 py-1 text-base text-lightPurple',
+  textWhite: 'w-fit text-lg text-white',
+};
 
 interface ButtonProps {
-  type: 'button' | 'submit';
-  disabled?: boolean;
-  onClick?: React.MouseEventHandler;
-  size?: string;
-  color?: ColorType;
-  buttonStyle?: ButtonStyleType;
-  isLoading?: boolean;
+  btnStyle: keyof typeof buttonStyle;
 }
+type OriginButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
-export default function Button({
-  size = '',
-  color = 'gray',
-  buttonStyle = 'border',
-  isLoading = false,
-  children,
-  ...props
-}: ButtonProps & PropsWithChildren) {
+export default function Button({ btnStyle, children, ...props }: ButtonProps & OriginButtonProps) {
   return (
-    <button className={cls(makeButtonClassName({ color, buttonStyle }), size, 'rounded-md')} {...props} disabled={isLoading}>
-      {isLoading ? '로딩 중...' : children}
+    <button {...props} className={buttonStyle[btnStyle]}>
+      {children}
     </button>
   );
 }
-
-interface makeButtonClassNameProps {
-  color: ColorType;
-  buttonStyle: ButtonStyleType;
-}
-
-const makeButtonClassName = ({ color, buttonStyle }: makeButtonClassNameProps) => {
-  if (color == 'purple') {
-    if (buttonStyle == 'fill')
-      return 'bg-lightPurple text-white hover:bg-lightPurple disabled:bg-lightPurple disabled:hover:bg-lightPurple disabled:cursor-not-allowed';
-    if (buttonStyle == 'border') return 'border border-purple-400 text-lightPurple hover:ring-1 hover:ring-purple-400';
-  }
-  if (color == 'gray') {
-    if (buttonStyle == 'fill') return 'bg-gray-700 text-white hover:bg-gray-600';
-    if (buttonStyle == 'border') return 'border border-gray-400 text-gray-500 hover:ring-1 hover:ring-gray-400';
-  }
-  return '';
-};

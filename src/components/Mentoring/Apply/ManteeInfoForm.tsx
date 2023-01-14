@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import Button from '@/components/shared/common/Button';
 
 const schema = z.object({
   name: z.string().min(1, '이름은 필수 입력입니다.'),
@@ -95,9 +96,9 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center py-5">
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          <Button btnStyle="submitMain" type="submit">
             다음
-          </button>
+          </Button>
         </section>
       </form>
     </>

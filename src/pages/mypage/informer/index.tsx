@@ -1,5 +1,6 @@
 import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
+import Button from '@/components/shared/common/Button';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
 import TextInput from '@/components/shared/input/TextInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
@@ -66,9 +67,9 @@ const mypageInformer = () => {
             <WrapLabelShort label="이메일">
               <TextDisabledInput value={informer?.email || ''}></TextDisabledInput>
             </WrapLabelShort>
-            <button className="rounded-full bg-lightPurple px-4 py-1 text-base text-darkWhite" type="button">
+            <Button btnStyle="inputBtn" type="button">
               재인증
-            </button>
+            </Button>
           </div>
         </div>
         <hr className="my-5 text-lightGray"></hr>
@@ -96,9 +97,9 @@ const mypageInformer = () => {
               ></CareersInput>
             </WrapLabel>
             <section className="flex w-full justify-center pt-6">
-              <button className="rounded-full bg-lightPurple px-6 py-2 text-lg text-darkWhite" type="submit">
+              <Button btnStyle="submitMain" type="submit">
                 수정하기
-              </button>
+              </Button>
             </section>
           </form>
         </div>

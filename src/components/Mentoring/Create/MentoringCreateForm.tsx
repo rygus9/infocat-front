@@ -17,6 +17,7 @@ import mentoringCreateApi from '@/api/mentoring/mentoringCreateApi';
 import { useMutation } from 'react-query';
 import CreateSuccessModal from './CreateSuccessModal';
 import useMentorInfo from '@/query/useMentorInfo';
+import Button from '@/components/shared/common/Button';
 
 const schema = z.object({
   careers: z.array(
@@ -158,9 +159,9 @@ export default function MentoringCreateForm() {
           </FormProvider>
         </section>
         <section className="flex items-center justify-center pt-10">
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          <Button btnStyle="submitMain" type="submit">
             {isSubmitting ? '등록 중' : '등록하기'}
-          </button>
+          </Button>
         </section>
       </form>
       <CreateSuccessModal isOpen={successModalOpen} closeModal={() => setSuccessModalOpen(false)}></CreateSuccessModal>

@@ -1,5 +1,6 @@
 import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
+import Button from '@/components/shared/common/Button';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
 import TextInput from '@/components/shared/input/TextInput';
 import LocalStorage from '@/recoil/effect/localStorage';
@@ -44,18 +45,20 @@ const account = () => {
             <WrapLabelShort label="비밀번호 확인" htmlFor="confirmPassword">
               <TextInput type="password" register={register('confirmPassword')} placeholder="비밀번호 확인"></TextInput>
             </WrapLabelShort>
-            <button className="rounded-full bg-lightPurple px-4 py-1 text-base text-white" type="submit">
-              변경하기
-            </button>
+            <div className="pt-2">
+              <Button btnStyle="controlMain" type="submit">
+                변경하기
+              </Button>
+            </div>
           </form>
         </div>
         {/* 화원 탈퇴하기 */}
         <hr className="my-5 text-lightGray"></hr>
         <div className="flex items-center">
           <h4 className="w-28 text-lg text-darkGray">회원 탈퇴</h4>
-          <button className="rounded-full bg-darkWhite px-4 py-1 text-base text-darkGray" type="button">
+          <Button btnStyle="controlSub" type="button">
             회원 탈퇴
-          </button>
+          </Button>
         </div>
       </div>
     </MypageCase>

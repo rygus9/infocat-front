@@ -14,6 +14,7 @@ import emailCompanyApi from '@/api/auth/emailCompanyApi';
 import companyAtom from '@/recoil/form/informerRegist/companyAtom';
 import { useState } from 'react';
 import { getErrorMessage } from '@/contents/errorMessage';
+import Button from '../shared/common/Button';
 
 const schema = z.object({
   companyEmail: z.string().email('잘못된 이메일 형식입니다.'),
@@ -101,9 +102,9 @@ export default function BasicForm({ onNext }: BasicFormProps) {
                 type="text"
                 placeholder="회사 이메일을 입력해주세요."
               ></TextInput>
-              <button className="w-16 bg-lightPurple text-white" onClick={emailSend} type="button">
+              <Button btnStyle="inputBtn" onClick={emailSend} type="button">
                 {emailSendStatus === 'loading' ? '전송중' : '전송'}
-              </button>
+              </Button>
             </div>
             {emailSendStatus === 'error' && <span className="mb-2 inline-block text-sm text-red-500">이메일 전송에 실패했습니다.</span>}
             {emailSendStatus === 'success' && (
@@ -114,9 +115,9 @@ export default function BasicForm({ onNext }: BasicFormProps) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center pb-5 pt-10">
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          <Button btnStyle="submitMain" type="submit">
             {isSubmitting ? '등록 중' : '다음 단계'}
-          </button>
+          </Button>
         </section>
       </form>
     </>

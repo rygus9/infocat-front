@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { z } from 'zod';
+import Button from '../shared/common/Button';
 import TextInput from '../shared/input/TextInput';
 import WrapLabel from '../shared/input/WrapLabel';
 import CareersInput from './CareersInput';
@@ -118,12 +119,12 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center space-x-2 pb-5 pt-10">
-          <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onPrevClick}>
+          <Button btnStyle="submitSub" type="button" onClick={onPrevClick}>
             이전
-          </button>
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          </Button>
+          <Button btnStyle="submitMain" type="submit">
             {isSubmitting ? '등록 중' : '등록하기'}
-          </button>
+          </Button>
         </section>
       </form>
       <SignUpSuccessModal isOpen={successModal} closeModal={() => setSuccessModal(false)}></SignUpSuccessModal>

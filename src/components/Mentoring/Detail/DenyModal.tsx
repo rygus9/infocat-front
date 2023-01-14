@@ -1,3 +1,4 @@
+import Button from '@/components/shared/common/Button';
 import Modal from '@/components/shared/common/Modal';
 import usePathPush from '@/hooks/useReplace';
 
@@ -14,12 +15,12 @@ export default function DenyModal({ closeModal, isOpen }: DenyModalProps) {
       <div className="pt-2 pb-4">
         <h3 className="pt-2 pb-10 text-xl text-darkGray">로그인이 필요합니다.</h3>
         <section className="flex items-center justify-center space-x-2">
-          <button onClick={closeModal} className="rounded-lg border border-lightPurple px-4 py-1 text-base text-lightPurple">
+          <Button btnStyle="modalSub" onClick={closeModal}>
             확인
-          </button>
-          <button onClick={onLoginPage} className="rounded-lg bg-lightPurple px-4 py-1 text-base text-darkWhite">
+          </Button>
+          <Button btnStyle="modalMain" onClick={onLoginPage}>
             로그인
-          </button>
+          </Button>
         </section>
       </div>
     </Modal>

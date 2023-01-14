@@ -1,4 +1,5 @@
 import logoutApi from '@/api/auth/logoutApi';
+import Button from '@/components/shared/common/Button';
 import currentUserAtom from '@/recoil/user/currentUserAtom';
 import cls from '@/utils/cls';
 import Link from 'next/link';
@@ -51,10 +52,17 @@ export default function Header() {
         <div className="flex items-center justify-center space-x-2">
           {isLogined ? (
             <>
-              <Button onClick={onMyPageClick}>마이페이지</Button> <Button onClick={onLogout}>로그아웃</Button>
+              <Button btnStyle="controlMain" onClick={onMyPageClick}>
+                마이페이지
+              </Button>{' '}
+              <Button btnStyle="controlSub" onClick={onLogout}>
+                로그아웃
+              </Button>
             </>
           ) : (
-            <Button onClick={onLoginClick}>로그인</Button>
+            <Button btnStyle="controlMain" onClick={onLoginClick}>
+              로그인
+            </Button>
           )}
         </div>
       </div>
@@ -73,13 +81,5 @@ export default function Header() {
         ))}
       </nav>
     </header>
-  );
-}
-
-function Button({ onClick, children }: PropsWithChildren<{ onClick?: () => void }>) {
-  return (
-    <button className="rounded-lg bg-darkWhite py-1 px-3 text-sm text-gray" onClick={onClick}>
-      {children}
-    </button>
   );
 }

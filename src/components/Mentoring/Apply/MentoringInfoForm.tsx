@@ -12,6 +12,7 @@ import { useMutation } from 'react-query';
 import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
 import ApplySuccessModal from './ApplySuccessModal';
 import { useState } from 'react';
+import Button from '@/components/shared/common/Button';
 
 const schema = z.object({
   schedule: z.string().min(1, '스케줄 입력은 필수입니다.'),
@@ -102,12 +103,12 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
           </WrapLabel>
         </section>
         <section className="flex w-full items-center justify-center space-x-4 pt-10">
-          <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onPrevButton}>
+          <Button btnStyle="submitSub" type="button" onClick={onPrevButton}>
             이전
-          </button>
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          </Button>
+          <Button btnStyle="submitMain" type="submit">
             {isSubmitting ? '제출 중' : '제출하기'}
-          </button>
+          </Button>
         </section>
       </form>
       <ApplySuccessModal isOpen={successModalOpen} closeModal={() => setSuccessModalOpen(false)}></ApplySuccessModal>
