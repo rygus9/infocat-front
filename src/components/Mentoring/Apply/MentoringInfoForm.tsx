@@ -1,4 +1,4 @@
-import TextAreaInput from '@/components/shared/input/TextAreaInput';
+import TextArea from '@/components/shared/input/TextArea';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import { useController, useForm } from 'react-hook-form';
 import QuestionsInput from './QuestionsInput';
@@ -96,7 +96,7 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
             <QuestionsInput register={register} name={'questions'} control={control} placeholder="질문을 입력하세요."></QuestionsInput>
           </WrapLabel>
           <WrapLabel label="바라는 점" id="wanted" moreInfo="본 멘토링에서 멘토님에게 바라는 점이 있다면 작성해주세요.">
-            <TextAreaInput register={register('wanted')} placeholder="바라는 점을 입력하세요." rows={4}></TextAreaInput>
+            <TextArea {...register('wanted')} placeholder="바라는 점을 입력하세요." rows={4}></TextArea>
           </WrapLabel>
         </section>
         <section className="flex w-full items-center justify-center space-x-4 pt-10">

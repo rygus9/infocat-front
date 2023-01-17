@@ -1,4 +1,4 @@
-import TextInput from '@/components/shared/input/TextInput';
+import Input from '@/components/shared/input/Input';
 import WrapLabel from '../../shared/input/WrapLabel';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -60,26 +60,16 @@ export default function FirstForm({ nextStep }: FirstFormProps) {
       <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-4">
           <WrapLabel label="이메일" id="email" errorMessage={errors.email?.message}>
-            <TextInput id="email" {...register('email')} type="email" placeholder="인증을 진행할 이메일을 입력하세요."></TextInput>
+            <Input id="email" {...register('email')} type="email" placeholder="인증을 진행할 이메일을 입력하세요."></Input>
           </WrapLabel>
           <WrapLabel label="닉네임" id="nickName" errorMessage={errors.nickName?.message}>
-            <TextInput id="nickName" {...register('nickName')} type="text" placeholder="닉네임을 입력하세요."></TextInput>
+            <Input id="nickName" {...register('nickName')} type="text" placeholder="닉네임을 입력하세요."></Input>
           </WrapLabel>
           <WrapLabel label="비밀번호" id="password" errorMessage={errors.aboutPassword?.password?.message}>
-            <TextInput
-              id="password"
-              {...register('aboutPassword.password')}
-              type="password"
-              placeholder="비밀번호를 입력하세요."
-            ></TextInput>
+            <Input id="password" {...register('aboutPassword.password')} type="password" placeholder="비밀번호를 입력하세요."></Input>
           </WrapLabel>
           <WrapLabel label="비밀번호 확인" id="passwordValid" errorMessage={errors.aboutPassword?.passwordValid?.message}>
-            <TextInput
-              id="passwordValid"
-              {...register('aboutPassword.passwordValid')}
-              type="password"
-              placeholder="비밀번호 확인"
-            ></TextInput>
+            <Input id="passwordValid" {...register('aboutPassword.passwordValid')} type="password" placeholder="비밀번호 확인"></Input>
           </WrapLabel>
         </section>
         <div className="flex items-center justify-center pt-10">

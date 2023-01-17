@@ -2,7 +2,7 @@ import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
 import Button from '@/components/shared/common/Button';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
-import TextInput from '@/components/shared/input/TextInput';
+import Input from '@/components/shared/input/Input';
 import LocalStorage from '@/recoil/effect/localStorage';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -37,13 +37,13 @@ const account = () => {
           <h4 className="pb-4 text-lg text-darkGray">비밀번호 변경</h4>
           <form className="space-y-3">
             <WrapLabelShort label="현재 비밀번호" htmlFor="nowPassword">
-              <TextInput type="password" {...register('nowPassword')} placeholder="현재 비밀번호를 입력하세요."></TextInput>
+              <Input type="password" {...register('nowPassword')} placeholder="현재 비밀번호를 입력하세요."></Input>
             </WrapLabelShort>
             <WrapLabelShort label="변경할 비밀번호" htmlFor="changedPassword">
-              <TextInput type="password" {...register('changedPassword')} placeholder="변경할 비밀번호를 입력하세요."></TextInput>
+              <Input type="password" {...register('changedPassword')} placeholder="변경할 비밀번호를 입력하세요."></Input>
             </WrapLabelShort>
             <WrapLabelShort label="비밀번호 확인" htmlFor="confirmPassword">
-              <TextInput type="password" {...register('confirmPassword')} placeholder="비밀번호 확인"></TextInput>
+              <Input type="password" {...register('confirmPassword')} placeholder="비밀번호 확인"></Input>
             </WrapLabelShort>
             <div className="pt-2">
               <Button btnStyle="controlMain" type="submit">

@@ -1,15 +1,13 @@
 import cls from '@/utils/cls';
-import { useState } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes, useState } from 'react';
 
-interface ToggleInputProps {
+type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+
+type ToggleProps = InputProps & {
   label: string;
-  register: UseFormRegisterReturn;
-  type?: 'checkbox' | 'radio';
-  value?: string;
-}
+};
 
-const ToggleInput = ({ label, register, type = 'checkbox', value }: ToggleInputProps) => {
+const Toggle = forwardRef(({ type = 'checkbox', label, onChange, ...props }: ToggleProps, ref: ForwardedRef<any>) => {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -17,14 +15,14 @@ const ToggleInput = ({ label, register, type = 'checkbox', value }: ToggleInputP
       <input
         type={type}
         id={label}
-        {...register}
+        {...props}
         className={cls('hidden')}
-        value={value}
         tabIndex={0}
         onChange={(event) => {
-          register.onChange(event);
+          typeof onChange === 'function' && onChange(event);
           setChecked((checked) => !checked);
         }}
+        ref={ref}
       ></input>
       <label
         htmlFor={label}
@@ -37,6 +35,6 @@ const ToggleInput = ({ label, register, type = 'checkbox', value }: ToggleInputP
       </label>
     </div>
   );
-};
+});
 
-export default ToggleInput;
+export default Toggle;

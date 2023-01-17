@@ -1,9 +1,9 @@
 import cls from '@/utils/cls';
 import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 
-type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const TextInput = forwardRef((props: TextInputProps, ref: ForwardedRef<any>) => {
+const Input = forwardRef((props: InputProps, ref: ForwardedRef<any>) => {
   return (
     <input
       {...props}
@@ -20,4 +20,4 @@ const TextInput = forwardRef((props: TextInputProps, ref: ForwardedRef<any>) => 
   );
 });
 
-export default TextInput;
+export default Input;

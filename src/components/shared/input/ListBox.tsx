@@ -16,7 +16,7 @@ interface ListBoxProps {
   placeholder?: string;
 }
 
-export default function ListBoxInput({ list, id, placeholder, value, onChange }: ListBoxProps, ref: ForwardedRef<any>) {
+export default function ListBox({ list, id, placeholder, value, onChange }: ListBoxProps, ref: ForwardedRef<any>) {
   return (
     <Listbox value={value} onChange={onChange} as={Fragment}>
       <div className="relative">

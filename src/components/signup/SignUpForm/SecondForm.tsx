@@ -1,5 +1,5 @@
 import WrapLabel from '../../shared/input/WrapLabel';
-import TextInput from '@/components/shared/input/TextInput';
+import Input from '@/components/shared/input/Input';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import joinInfoAtom from '@/recoil/form/joinAtom';
@@ -79,7 +79,7 @@ export default function SecondForm({ backStep, finalStep }: SecondForm) {
         <section className="space-y-4 pt-6">
           <WrapLabel label="이메일 인증" id="validationCode" errorMessage={errors.validationCode?.message}>
             <div className="flex h-fit items-stretch space-x-2">
-              <TextInput id="validationCode" {...register('validationCode')} type="text" placeholder="인증 코드를 입력하세요."></TextInput>
+              <Input id="validationCode" {...register('validationCode')} type="text" placeholder="인증 코드를 입력하세요."></Input>
               <Button type="button" btnStyle="inputBtn" onClick={onRetry} disabled={emailSendLoading}>
                 {emailSendLoading ? '전송중...' : '재전송'}
               </Button>

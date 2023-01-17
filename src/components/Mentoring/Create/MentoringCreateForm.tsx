@@ -1,5 +1,5 @@
-import ListBoxInput from '@/components/shared/input/ListBoxInput';
-import TextInput from '@/components/shared/input/TextInput';
+import ListBox from '@/components/shared/input/ListBox';
+import Input from '@/components/shared/input/Input';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import CareersInput from '@/components/signup-informer/CareersInput';
 import { timeScaleOption } from '@/contents/option/scheduleOption';
@@ -106,14 +106,10 @@ export default function MentoringCreateForm() {
         <section className="space-y-5">
           <h3 className="pt-6 text-xl text-darkGray">멘토링 정보</h3>
           <WrapLabel label="멘토링 이름" id="mentoringName" required errorMessage={errors.mentoringName?.message}>
-            <TextInput {...register('mentoringName')} type="text" placeholder="예 ) 예비 개발자를 위한 자기소개서 첨삭"></TextInput>
+            <Input {...register('mentoringName')} type="text" placeholder="예 ) 예비 개발자를 위한 자기소개서 첨삭"></Input>
           </WrapLabel>
           <WrapLabel label="멘토링 한줄소개" id="mentoringShortIntro" required errorMessage={errors.mentoringShortIntro?.message}>
-            <TextInput
-              {...register('mentoringShortIntro')}
-              type="text"
-              placeholder="예 ) 현직자와 함께하는 IT개발분야 자기소개서 특강"
-            ></TextInput>
+            <Input {...register('mentoringShortIntro')} type="text" placeholder="예 ) 현직자와 함께하는 IT개발분야 자기소개서 특강"></Input>
           </WrapLabel>
           <WrapLabel id="mentoringField" label="멘토링 희망분야" errorMessage={errors.mentoringField?.message}>
             <MultiChoiceInput
@@ -176,14 +172,10 @@ function SchedulePart() {
         moreInfo="숫자만 포인트 단위로 입력해주세요. 예) 10000p -> 10000"
         errorMessage={errors.price?.message}
       >
-        <TextInput type="number" {...register('price')} placeholder="여기에 입력해주세요."></TextInput>
+        <Input type="number" {...register('price')} placeholder="여기에 입력해주세요."></Input>
       </WrapLabel>
       <WrapLabel id="timeScale" label="회당 멘토링 시간." errorMessage={errors.timeScale?.message} required>
-        <ListBoxInput
-          list={timeScaleOption}
-          value={timeScaleController.field.value}
-          onChange={timeScaleController.field.onChange}
-        ></ListBoxInput>
+        <ListBox list={timeScaleOption} value={timeScaleController.field.value} onChange={timeScaleController.field.onChange}></ListBox>
       </WrapLabel>
       <WrapLabel id="" label="스케줄 선택" required errorMessage={errors.startTimes?.message}>
         <div className="h-[28rem]">

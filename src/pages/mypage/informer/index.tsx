@@ -2,7 +2,7 @@ import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
 import Button from '@/components/shared/common/Button';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
-import TextInput from '@/components/shared/input/TextInput';
+import Input from '@/components/shared/input/Input';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import CareersInput from '@/components/signup-informer/CareersInput';
 import useMentorInfo from '@/query/useMentorInfo';
@@ -77,16 +77,16 @@ const mypageInformer = () => {
           <h2 className="pb-4 text-xl text-darkGray">인포머 정보 수정</h2>
           <form className="space-y-2 pr-6">
             <WrapLabel label="이름(실명)" id="name" errorMessage={errors.name?.message}>
-              <TextInput id="name" {...register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
+              <Input id="name" {...register('name')} type="text" placeholder="실명을 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="연락처" id="phone" errorMessage={errors.phone?.message}>
-              <TextInput id="phone" {...register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
+              <Input id="phone" {...register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="직무" id="role" errorMessage={errors.role?.message}>
-              <TextInput id="role" {...register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
+              <Input id="role" {...register('role')} type="text" placeholder="직무를 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="연차" id="years" errorMessage={errors.years?.message}>
-              <TextInput id="years" {...register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
+              <Input id="years" {...register('years')} type="number" placeholder="연차를 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="커리어" id="careers" errorMessage={errors.careers && '이력 사항을 입력하세요.'} required>
               <CareersInput
