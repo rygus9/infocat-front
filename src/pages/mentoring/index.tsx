@@ -1,8 +1,8 @@
-import MainBanner from '@/components/Mentoring/Main/MainBanner';
+import MainBanner from '@/components/mentoring/main/MainBanner';
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 
-const MainListNotSSR = dynamic(() => import('@/components/Mentoring/Main/MainList'), { ssr: false });
+const MainListNotSSR = dynamic(() => import('@/components/mentoring/main/MainList'), { ssr: false });
 
 const Mentoring: NextPage = () => {
   return (

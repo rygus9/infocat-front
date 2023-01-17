@@ -6,8 +6,8 @@ const buttonStyle = {
   controlMain: 'rounded-lg bg-lightPurple py-1 px-3 text-sm text-white',
   controlSub: 'rounded-lg bg-darkWhite py-1 px-3 text-sm text-gray',
   inputBtn: 'w-20 bg-lightPurple text-white disabled:bg-darkWhite disabled:text-darkGray',
-  modalMain: 'rounded-lg bg-lightPurple px-4 py-1 text-base text-darkWhite',
-  modalSub: 'rounded-lg border border-lightPurple px-4 py-1 text-base text-lightPurple',
+  modalMain: 'rounded-md bg-lightPurple px-4 py-1 text-base text-darkWhite',
+  modalSub: 'rounded-md border border-lightPurple px-4 py-1 text-base text-lightPurple',
   textWhite: 'w-fit text-lg text-white',
 };
 

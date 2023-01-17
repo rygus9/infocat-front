@@ -1,6 +1,7 @@
 import mentorRegistApi from '@/api/mentor/mentorRegistApi';
 import { CareerFormValidation } from '@/contents/validation/signUpInformerFormValidation';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import usePathPush from '@/hooks/useReplace';
 import careerFormAtom from '@/recoil/form/informerRegist/careerFormAtom';
 import getBasicInfoSelector from '@/recoil/form/informerRegist/getBasicInfoSelector';
 import currentUserAtom from '@/recoil/user/currentUserAtom';
@@ -10,11 +11,11 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { z } from 'zod';
+import AlertModal from '../shared/common/AlertModal';
 import Button from '../shared/common/Button';
 import Input from '../shared/input/Input';
 import WrapLabel from '../shared/input/WrapLabel';
 import CareersInput from './CareersInput';
-import SignUpSuccessModal from './SignUpSuccessModal';
 
 export type CareerFormType = z.infer<typeof CareerFormValidation>;
 
@@ -29,6 +30,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
   const userState = useCurrentUser();
   const setCurrentUserState = useSetRecoilState(currentUserAtom);
   const [successModal, setSuccessModal] = useState(false);
+  const onGoMentoring = usePathPush('/mentoring');
 
   const {
     register,
@@ -113,7 +115,13 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           </Button>
         </section>
       </form>
-      <SignUpSuccessModal isOpen={successModal} closeModal={() => setSuccessModal(false)}></SignUpSuccessModal>
+      <AlertModal
+        description="인포머 등록에 성공하셨습니다."
+        isOpen={successModal}
+        onClick={() => {
+          onGoMentoring;
+        }}
+      ></AlertModal>
     </>
   );
 }

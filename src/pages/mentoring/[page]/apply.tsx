@@ -1,5 +1,5 @@
-import MenteeInfoForm from '@/components/Mentoring/Apply/MenteeInfoForm';
-import MentoringInfoForm from '@/components/Mentoring/Apply/MentoringInfoForm';
+import MenteeInfoForm from '@/components/mentoring/apply/MenteeInfoForm';
+import MentoringInfoForm from '@/components/mentoring/apply/MentoringInfoForm';
 import { NextPage } from 'next';
 import { useState } from 'react';
 

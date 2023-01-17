@@ -10,10 +10,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import mentoringApplyApi from '@/api/mentoring/mentoringApplyApi';
 import { useMutation } from 'react-query';
 import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
-import ApplySuccessModal from './ApplySuccessModal';
 import { useState } from 'react';
 import Button from '@/components/shared/common/Button';
 import { MentoringInfoFormValidation } from '@/contents/validation/mentoringApplyFormValidation';
+import AlertModal from '@/components/shared/common/AlertModal';
+import usePathPush from '@/hooks/useReplace';
 
 export type MentoringApplyMentoringType = z.infer<typeof MentoringInfoFormValidation>;
 
@@ -25,6 +26,7 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
   const [mentoringFormState, setMentoringFormState] = useRecoilState(mentoringFormAtom);
   const { mutateAsync: mentoringApplyMutate, status: mentoringApplyState } = useMutation(mentoringApplyApi);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const onGoMyPageMentoring = usePathPush('/mypage/mentoring');
   const menteeFormState = useRecoilValue(menteeFormAtom);
 
   const {
@@ -108,7 +110,7 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
           </Button>
         </section>
       </form>
-      <ApplySuccessModal isOpen={successModalOpen} closeModal={() => setSuccessModalOpen(false)}></ApplySuccessModal>
+      <AlertModal isOpen={successModalOpen} description="멘토링 신청에 성공하셨습니다." onClick={() => onGoMyPageMentoring()}></AlertModal>
     </>
   );
 }

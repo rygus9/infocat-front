@@ -13,13 +13,14 @@ import { z } from 'zod';
 import MultiChoiceInput from '@/components/shared/input/MultiChoiceInput';
 import mentoringCreateApi from '@/api/mentoring/mentoringCreateApi';
 import { useMutation } from 'react-query';
-import CreateSuccessModal from './CreateSuccessModal';
 import useMentorInfo from '@/query/useMentorInfo';
 import Button from '@/components/shared/common/Button';
 import { mentoringCreateFormValidation } from '@/contents/validation/mentoringCreateFormValidation';
 import Editor from '@/components/shared/editor/Editor';
 import CategoryInput from './CategoryInput';
 import WeekScheduler from './WeekScheduler';
+import AlertModal from '@/components/shared/common/AlertModal';
+import usePathPush from '@/hooks/useReplace';
 
 export type MentoringFormType = z.infer<typeof mentoringCreateFormValidation>;
 
@@ -28,6 +29,7 @@ export default function MentoringCreateForm() {
   const { data: mentorState, status: mentorStateStatus } = useMentorInfo();
 
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const onGoMentoring = usePathPush('/mentoring');
 
   const method = useForm<MentoringFormType>({
     resolver: zodResolver(mentoringCreateFormValidation),
@@ -147,7 +149,7 @@ export default function MentoringCreateForm() {
           </Button>
         </section>
       </form>
-      <CreateSuccessModal isOpen={successModalOpen} closeModal={() => setSuccessModalOpen(false)}></CreateSuccessModal>
+      <AlertModal description="멘토링 생성에 성공하셨습니다." isOpen={successModalOpen} onClick={() => onGoMentoring()}></AlertModal>
     </>
   );
 }

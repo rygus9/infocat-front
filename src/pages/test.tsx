@@ -1,4 +1,4 @@
-import WeekScheduler from '@/components/Mentoring/Create/WeekScheduler';
+import WeekScheduler from '@/components/mentoring/create/WeekScheduler';
 import { useState } from 'react';
 
 const test = () => {
