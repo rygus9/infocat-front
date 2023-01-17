@@ -8,18 +8,18 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { ReactNode, useState } from 'react';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FormProvider, useController, useForm, useFormContext } from 'react-hook-form';
 import { z } from 'zod';
-import EditorWithForm from './EditorWithForm';
-import WeekSchedulerWithForm from './WeekSchedulerWithForm';
 import MultiChoiceInput from '@/components/shared/input/MultiChoiceInput';
-import CategoryInputWithForm from './CategoryInputWithForm';
 import mentoringCreateApi from '@/api/mentoring/mentoringCreateApi';
 import { useMutation } from 'react-query';
 import CreateSuccessModal from './CreateSuccessModal';
 import useMentorInfo from '@/query/useMentorInfo';
 import Button from '@/components/shared/common/Button';
 import { mentoringCreateFormValidation } from '@/contents/validation/mentoringCreateFormValidation';
+import Editor from '@/components/shared/editor/Editor';
+import CategoryInput from './CategoryInput';
+import WeekScheduler from './WeekScheduler';
 
 export type MentoringFormType = z.infer<typeof mentoringCreateFormValidation>;
 
@@ -28,9 +28,10 @@ export default function MentoringCreateForm() {
   const { data: mentorState, status: mentorStateStatus } = useMentorInfo();
 
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+
   const method = useForm<MentoringFormType>({
     resolver: zodResolver(mentoringCreateFormValidation),
-    mode: 'onChange',
+    mode: 'onSubmit',
     defaultValues: {
       mentoringField: [],
       timeScale: timeScaleOption[0],
@@ -72,9 +73,13 @@ export default function MentoringCreateForm() {
       console.log(err);
     }
   };
+
   const onError = (error: any) => {
     console.log('Mentoring Create Error : ', error);
   };
+
+  const EditorController = useController({ control, name: 'mentoringContent' });
+  const CategoryController = useController({ control, name: 'mentoringCategory' });
 
   return (
     <>
@@ -111,7 +116,6 @@ export default function MentoringCreateForm() {
             ></TextInput>
           </WrapLabel>
           <WrapLabel id="mentoringField" label="멘토링 희망분야" errorMessage={errors.mentoringField?.message}>
-            {/* <ListBoxInput list={fieldCategoryOption} name="mentoringField" control={control}></ListBoxInput> */}
             <MultiChoiceInput
               id="mentoringField"
               type="checkbox"
@@ -120,10 +124,10 @@ export default function MentoringCreateForm() {
             ></MultiChoiceInput>
           </WrapLabel>
           <WrapLabel id="mentoringCategory" label="멘토링 카테고리" errorMessage={errors.mentoringCategory?.message}>
-            <CategoryInputWithForm name={'mentoringCategory'} control={control}></CategoryInputWithForm>
+            <CategoryInput value={CategoryController.field.value} onChange={CategoryController.field.onChange}></CategoryInput>
           </WrapLabel>
           <WrapLabel label="멘토링 소개" id="mentoringContent" required errorMessage={errors.mentoringContent?.message}>
-            <EditorWithForm name="mentoringContent" control={control}></EditorWithForm>
+            <Editor value={EditorController.field.value} onChange={EditorController.field.onChange} defaultValue=""></Editor>
           </WrapLabel>
           <WrapLabel label="이력사항" id="careers" errorMessage={errors.careers?.message}>
             <CareersInput
@@ -160,6 +164,9 @@ function SchedulePart() {
     formState: { errors },
   } = useFormContext<MentoringFormType>();
 
+  const schedulerController = useController({ control: control, name: 'startTimes' });
+  const timeScaleController = useController({ control, name: 'timeScale' });
+
   return (
     <>
       <WrapLabel
@@ -172,10 +179,20 @@ function SchedulePart() {
         <TextInput type="number" register={register('price')} placeholder="여기에 입력해주세요."></TextInput>
       </WrapLabel>
       <WrapLabel id="timeScale" label="회당 멘토링 시간." errorMessage={errors.timeScale?.message} required>
-        <ListBoxInput list={timeScaleOption} name="timeScale" control={control}></ListBoxInput>
+        <ListBoxInput
+          list={timeScaleOption}
+          value={timeScaleController.field.value}
+          onChange={timeScaleController.field.onChange}
+        ></ListBoxInput>
       </WrapLabel>
       <WrapLabel id="" label="스케줄 선택" required errorMessage={errors.startTimes?.message}>
-        <WeekSchedulerWithForm control={control} name="startTimes" timeScale={parseInt(watch().timeScale.value)}></WeekSchedulerWithForm>
+        <div className="h-[28rem]">
+          <WeekScheduler
+            value={schedulerController.field.value}
+            onChange={schedulerController.field.onChange}
+            timeScale={parseInt(watch().timeScale.value)}
+          ></WeekScheduler>
+        </div>
       </WrapLabel>
     </>
   );

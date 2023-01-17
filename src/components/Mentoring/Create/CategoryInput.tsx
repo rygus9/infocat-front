@@ -28,7 +28,7 @@ export default function CategoryInput({ value, onChange }: CategoryInputProps) {
   return (
     <div className="h-full w-full">
       <section className="flex items-center gap-2 pb-2">
-        {jobCategoryOption.map((main) => (
+        {jobCategoryOption.map((main, index) => (
           <button
             className={cls(
               'border bg-white py-1.5 px-3  text-base',

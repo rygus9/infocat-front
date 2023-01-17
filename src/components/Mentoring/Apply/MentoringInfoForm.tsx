@@ -1,9 +1,9 @@
 import TextAreaInput from '@/components/shared/input/TextAreaInput';
 import WrapLabel from '@/components/shared/input/WrapLabel';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import QuestionsInput from './QuestionsInput';
 import { z } from 'zod';
-import CalendarInputWithForm from './CalendarInputWithForm';
+import CalendarInputContainer from './CalendarInputContainer';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import mentoringFormAtom from '@/recoil/form/mentoringApply/mentoringFormAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -74,13 +74,19 @@ export default function MentoringInfoForm({ onPrev }: MentoringInfoFormProps) {
   const onError = (err: any) => {
     console.log(err);
   };
+
+  const calendarController = useController({ control, name: 'schedule' });
+
   return (
     <>
       <h1 className="mt-20 text-center text-2xl text-darkGray">인포머와 약속을 잡아보세요.</h1>
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
           <WrapLabel label="날짜 및 시간 선택" id="schedule" required errorMessage={errors.schedule?.message}>
-            <CalendarInputWithForm name="schedule" control={control}></CalendarInputWithForm>
+            <CalendarInputContainer
+              value={calendarController.field.value}
+              onChange={calendarController.field.onChange}
+            ></CalendarInputContainer>
           </WrapLabel>
           <WrapLabel
             label="사전 질문"

@@ -5,7 +5,7 @@ import WrapLabel from '@/components/shared/input/WrapLabel';
 import { menteeStatusOption } from '@/contents/option/menteeStatusOption';
 import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 import useCurrentUser from '@/hooks/useCurrentUser';
@@ -32,14 +32,18 @@ export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
     mode: 'onChange',
     defaultValues: menteeFormState,
   });
+
   const onSubmit = (data: any) => {
     console.log('ManteeForm Data', data);
     setMenteeFormState(data);
     onNext();
   };
+
   const onError = (error: any) => {
     console.log('ManteeForm Info Error : ', error);
   };
+
+  const statusController = useController({ control: control, name: 'status' });
 
   return (
     <>
@@ -63,10 +67,10 @@ export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
           <WrapLabel label="상태" id="status" required errorMessage={errors.status?.title?.message}>
             <ListBoxInput
               list={menteeStatusOption}
-              control={control}
-              name={'status'}
               id={'status'}
               placeholder="눌러서 선택"
+              value={statusController.field.value}
+              onChange={statusController.field.onChange}
             ></ListBoxInput>
           </WrapLabel>
           <WrapLabel

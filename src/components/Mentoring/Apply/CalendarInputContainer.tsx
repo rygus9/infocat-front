@@ -3,11 +3,12 @@ import getDurationTitle from '@/contents/translate/getDurationTitle';
 import { UseControllerProps, useController } from 'react-hook-form';
 import CalendarInput from './CalenderInput';
 
-export default function CalendarInputWithForm({ ...props }: UseControllerProps<any, any>) {
-  const {
-    field: { value, onChange, ref },
-  } = useController(props);
+interface CalendarInputContainerProps {
+  value: any;
+  onChange: (event: any) => void;
+}
 
+export default function CalendarInputContainer({ value, onChange }: CalendarInputContainerProps) {
   const path = location.pathname.split('/')[2];
 
   const { data, status } = useMentoringSchedule(path);
