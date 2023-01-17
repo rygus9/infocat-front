@@ -14,7 +14,7 @@ export default function ResiterForm() {
   };
 
   const finalStep = () => {
-    setStep((elem) => 3);
+    setStep(3);
   };
 
   return (

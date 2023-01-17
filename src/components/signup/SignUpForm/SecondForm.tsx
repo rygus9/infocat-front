@@ -79,12 +79,7 @@ export default function SecondForm({ backStep, finalStep }: SecondForm) {
         <section className="space-y-4 pt-6">
           <WrapLabel label="이메일 인증" id="validationCode" errorMessage={errors.validationCode?.message}>
             <div className="flex h-fit items-stretch space-x-2">
-              <TextInput
-                id="validationCode"
-                register={register('validationCode')}
-                type="text"
-                placeholder="인증 코드를 입력하세요."
-              ></TextInput>
+              <TextInput id="validationCode" {...register('validationCode')} type="text" placeholder="인증 코드를 입력하세요."></TextInput>
               <Button type="button" btnStyle="inputBtn" onClick={onRetry} disabled={emailSendLoading}>
                 {emailSendLoading ? '전송중...' : '재전송'}
               </Button>

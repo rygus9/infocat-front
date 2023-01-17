@@ -49,10 +49,10 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit, onError)} className="px-4">
         <section className="mt-4 space-y-2">
           <WrapLabel label="이메일" id="email">
-            <TextInput id="email" register={register('email')} type="text" placeholder="이메일"></TextInput>
+            <TextInput id="email" {...register('email')} type="text" placeholder="이메일"></TextInput>
           </WrapLabel>
           <WrapLabel label="비밀번호" id="password">
-            <TextInput id="password" register={register('password')} type="password" placeholder="비밀번호"></TextInput>
+            <TextInput id="password" {...register('password')} type="password" placeholder="비밀번호"></TextInput>
           </WrapLabel>
         </section>
 

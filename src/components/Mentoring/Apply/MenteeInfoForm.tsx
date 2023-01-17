@@ -53,7 +53,7 @@ export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
           <WrapLabel label="이름" id="name" moreInfo="실명으로 입력하세요." required errorMessage={errors.name?.message}>
-            <TextInput register={register('name')} type="text" placeholder="이름을 입력하세요."></TextInput>
+            <TextInput {...register('name')} type="text" placeholder="이름을 입력하세요."></TextInput>
           </WrapLabel>
           <WrapLabel
             label="휴대전화 번호"
@@ -62,7 +62,7 @@ export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
             required
             errorMessage={errors.phoneNumber?.message}
           >
-            <TextInput register={register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></TextInput>
+            <TextInput {...register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></TextInput>
           </WrapLabel>
           <WrapLabel label="상태" id="status" required errorMessage={errors.status?.title?.message}>
             <ListBoxInput
@@ -80,7 +80,7 @@ export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
             errorMessage={errors.major?.message}
             moreInfo="전공을 정확하게 입력해주세요. 예) 컴퓨터공학과, 경영학과"
           >
-            <TextInput register={register('major')} type="text" placeholder="전공을 입력해주세요."></TextInput>
+            <TextInput {...register('major')} type="text" placeholder="전공을 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="자기소개" id="introduce" required errorMessage={errors.introduce?.message}>
             <TextAreaInput register={register('introduce')} placeholder="간단한 자기 소개 부탁드립니다." rows={5}></TextAreaInput>

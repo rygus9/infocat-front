@@ -60,15 +60,15 @@ export default function FirstForm({ nextStep }: FirstFormProps) {
       <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-4">
           <WrapLabel label="이메일" id="email" errorMessage={errors.email?.message}>
-            <TextInput id="email" register={register('email')} type="email" placeholder="인증을 진행할 이메일을 입력하세요."></TextInput>
+            <TextInput id="email" {...register('email')} type="email" placeholder="인증을 진행할 이메일을 입력하세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="닉네임" id="nickName" errorMessage={errors.nickName?.message}>
-            <TextInput id="nickName" register={register('nickName')} type="text" placeholder="닉네임을 입력하세요."></TextInput>
+            <TextInput id="nickName" {...register('nickName')} type="text" placeholder="닉네임을 입력하세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="비밀번호" id="password" errorMessage={errors.aboutPassword?.password?.message}>
             <TextInput
               id="password"
-              register={register('aboutPassword.password')}
+              {...register('aboutPassword.password')}
               type="password"
               placeholder="비밀번호를 입력하세요."
             ></TextInput>
@@ -76,7 +76,7 @@ export default function FirstForm({ nextStep }: FirstFormProps) {
           <WrapLabel label="비밀번호 확인" id="passwordValid" errorMessage={errors.aboutPassword?.passwordValid?.message}>
             <TextInput
               id="passwordValid"
-              register={register('aboutPassword.passwordValid')}
+              {...register('aboutPassword.passwordValid')}
               type="password"
               placeholder="비밀번호 확인"
             ></TextInput>

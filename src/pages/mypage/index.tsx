@@ -45,7 +45,7 @@ const MyProfile = () => {
         {/* edit Part */}
         <div className="space-y-4 py-10">
           <WrapLabelShort label="닉네임 수정" htmlFor="nickname">
-            <TextInput type="text" register={register('nickname')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
+            <TextInput type="text" {...register('nickname')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
           </WrapLabelShort>
           <div className="space-y-3">
             <label htmlFor="introduce" className="inline-block w-28 text-gray">

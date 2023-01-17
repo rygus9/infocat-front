@@ -1,28 +1,23 @@
 import cls from '@/utils/cls';
-import { UseFormRegisterReturn } from 'react-hook-form/dist/types/form';
+import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 
-interface TextInputProps {
-  type: 'text' | 'password' | 'email' | 'number';
-  register: UseFormRegisterReturn;
-  id?: string;
-  placeholder?: string;
-}
+type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const TextInput = ({ register, ...rest }: TextInputProps) => {
+const TextInput = forwardRef((props: TextInputProps, ref: ForwardedRef<any>) => {
   return (
     <input
-      {...rest}
-      {...register}
-      {...(rest.id ? {} : { id: register.name })}
+      {...props}
       autoComplete="off"
       className={cls(
         'w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm',
         'text-base text-darkGray',
         'placeholder:text placeholder:text-lightBlack',
-        'focus:border-darkPurPle focus:ring-0'
+        'focus:border-darkPurPle focus:ring-0',
+        props.className ? props.className : ''
       )}
+      ref={ref}
     ></input>
   );
-};
+});
 
 export default TextInput;

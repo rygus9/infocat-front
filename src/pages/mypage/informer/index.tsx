@@ -77,16 +77,16 @@ const mypageInformer = () => {
           <h2 className="pb-4 text-xl text-darkGray">인포머 정보 수정</h2>
           <form className="space-y-2 pr-6">
             <WrapLabel label="이름(실명)" id="name" errorMessage={errors.name?.message}>
-              <TextInput id="name" register={register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
+              <TextInput id="name" {...register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
             </WrapLabel>
             <WrapLabel label="연락처" id="phone" errorMessage={errors.phone?.message}>
-              <TextInput id="phone" register={register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
+              <TextInput id="phone" {...register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
             </WrapLabel>
             <WrapLabel label="직무" id="role" errorMessage={errors.role?.message}>
-              <TextInput id="role" register={register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
+              <TextInput id="role" {...register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
             </WrapLabel>
             <WrapLabel label="연차" id="years" errorMessage={errors.years?.message}>
-              <TextInput id="years" register={register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
+              <TextInput id="years" {...register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
             </WrapLabel>
             <WrapLabel label="커리어" id="careers" errorMessage={errors.careers && '이력 사항을 입력하세요.'} required>
               <CareersInput

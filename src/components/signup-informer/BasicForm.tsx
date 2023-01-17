@@ -72,10 +72,10 @@ export default function BasicForm({ onNext }: BasicFormProps) {
       <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit)}>
         <section className="space-y-4">
           <WrapLabel label="이름(실명)" id="name" errorMessage={errors.name?.message} required>
-            <TextInput id="name" register={register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
+            <TextInput id="name" {...register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="연락처" id="phone" errorMessage={errors.phone?.message} required>
-            <TextInput id="phone" register={register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
+            <TextInput id="phone" {...register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel
             label="회사 이메일"
@@ -87,12 +87,7 @@ export default function BasicForm({ onNext }: BasicFormProps) {
             <div
               className={cls('flex items-stretch space-x-2', emailSendStatus === 'error' || emailSendStatus === 'success' ? '' : 'mb-2')}
             >
-              <TextInput
-                id="companyEmail"
-                register={register('companyEmail')}
-                type="text"
-                placeholder="회사 이메일을 입력해주세요."
-              ></TextInput>
+              <TextInput id="companyEmail" {...register('companyEmail')} type="text" placeholder="회사 이메일을 입력해주세요."></TextInput>
               <Button btnStyle="inputBtn" onClick={emailSend} type="button">
                 {emailSendStatus === 'loading' ? '전송중' : '전송'}
               </Button>
@@ -101,7 +96,7 @@ export default function BasicForm({ onNext }: BasicFormProps) {
             {emailSendStatus === 'success' && (
               <span className="mb-2 inline-block text-sm text-lightPurple">인증 코드가 전송되었습니다.</span>
             )}
-            <TextInput id="emailCode" register={register('emailCode')} placeholder="인증 코드를 입력해주세요." type="text"></TextInput>
+            <TextInput id="emailCode" {...register('emailCode')} placeholder="인증 코드를 입력해주세요." type="text"></TextInput>
             {emailValidationStatus === 'error' && <span className="inline-block text-sm text-red-500">{emailValidationError}</span>}
           </WrapLabel>
         </section>

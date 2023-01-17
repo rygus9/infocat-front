@@ -90,10 +90,10 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
       <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-4">
           <WrapLabel label="직무" id="role" errorMessage={errors.role?.message} moreInfo="예) 웹프론트엔드, 앱디자이너, 서비스PM" required>
-            <TextInput id="role" register={register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
+            <TextInput id="role" {...register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="연차" id="years" errorMessage={errors.years?.message} moreInfo="숫자만 입력해주세요. 예) 5년차 -> 5" required>
-            <TextInput id="years" register={register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
+            <TextInput id="years" {...register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
           </WrapLabel>
           <WrapLabel label="커리어" id="careers" errorMessage={errors.careers && '이력 사항을 입력하세요.'} required>
             <CareersInput

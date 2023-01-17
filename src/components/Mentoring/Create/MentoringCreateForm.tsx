@@ -106,11 +106,11 @@ export default function MentoringCreateForm() {
         <section className="space-y-5">
           <h3 className="pt-6 text-xl text-darkGray">멘토링 정보</h3>
           <WrapLabel label="멘토링 이름" id="mentoringName" required errorMessage={errors.mentoringName?.message}>
-            <TextInput register={register('mentoringName')} type="text" placeholder="예 ) 예비 개발자를 위한 자기소개서 첨삭"></TextInput>
+            <TextInput {...register('mentoringName')} type="text" placeholder="예 ) 예비 개발자를 위한 자기소개서 첨삭"></TextInput>
           </WrapLabel>
           <WrapLabel label="멘토링 한줄소개" id="mentoringShortIntro" required errorMessage={errors.mentoringShortIntro?.message}>
             <TextInput
-              register={register('mentoringShortIntro')}
+              {...register('mentoringShortIntro')}
               type="text"
               placeholder="예 ) 현직자와 함께하는 IT개발분야 자기소개서 특강"
             ></TextInput>
@@ -176,7 +176,7 @@ function SchedulePart() {
         moreInfo="숫자만 포인트 단위로 입력해주세요. 예) 10000p -> 10000"
         errorMessage={errors.price?.message}
       >
-        <TextInput type="number" register={register('price')} placeholder="여기에 입력해주세요."></TextInput>
+        <TextInput type="number" {...register('price')} placeholder="여기에 입력해주세요."></TextInput>
       </WrapLabel>
       <WrapLabel id="timeScale" label="회당 멘토링 시간." errorMessage={errors.timeScale?.message} required>
         <ListBoxInput
