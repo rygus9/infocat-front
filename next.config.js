@@ -10,6 +10,8 @@ const nextConfig = {
           source: '/api/v1/:path*',
         },
       ];
+    } else {
+      return [];
     }
   },
 };
