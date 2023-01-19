@@ -1,7 +1,7 @@
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import DenyModal from './DenyModal';
+import DenyModal from '@/components/mentoring/details/DenyModal';
 
 const buttonDesign = {
   desktop: 'h-16 rounded-xl bg-[#a272de] px-10 text-xl text-white',
