@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* for Editor */
+.ql-container {
+  font-size: 16px !important;
+  color: rgb(112, 112, 112) !important;
+}
+
+.quill-viewer .ql-container {
+  height: fit-content;
+}
+
+.quill-editor .ql-container {
+  height: 250px !important;
+}
+
+.quill-editor .ql-toolbar {
+  padding: 3px 5px !important;
+}
+
+th {
+  font-weight: 400;
+}
