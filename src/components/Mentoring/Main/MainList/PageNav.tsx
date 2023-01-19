@@ -6,12 +6,12 @@ import { useRouter } from 'next/router';
 import removeUndefined from '@/utils/removeUndefined';
 const SHOW_PAGE = 5;
 
-interface PageNavParams {
+interface PageNavProps {
   pageNum: number;
   endPage: number;
 }
 
-export default function PageNav({ pageNum, endPage }: PageNavParams) {
+export default function PageNav({ pageNum, endPage }: PageNavProps) {
   const router = useRouter();
   const pageClick = (idx: number) => () =>
     idx !== 1

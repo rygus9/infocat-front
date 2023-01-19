@@ -1,4 +1,4 @@
-import { CareerFormType } from '@/components/signup-mentor/CareerForm';
+import { CareerFormType } from '@/components/signup-informer/CareerForm';
 import { atom } from 'recoil';
 
 const careerFormAtom = atom<CareerFormType>({

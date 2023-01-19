@@ -1,4 +1,4 @@
-import MentoringCreateForm from '@/components/Mentoring/Create/MentoringCreateForm';
+import MentoringCreateForm from '@/components/mentoring/create/MentoringCreateForm';
 import { NextPage } from 'next';
 
 const create: NextPage = () => {

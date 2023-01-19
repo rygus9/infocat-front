@@ -1,5 +1,7 @@
 import mentorRegistApi from '@/api/mentor/mentorRegistApi';
+import { CareerFormValidation } from '@/contents/validation/signUpInformerFormValidation';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import usePathPush from '@/hooks/useReplace';
 import careerFormAtom from '@/recoil/form/informerRegist/careerFormAtom';
 import getBasicInfoSelector from '@/recoil/form/informerRegist/getBasicInfoSelector';
 import currentUserAtom from '@/recoil/user/currentUserAtom';
@@ -9,27 +11,13 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { z } from 'zod';
-import TextInput from '../shared/input/TextInput';
+import AlertModal from '../shared/common/AlertModal';
+import Button from '../shared/common/Button';
+import Input from '../shared/input/Input';
 import WrapLabel from '../shared/input/WrapLabel';
 import CareersInput from './CareersInput';
-import SignUpSuccessModal from './SignUpSuccessModal';
 
-const schema = z.object({
-  years: z
-    .string()
-    .min(1, '연차는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-  role: z.string().min(1, '직무는 필수 입력입니다.'),
-  careers: z
-    .array(
-      z.object({
-        content: z.string().min(1, '이력 사항은 필수 입력입니다.'),
-      })
-    )
-    .min(1),
-});
-
-export type CareerFormType = z.infer<typeof schema>;
+export type CareerFormType = z.infer<typeof CareerFormValidation>;
 
 interface CareerFormProps {
   onPrev: () => void;
@@ -42,6 +30,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
   const userState = useCurrentUser();
   const setCurrentUserState = useSetRecoilState(currentUserAtom);
   const [successModal, setSuccessModal] = useState(false);
+  const onGoMentoring = usePathPush('/mentoring');
 
   const {
     register,
@@ -50,7 +39,7 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
     control,
     handleSubmit,
   } = useForm<CareerFormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(CareerFormValidation),
     mode: 'onChange',
     defaultValues: careerForm,
   });
@@ -103,10 +92,10 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
       <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-4">
           <WrapLabel label="직무" id="role" errorMessage={errors.role?.message} moreInfo="예) 웹프론트엔드, 앱디자이너, 서비스PM" required>
-            <TextInput id="role" register={register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
+            <Input id="role" {...register('role')} type="text" placeholder="직무를 입력해주세요."></Input>
           </WrapLabel>
           <WrapLabel label="연차" id="years" errorMessage={errors.years?.message} moreInfo="숫자만 입력해주세요. 예) 5년차 -> 5" required>
-            <TextInput id="years" register={register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
+            <Input id="years" {...register('years')} type="number" placeholder="연차를 입력해주세요."></Input>
           </WrapLabel>
           <WrapLabel label="커리어" id="careers" errorMessage={errors.careers && '이력 사항을 입력하세요.'} required>
             <CareersInput
@@ -118,15 +107,21 @@ export default function CareerForm({ onPrev }: CareerFormProps) {
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center space-x-2 pb-5 pt-10">
-          <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onPrevClick}>
+          <Button btnStyle="submitSub" type="button" onClick={onPrevClick}>
             이전
-          </button>
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          </Button>
+          <Button btnStyle="submitMain" type="submit">
             {isSubmitting ? '등록 중' : '등록하기'}
-          </button>
+          </Button>
         </section>
       </form>
-      <SignUpSuccessModal isOpen={successModal} closeModal={() => setSuccessModal(false)}></SignUpSuccessModal>
+      <AlertModal
+        description="인포머 등록에 성공하셨습니다."
+        isOpen={successModal}
+        onClick={() => {
+          onGoMentoring;
+        }}
+      ></AlertModal>
     </>
   );
 }

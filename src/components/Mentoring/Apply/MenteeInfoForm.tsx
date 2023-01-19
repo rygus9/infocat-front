@@ -1,36 +1,24 @@
-import ListBoxInput from '@/components/shared/input/ListBoxInput';
-import TextAreaInput from '@/components/shared/input/TextAreaInput';
-import TextInput from '@/components/shared/input/TextInput';
+import ListBox from '@/components/shared/input/ListBox';
+import TextArea from '@/components/shared/input/TextArea';
+import Input from '@/components/shared/input/Input';
 import WrapLabel from '@/components/shared/input/WrapLabel';
-import { menteeStatusOption } from '@/contents';
+import { menteeStatusOption } from '@/contents/option/menteeStatusOption';
 import menteeFormAtom from '@/recoil/form/mentoringApply/menteeFormAtom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { z } from 'zod';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import Button from '@/components/shared/common/Button';
+import { MenteeInfoFormValidation } from '@/contents/validation/mentoringApplyFormValidation';
 
-const schema = z.object({
-  name: z.string().min(1, '이름은 필수 입력입니다.'),
-  phoneNumber: z
-    .string()
-    .min(1, '휴대전화 번호는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-  status: z.object({
-    title: z.string().min(1, '현재 상태는 필수 입력입니다.'),
-    value: z.string(),
-  }),
-  major: z.string().min(1, '전공은 필수 입력입니다.'),
-  introduce: z.string().min(10, '최소한 10글자 이상은 입력해주세요.'),
-});
+export type MentoringApplyMenteeType = z.infer<typeof MenteeInfoFormValidation>;
 
-export type MentoringApplyMenteeType = z.infer<typeof schema>;
-
-interface ManteeInfoFormProps {
+interface MenteeInfoFormProps {
   onNext: () => void;
 }
 
-export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
+export default function MenteeInfoForm({ onNext }: MenteeInfoFormProps) {
   const [menteeFormState, setMenteeFormState] = useRecoilState(menteeFormAtom);
   const currentUser = useCurrentUser();
 
@@ -40,18 +28,22 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<MentoringApplyMenteeType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(MenteeInfoFormValidation),
     mode: 'onChange',
     defaultValues: menteeFormState,
   });
+
   const onSubmit = (data: any) => {
     console.log('ManteeForm Data', data);
     setMenteeFormState(data);
     onNext();
   };
+
   const onError = (error: any) => {
     console.log('ManteeForm Info Error : ', error);
   };
+
+  const statusController = useController({ control: control, name: 'status' });
 
   return (
     <>
@@ -61,7 +53,7 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
       <form className="pt-16 pb-20" onSubmit={handleSubmit(onSubmit, onError)}>
         <section className="space-y-5">
           <WrapLabel label="이름" id="name" moreInfo="실명으로 입력하세요." required errorMessage={errors.name?.message}>
-            <TextInput register={register('name')} type="text" placeholder="이름을 입력하세요."></TextInput>
+            <Input {...register('name')} type="text" placeholder="이름을 입력하세요."></Input>
           </WrapLabel>
           <WrapLabel
             label="휴대전화 번호"
@@ -70,16 +62,16 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
             required
             errorMessage={errors.phoneNumber?.message}
           >
-            <TextInput register={register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></TextInput>
+            <Input {...register('phoneNumber')} type="number" placeholder="휴대전화 번호 (-빼고 입력)"></Input>
           </WrapLabel>
           <WrapLabel label="상태" id="status" required errorMessage={errors.status?.title?.message}>
-            <ListBoxInput
+            <ListBox
               list={menteeStatusOption}
-              control={control}
-              name={'status'}
               id={'status'}
               placeholder="눌러서 선택"
-            ></ListBoxInput>
+              value={statusController.field.value}
+              onChange={statusController.field.onChange}
+            ></ListBox>
           </WrapLabel>
           <WrapLabel
             label="전공"
@@ -88,16 +80,16 @@ export default function ManteeInfoForm({ onNext }: ManteeInfoFormProps) {
             errorMessage={errors.major?.message}
             moreInfo="전공을 정확하게 입력해주세요. 예) 컴퓨터공학과, 경영학과"
           >
-            <TextInput register={register('major')} type="text" placeholder="전공을 입력해주세요."></TextInput>
+            <Input {...register('major')} type="text" placeholder="전공을 입력해주세요."></Input>
           </WrapLabel>
           <WrapLabel label="자기소개" id="introduce" required errorMessage={errors.introduce?.message}>
-            <TextAreaInput register={register('introduce')} placeholder="간단한 자기 소개 부탁드립니다." rows={5}></TextAreaInput>
+            <TextArea {...register('introduce')} placeholder="간단한 자기 소개 부탁드립니다." rows={5}></TextArea>
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center py-5">
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          <Button btnStyle="submitMain" type="submit">
             다음
-          </button>
+          </Button>
         </section>
       </form>
     </>

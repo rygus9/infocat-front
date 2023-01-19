@@ -1,11 +1,13 @@
 import { MentoringCardParams } from '@/api/mentoring/mentoringListSearchApi';
 import usePathPush from '@/hooks/useReplace';
 import cls from '@/utils/cls';
-import yearToRank from '@/utils/yearToRank';
+import yearToRank from '@/contents/translate/yearToRank';
 import { range } from 'rambda';
 import { PropsWithChildren } from 'react';
 
-export default function MentoringCard({ id, title, role, years, company, stars, image }: MentoringCardParams) {
+type MentoringCardProps = MentoringCardParams;
+
+export default function MentoringCard({ id, title, role, years, company, stars, image }: MentoringCardProps) {
   const onMentoringPush = usePathPush('/mentoring/' + id);
 
   return (

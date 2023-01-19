@@ -1,6 +1,5 @@
 import WrapLabel from '../../shared/input/WrapLabel';
-import TextInput from '@/components/shared/input/TextInput';
-import Button from '@/components/shared/common/Button';
+import Input from '@/components/shared/input/Input';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import joinInfoAtom from '@/recoil/form/joinAtom';
@@ -8,10 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useMutation } from 'react-query';
 import signUpApi from '@/api/auth/signUpApi';
-import { useState } from 'react';
 import emailValidationApi from '@/api/email/emailValidationApi';
 import { getErrorMessage } from '@/contents/errorMessage';
 import emailSendApi from '@/api/email/emailSendApi';
+import Button from '@/components/shared/common/Button';
 
 interface SecondForm {
   backStep: () => void;
@@ -46,7 +45,6 @@ export default function SecondForm({ backStep, finalStep }: SecondForm) {
       setError('validationCode', { message: getErrorMessage(errorCode as string) });
       return;
     }
-    console.log(validationToken);
     const signUp = await signUpMutate({
       email: joinInfo.email,
       nickname: joinInfo.nickName,
@@ -81,23 +79,18 @@ export default function SecondForm({ backStep, finalStep }: SecondForm) {
         <section className="space-y-4 pt-6">
           <WrapLabel label="이메일 인증" id="validationCode" errorMessage={errors.validationCode?.message}>
             <div className="flex h-fit items-stretch space-x-2">
-              <TextInput
-                id="validationCode"
-                register={register('validationCode')}
-                type="text"
-                placeholder="인증 코드를 입력하세요."
-              ></TextInput>
-              <Button color="gray" buttonStyle="border" type="button" size="w-20" onClick={onRetry} disabled={emailSendLoading}>
+              <Input id="validationCode" {...register('validationCode')} type="text" placeholder="인증 코드를 입력하세요."></Input>
+              <Button type="button" btnStyle="inputBtn" onClick={onRetry} disabled={emailSendLoading}>
                 {emailSendLoading ? '전송중...' : '재전송'}
               </Button>
             </div>
           </WrapLabel>
         </section>
         <div className="flex items-center justify-center space-x-2 pt-10">
-          <Button type="button" color="purple" buttonStyle="border" size="w-full h-12" onClick={backStep}>
+          <Button type="button" btnStyle="submitSub" onClick={backStep}>
             이전단계
           </Button>
-          <Button type="submit" color="purple" buttonStyle="fill" size="w-full h-12 font-bold">
+          <Button type="submit" btnStyle="submitMain">
             회원가입
           </Button>
         </div>

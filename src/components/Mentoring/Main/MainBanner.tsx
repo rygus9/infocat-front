@@ -1,3 +1,4 @@
+import Button from '@/components/shared/common/Button';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import usePathPush from '@/hooks/useReplace';
 import cls from '@/utils/cls';
@@ -17,19 +18,21 @@ export default function MainBanner() {
           </p>
         </section>
         <section className="absolute right-10 top-10 md:top-1/2 md:-translate-y-1/2 ">
-          {currentUser && currentUser.isInformer ? (
-            <button className="w-full pb-2 text-right text-lg text-white" onClick={onMentoringCreate}>
-              멘토링 생성하기
-            </button>
-          ) : (
-            <>
-              {currentUser && (
-                <button className="w-full pb-2 text-right text-lg text-white" onClick={onMentorSignUpClick}>
-                  인포머 지원하기
-                </button>
-              )}
-            </>
-          )}
+          <div className="flex justify-end pb-2">
+            {currentUser && currentUser.isInformer ? (
+              <Button btnStyle="textWhite" onClick={onMentoringCreate}>
+                멘토링 생성하기
+              </Button>
+            ) : (
+              <>
+                {currentUser && (
+                  <Button btnStyle="textWhite" onClick={onMentorSignUpClick}>
+                    인포머 지원하기
+                  </Button>
+                )}
+              </>
+            )}
+          </div>
           <figure className="hidden aspect-square h-52 w-80 overflow-hidden rounded-md md:block">
             <img src="/mentoring.webp" className="h-full w-full object-cover"></img>
           </figure>

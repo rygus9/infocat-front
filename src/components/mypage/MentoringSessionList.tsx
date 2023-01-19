@@ -1,6 +1,6 @@
-import { statusToLabel, StatusType } from '@/contents';
+import { statusToLabel, StatusType } from '@/contents/option/mentoringSessionOption';
 import cls from '@/utils/cls';
-import mentoringSchedule from '@/utils/mentoringSchedule';
+import mentoringSchedule from '@/contents/translate/mentoringSchedule';
 import { ChevronRightIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import StatusLabel from './StatusLabel';
 

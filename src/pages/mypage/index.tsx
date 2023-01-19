@@ -1,7 +1,8 @@
 import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
-import TextAreaInput from '@/components/shared/input/TextAreaInput';
-import TextInput from '@/components/shared/input/TextInput';
+import Button from '@/components/shared/common/Button';
+import TextArea from '@/components/shared/input/TextArea';
+import Input from '@/components/shared/input/Input';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import LocalStorage from '@/recoil/effect/localStorage';
 import { useForm } from 'react-hook-form';
@@ -44,18 +45,18 @@ const MyProfile = () => {
         {/* edit Part */}
         <div className="space-y-4 py-10">
           <WrapLabelShort label="닉네임 수정" htmlFor="nickname">
-            <TextInput type="text" register={register('nickname')} placeholder="수정할 닉네임을 입력하세요."></TextInput>
+            <Input type="text" {...register('nickname')} placeholder="수정할 닉네임을 입력하세요."></Input>
           </WrapLabelShort>
           <div className="space-y-3">
             <label htmlFor="introduce" className="inline-block w-28 text-gray">
               자기 소개
             </label>
-            <TextAreaInput register={register('introduce')} placeholder="자기 소개를 입력하세요." rows={8}></TextAreaInput>
+            <TextArea {...register('introduce')} placeholder="자기 소개를 입력하세요." rows={8}></TextArea>
           </div>
           <div className="flex w-full justify-center pt-5">
-            <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+            <Button btnStyle="submitMain" type="submit">
               저장하기
-            </button>
+            </Button>
           </div>
         </div>
       </div>

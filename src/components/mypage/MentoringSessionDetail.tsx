@@ -1,5 +1,5 @@
-import { statusToLabel, StatusType } from '@/contents';
-import mentoringSchedule from '@/utils/mentoringSchedule';
+import { statusToLabel, StatusType } from '@/contents/option/mentoringSessionOption';
+import mentoringSchedule from '@/contents/translate/mentoringSchedule';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
@@ -82,12 +82,12 @@ export default function MentoringSessionDetail({ mentoringSessionDetail, isInfor
   );
 }
 
-interface ControlPartParams {
+interface ControlPartProps {
   isInformer: boolean;
   status: string;
 }
 
-function ControlPart({ isInformer, status }: ControlPartParams) {
+function ControlPart({ isInformer, status }: ControlPartProps) {
   return (
     <section className="mt-6 flex items-center justify-end space-x-2">
       {status === 'Pending' && isInformer && (

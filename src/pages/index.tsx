@@ -1,4 +1,4 @@
-import SearchComponent from '@/components/Mentoring/Main/common/SearchComponent';
+import SearchComponent from '@/components/mentoring/main/common/SearchComponent';
 import usePathPush from '@/hooks/useReplace';
 import type { NextPage } from 'next';
 

@@ -3819,6 +3819,56 @@ __metadata:
   languageName: node
   linkType: hard
 
+"infocat-front@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "infocat-front@workspace:."
+  dependencies:
+    "@headlessui/react": ^1.7.2
+    "@heroicons/react": ^2.0.11
+    "@hookform/resolvers": ^2.9.8
+    "@tailwindcss/forms": ^0.5.3
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^13.4.0
+    "@types/dompurify": ^2.4.0
+    "@types/is-hotkey": ^0
+    "@types/is-url": ^1
+    "@types/jest": ^29.1.1
+    "@types/node": 18.7.17
+    "@types/prettier": ^2
+    "@types/qs": ^6
+    "@types/react": 18.0.19
+    "@types/react-big-calendar": ^0.38.3
+    "@types/react-dom": 18.0.6
+    "@types/testing-library__jest-dom": ^5
+    "@yarnpkg/sdks": ^3.0.0-rc.31
+    autoprefixer: ^10.4.9
+    axios: ^0.27.2
+    date-fns: ^2.29.3
+    dompurify: ^2.4.1
+    eslint: ^8.23.1
+    jest: ^29.1.1
+    jest-environment-jsdom: ^29.1.1
+    localforage: ^1.10.0
+    next: 12.3.0
+    postcss: ^8.4.16
+    postcss-loader: ^7.0.1
+    prettier: ^2.7.1
+    prettier-plugin-tailwindcss: ^0.1.13
+    qs: ^6.11.0
+    rambda: ^7.3.0
+    react: 18.2.0
+    react-dom: 18.2.0
+    react-hook-form: ^7.35.0
+    react-query: ^3.39.2
+    react-quill: ^2.0.0
+    recoil: ^0.7.5
+    tailwindcss: ^3.1.8
+    typescript: ^4.9.3
+    webpack: ^5.74.0
+    zod: ^3.19.1
+  languageName: unknown
+  linkType: soft
+
 "inherits@npm:2, inherits@npm:^2.0.3":
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
@@ -6139,56 +6189,6 @@ __metadata:
   checksum: b122535466e9c97b55e69c7f18e2be0ce3823c5d47ee8de0d9c0b114aa55741c6db8bfbfce3766a94d1272e61bfb1ebf0a15e9310ac5629fbb7446a861b4fd3a
   languageName: node
   linkType: hard
-
-"resumerry-front-2.0@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "resumerry-front-2.0@workspace:."
-  dependencies:
-    "@headlessui/react": ^1.7.2
-    "@heroicons/react": ^2.0.11
-    "@hookform/resolvers": ^2.9.8
-    "@tailwindcss/forms": ^0.5.3
-    "@testing-library/jest-dom": ^5.16.5
-    "@testing-library/react": ^13.4.0
-    "@types/dompurify": ^2.4.0
-    "@types/is-hotkey": ^0
-    "@types/is-url": ^1
-    "@types/jest": ^29.1.1
-    "@types/node": 18.7.17
-    "@types/prettier": ^2
-    "@types/qs": ^6
-    "@types/react": 18.0.19
-    "@types/react-big-calendar": ^0.38.3
-    "@types/react-dom": 18.0.6
-    "@types/testing-library__jest-dom": ^5
-    "@yarnpkg/sdks": ^3.0.0-rc.31
-    autoprefixer: ^10.4.9
-    axios: ^0.27.2
-    date-fns: ^2.29.3
-    dompurify: ^2.4.1
-    eslint: ^8.23.1
-    jest: ^29.1.1
-    jest-environment-jsdom: ^29.1.1
-    localforage: ^1.10.0
-    next: 12.3.0
-    postcss: ^8.4.16
-    postcss-loader: ^7.0.1
-    prettier: ^2.7.1
-    prettier-plugin-tailwindcss: ^0.1.13
-    qs: ^6.11.0
-    rambda: ^7.3.0
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-hook-form: ^7.35.0
-    react-query: ^3.39.2
-    react-quill: ^2.0.0
-    recoil: ^0.7.5
-    tailwindcss: ^3.1.8
-    typescript: ^4.9.3
-    webpack: ^5.74.0
-    zod: ^3.19.1
-  languageName: unknown
-  linkType: soft
 
 "retry@npm:^0.12.0":
   version: 0.12.0

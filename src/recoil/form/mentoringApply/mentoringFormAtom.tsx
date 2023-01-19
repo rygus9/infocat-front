@@ -1,4 +1,4 @@
-import { MentoringApplyMentoringType } from '@/components/Mentoring/Apply/MentoringInfoForm';
+import { MentoringApplyMentoringType } from '@/components/mentoring/apply/MentoringInfoForm';
 import { atom } from 'recoil';
 
 const mentoringFormAtom = atom<MentoringApplyMentoringType>({

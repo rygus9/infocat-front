@@ -1,3 +1,4 @@
+import Button from '@/components/shared/common/Button';
 import { useRouter } from 'next/router';
 
 export default function FinalPage() {
@@ -17,12 +18,12 @@ export default function FinalPage() {
       <section className="pt-4">
         <p className="text-center text-lg text-gray">Infocat에서 취업을 준비하세요.</p>
         <section className="flex items-center justify-center space-x-2 pt-20">
-          <button className="rounded-full bg-darkWhite px-8 py-2 text-lg text-darkGray" type="button" onClick={onHomeClick}>
+          <Button btnStyle="submitSub" type="button" onClick={onHomeClick}>
             홈으로
-          </button>
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="button" onClick={onLoginClick}>
+          </Button>
+          <Button btnStyle="submitMain" type="button" onClick={onLoginClick}>
             로그인 페이지로
-          </button>
+          </Button>
         </section>
       </section>
     </div>

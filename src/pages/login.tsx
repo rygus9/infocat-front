@@ -1,5 +1,4 @@
-import Button from '@/components/shared/common/Button';
-import TextInput from '@/components/shared/input/TextInput';
+import Input from '@/components/shared/input/Input';
 import WrapLabel from '@/components/shared/input/WrapLabel';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -11,6 +10,7 @@ import { getErrorMessage } from '@/contents/errorMessage';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import currentUserAtom from '@/recoil/user/currentUserAtom';
+import Button from '@/components/shared/common/Button';
 
 interface LoginForm {
   email: string;
@@ -49,16 +49,16 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit, onError)} className="px-4">
         <section className="mt-4 space-y-2">
           <WrapLabel label="이메일" id="email">
-            <TextInput id="email" register={register('email')} type="text" placeholder="이메일"></TextInput>
+            <Input id="email" {...register('email')} type="text" placeholder="이메일"></Input>
           </WrapLabel>
           <WrapLabel label="비밀번호" id="password">
-            <TextInput id="password" register={register('password')} type="password" placeholder="비밀번호"></TextInput>
+            <Input id="password" {...register('password')} type="password" placeholder="비밀번호"></Input>
           </WrapLabel>
         </section>
 
-        <div className="pt-6">
+        <div className="pt-6 text-center">
           {serverError && <div className="pb-1 text-center text-sm text-red-500">{serverError}</div>}
-          <Button type="submit" color="purple" buttonStyle="fill" size="w-full h-10">
+          <Button type="submit" btnStyle="submitMain">
             {loginLoading ? '로딩 중...' : '로그인'}
           </Button>
         </div>

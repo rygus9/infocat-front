@@ -8,24 +8,16 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { z } from 'zod';
-import TextInput from '../shared/input/TextInput';
+import Input from '../shared/input/Input';
 import WrapLabel from '../shared/input/WrapLabel';
 import emailCompanyApi from '@/api/auth/emailCompanyApi';
 import companyAtom from '@/recoil/form/informerRegist/companyAtom';
 import { useState } from 'react';
 import { getErrorMessage } from '@/contents/errorMessage';
+import Button from '../shared/common/Button';
+import { BasicFormValidation } from '@/contents/validation/signUpInformerFormValidation';
 
-const schema = z.object({
-  companyEmail: z.string().email('잘못된 이메일 형식입니다.'),
-  emailCode: z.string().min(1, '인증 코드는 필수입니다.'),
-  name: z.string().min(1, '이름은 필수 입력입니다.'),
-  phone: z
-    .string()
-    .min(1, '휴대전화 번호는 필수 입력입니다.')
-    .regex(/^[0-9]*$/, '숫자만 입력하세요.'),
-});
-
-export type BasicFormType = z.infer<typeof schema>;
+export type BasicFormType = z.infer<typeof BasicFormValidation>;
 
 interface BasicFormProps {
   onNext: () => void;
@@ -46,7 +38,7 @@ export default function BasicForm({ onNext }: BasicFormProps) {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<BasicFormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(BasicFormValidation),
     mode: 'onChange',
     defaultValues: basicFormState,
   });
@@ -80,10 +72,10 @@ export default function BasicForm({ onNext }: BasicFormProps) {
       <form className="pt-6 pb-10" onSubmit={handleSubmit(onSubmit)}>
         <section className="space-y-4">
           <WrapLabel label="이름(실명)" id="name" errorMessage={errors.name?.message} required>
-            <TextInput id="name" register={register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
+            <Input id="name" {...register('name')} type="text" placeholder="실명을 입력해주세요."></Input>
           </WrapLabel>
           <WrapLabel label="연락처" id="phone" errorMessage={errors.phone?.message} required>
-            <TextInput id="phone" register={register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
+            <Input id="phone" {...register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></Input>
           </WrapLabel>
           <WrapLabel
             label="회사 이메일"
@@ -95,28 +87,23 @@ export default function BasicForm({ onNext }: BasicFormProps) {
             <div
               className={cls('flex items-stretch space-x-2', emailSendStatus === 'error' || emailSendStatus === 'success' ? '' : 'mb-2')}
             >
-              <TextInput
-                id="companyEmail"
-                register={register('companyEmail')}
-                type="text"
-                placeholder="회사 이메일을 입력해주세요."
-              ></TextInput>
-              <button className="w-16 bg-lightPurple text-white" onClick={emailSend} type="button">
+              <Input id="companyEmail" {...register('companyEmail')} type="text" placeholder="회사 이메일을 입력해주세요."></Input>
+              <Button btnStyle="inputBtn" onClick={emailSend} type="button">
                 {emailSendStatus === 'loading' ? '전송중' : '전송'}
-              </button>
+              </Button>
             </div>
             {emailSendStatus === 'error' && <span className="mb-2 inline-block text-sm text-red-500">이메일 전송에 실패했습니다.</span>}
             {emailSendStatus === 'success' && (
               <span className="mb-2 inline-block text-sm text-lightPurple">인증 코드가 전송되었습니다.</span>
             )}
-            <TextInput id="emailCode" register={register('emailCode')} placeholder="인증 코드를 입력해주세요." type="text"></TextInput>
+            <Input id="emailCode" {...register('emailCode')} placeholder="인증 코드를 입력해주세요." type="text"></Input>
             {emailValidationStatus === 'error' && <span className="inline-block text-sm text-red-500">{emailValidationError}</span>}
           </WrapLabel>
         </section>
         <section className="flex items-center justify-center pb-5 pt-10">
-          <button className="rounded-full bg-lightPurple px-8 py-2 text-lg text-darkWhite" type="submit">
+          <Button btnStyle="submitMain" type="submit">
             {isSubmitting ? '등록 중' : '다음 단계'}
-          </button>
+          </Button>
         </section>
       </form>
     </>

@@ -1,5 +1,11 @@
 import PopTransition from '@/components/shared/common/PopTransition';
-import { fieldCategoryOption, GeneralOption, jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '@/contents';
+import {
+  fieldCategoryOption,
+  GeneralOption,
+  jobCategoryOption,
+  JobCategoryOptionMain,
+  JobCategoryOptionSub,
+} from '@/contents/option/mentoringFilteringOption';
 import cls from '@/utils/cls';
 import removeUndefined from '@/utils/removeUndefined';
 import { Popover } from '@headlessui/react';

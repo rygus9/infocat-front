@@ -1,9 +1,10 @@
 import MypageCase from '@/components/mypage/MypageCase';
 import WrapLabelShort from '@/components/mypage/WrapLabelShort';
+import Button from '@/components/shared/common/Button';
 import TextDisabledInput from '@/components/shared/input/TextDisabledInput';
-import TextInput from '@/components/shared/input/TextInput';
+import Input from '@/components/shared/input/Input';
 import WrapLabel from '@/components/shared/input/WrapLabel';
-import CareersInput from '@/components/signup-mentor/CareersInput';
+import CareersInput from '@/components/signup-informer/CareersInput';
 import useMentorInfo from '@/query/useMentorInfo';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -66,9 +67,9 @@ const mypageInformer = () => {
             <WrapLabelShort label="이메일">
               <TextDisabledInput value={informer?.email || ''}></TextDisabledInput>
             </WrapLabelShort>
-            <button className="rounded-full bg-lightPurple px-4 py-1 text-base text-darkWhite" type="button">
+            <Button btnStyle="inputBtn" type="button">
               재인증
-            </button>
+            </Button>
           </div>
         </div>
         <hr className="my-5 text-lightGray"></hr>
@@ -76,16 +77,16 @@ const mypageInformer = () => {
           <h2 className="pb-4 text-xl text-darkGray">인포머 정보 수정</h2>
           <form className="space-y-2 pr-6">
             <WrapLabel label="이름(실명)" id="name" errorMessage={errors.name?.message}>
-              <TextInput id="name" register={register('name')} type="text" placeholder="실명을 입력해주세요."></TextInput>
+              <Input id="name" {...register('name')} type="text" placeholder="실명을 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="연락처" id="phone" errorMessage={errors.phone?.message}>
-              <TextInput id="phone" register={register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></TextInput>
+              <Input id="phone" {...register('phone')} type="text" placeholder="-를 제외하고 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="직무" id="role" errorMessage={errors.role?.message}>
-              <TextInput id="role" register={register('role')} type="text" placeholder="직무를 입력해주세요."></TextInput>
+              <Input id="role" {...register('role')} type="text" placeholder="직무를 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="연차" id="years" errorMessage={errors.years?.message}>
-              <TextInput id="years" register={register('years')} type="number" placeholder="연차를 입력해주세요."></TextInput>
+              <Input id="years" {...register('years')} type="number" placeholder="연차를 입력해주세요."></Input>
             </WrapLabel>
             <WrapLabel label="커리어" id="careers" errorMessage={errors.careers && '이력 사항을 입력하세요.'} required>
               <CareersInput
@@ -96,9 +97,9 @@ const mypageInformer = () => {
               ></CareersInput>
             </WrapLabel>
             <section className="flex w-full justify-center pt-6">
-              <button className="rounded-full bg-lightPurple px-6 py-2 text-lg text-darkWhite" type="submit">
+              <Button btnStyle="submitMain" type="submit">
                 수정하기
-              </button>
+              </Button>
             </section>
           </form>
         </div>

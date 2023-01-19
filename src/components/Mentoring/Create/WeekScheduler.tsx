@@ -48,19 +48,23 @@ const startTimeToIndex = (startTime: string) => {
   return [hour * 2 + ((min / 30) << 0), week];
 };
 
-interface WeekSchedulerParams {
+interface WeekSchedulerProps {
+  onChange: (value: string[]) => void;
+  value: string[];
   timeScale: number;
-  onChange: (startTimes: string[]) => void;
-  startTimes: string[];
 }
 
-export default function WeekScheduler({ timeScale, onChange, startTimes }: WeekSchedulerParams) {
+export default function WeekScheduler({ onChange, value, timeScale }: WeekSchedulerProps) {
   const [timeTable, setTimeTable] = useState(createTimeTable);
   let scale = timeScale;
 
   useEffect(() => {
+    if (value.length !== 0) onChange([]);
+  }, [timeScale]);
+
+  useEffect(() => {
     let nextTable = createTimeTable();
-    startTimes.forEach((startTime) => {
+    value.forEach((startTime) => {
       let [now_row, now_col] = startTimeToIndex(startTime);
       if (scale == 1) {
         nextTable[now_row][now_col] = 1;
@@ -78,11 +82,11 @@ export default function WeekScheduler({ timeScale, onChange, startTimes }: WeekS
       }
     });
     setTimeTable(nextTable);
-  }, [startTimes]);
+  }, [value]);
 
   // 스케줄 없는 공간 클릭 시 채워두기
   const onBlankClick = (row: number, col: number) => {
-    onChange(startTimes.concat(indexToStartTime(row, col)));
+    onChange(value.concat(indexToStartTime(row, col)));
   };
 
   // 스케줄 있는 버튼 클릭시 지움
@@ -96,9 +100,9 @@ export default function WeekScheduler({ timeScale, onChange, startTimes }: WeekS
       }
       // prev_row, prev_col의 다음이 시작 시간임.
       let [time_row, time_col] = nextTime(prev_row, prev_col);
-      onChange(startTimes.filter((startTime) => startTime !== indexToStartTime(time_row, time_col)));
+      onChange(value.filter((startTime) => startTime !== indexToStartTime(time_row, time_col)));
     } else {
-      onChange(startTimes.filter((startTime) => startTime !== indexToStartTime(row, col)));
+      onChange(value.filter((startTime) => startTime !== indexToStartTime(row, col)));
     }
   };
 

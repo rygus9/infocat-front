@@ -1,7 +1,6 @@
 import { Listbox } from '@headlessui/react';
-import { useController, UseControllerProps } from 'react-hook-form';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { Fragment } from 'react';
+import { ForwardedRef, Fragment } from 'react';
 import cls from '@/utils/cls';
 
 interface ListBoxOption {
@@ -11,26 +10,27 @@ interface ListBoxOption {
 
 interface ListBoxProps {
   list: ListBoxOption[];
+  value: ListBoxOption;
+  onChange: (d: ListBoxOption) => void;
   id?: string;
   placeholder?: string;
 }
 
-const ListBoxInput = ({ list, id, placeholder, ...props }: ListBoxProps & UseControllerProps<any, any>) => {
-  const {
-    field: { value, onChange, ref },
-  } = useController(props);
-
+export default function ListBox({ list, id, placeholder, value, onChange }: ListBoxProps, ref: ForwardedRef<any>) {
   return (
     <Listbox value={value} onChange={onChange} as={Fragment}>
       <div className="relative">
         <Listbox.Button
-          ref={(e: any) => (ref(e), e && (e.id = id))}
+          ref={(e: any) => {
+            typeof ref === 'function' && ref(e);
+          }}
           className={cls(
             'flex w-full border border-lightGray bg-white px-2.5 py-2 shadow-sm ',
             'text-base text-darkGray',
             'placeholder:text placeholder:text-lightBlack',
             'focus:border-darkPurPle focus:outline-none focus:ring-0'
           )}
+          id={id}
         >
           <span className="flex-1 truncate text-left">{value && value.title ? value.title : placeholder}</span>
           <ChevronUpDownIcon className="text-gray-400 h-full w-6" aria-hidden="true" />
@@ -67,6 +67,4 @@ const ListBoxInput = ({ list, id, placeholder, ...props }: ListBoxProps & UseCon
       </div>
     </Listbox>
   );
-};
-
-export default ListBoxInput;
+}

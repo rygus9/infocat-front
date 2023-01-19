@@ -1,6 +1,6 @@
 import cls from '@/utils/cls';
 import { UseFormRegisterReturn } from 'react-hook-form/dist/types';
-import ToggleInput from './ToggleInput';
+import Toggle from './Toggle';
 
 interface MultiChoiceInputProps {
   type?: 'radio' | 'checkbox';
@@ -14,7 +14,7 @@ const MultiChoiceInput = ({ id, type = 'checkbox', options, register }: MultiCho
     <fieldset id={id} className={cls('flex flex-wrap items-center')}>
       {options.map((value, index) => (
         <div key={index} className={cls('py-1.5', 'mr-2')}>
-          <ToggleInput label={value.title} register={register} type={type} value={value.value}></ToggleInput>
+          <Toggle label={value.title} {...register} type={type} value={value.value}></Toggle>
         </div>
       ))}
     </fieldset>

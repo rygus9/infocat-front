@@ -1,13 +1,13 @@
-import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '@/contents';
+import { jobCategoryOption, JobCategoryOptionMain, JobCategoryOptionSub } from '@/contents/option/mentoringFilteringOption';
 import cls from '@/utils/cls';
 import { useEffect, useRef, useState } from 'react';
 
-interface CategoryInputParams {
+interface CategoryInputProps {
   value: { subCategory: string; subValue: string };
   onChange: (value: { subCategory: string; subValue: string }) => void;
 }
 
-export default function CategoryInput({ value, onChange }: CategoryInputParams) {
+export default function CategoryInput({ value, onChange }: CategoryInputProps) {
   const [mainCategory, setMainCategory] = useState<string>();
   const disclosureRef = useRef<HTMLElement>(null);
 
@@ -28,7 +28,7 @@ export default function CategoryInput({ value, onChange }: CategoryInputParams) 
   return (
     <div className="h-full w-full">
       <section className="flex items-center gap-2 pb-2">
-        {jobCategoryOption.map((main) => (
+        {jobCategoryOption.map((main, index) => (
           <button
             className={cls(
               'border bg-white py-1.5 px-3  text-base',
