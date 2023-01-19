@@ -8,6 +8,6 @@ client.defaults.paramsSerializer = (params) => {
 };
 
 if (process.env.NODE_ENV === 'development') client.defaults.baseURL = 'http://localhost:3000';
-else client.defaults.baseURL = 'https://infocat.link';
+else client.defaults.baseURL = 'https://api.infocat.link';
 
 export default client;
