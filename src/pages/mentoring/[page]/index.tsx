@@ -1,8 +1,8 @@
 import mentoringSearchApi, { MentoringSearchApiRes } from '@/api/mentoring/mentoringSearchApi';
-import ApplyButton from '@/components/Mentoring/details/ApplyButton';
-import DetailBanner from '@/components/Mentoring/details/DetailBanner';
-import DetailBody from '@/components/Mentoring/details/DetailBody';
-import Order from '@/components/Mentoring/details/Order';
+import ApplyButton from '@/components/mentoring/details/ApplyButton';
+import DetailBanner from '@/components/mentoring/details/DetailBanner';
+import DetailBody from '@/components/mentoring/details/DetailBody';
+import Order from '@/components/mentoring/details/Order';
 import { StarIcon } from '@heroicons/react/24/outline';
 import { GetServerSideProps, NextPage } from 'next';
 
