@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Infocat Project
 
-## Getting Started
+2022년 2학기 마지막 쯤에 진행한 프로젝트, 졸업 전 진행한 마지막 프로젝트다.
+단순 멘토링 매칭 플랫폼인데 멘토링 전후로 무언가 관리해주는 서비스가 있으면 어떨까 싶은 아이디어에서 출발하였다.
+기획자 1명과 프론트 1명, 벡엔드 1명에서 진행하였다.
 
-First, run the development server:
+이 프로젝트는 예전에 Resumerry를 만들었을 때보다는 많이 나아졌지만 지금 글을 쓰는 시점에서 보니 그렇다...
+(이때도 나름 인턴해서 꽤 성장했다고 생각했는데 막상 회사 다녀보니 아니다.)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### 가장 신경썼던 부분?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+해당 프로젝트에서 가장 신경 썼던 부분은 폼 입력 부분이었던 것 같다.
+검색 필터링 UI와 멘토링 일정을 등록하는 캘린더 UI가 가장 손이 많이 갔던 것 같다.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 아쉬웠던 부분
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+이 당시에도 진행하면 진행할수록 성장해서 UI가 맘에 안들었었는데 지금보니 정말 맘에 안든다. 슬슬 좀 그럴싸한 UI를 만들 때가 왔는데...
+그리고 SSR을 적용했는데 좀 미스였던 것 같다. 서버와의 통신시간이 매우 길어서 페이지 로딩 속도가 엄청 느리다.
+NextJS 13에서는 Suspense를 기본으로 지원해주기는 하지만 아직은 좀 무리가 있지 않나 싶다.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### 영상 링크
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://drive.google.com/file/d/1UEPOrccnRc63EmLgzdpwoY75uE3xQ9Qw/view?usp=sharing
