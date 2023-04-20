@@ -17,7 +17,3 @@
 이 당시에도 진행하면 진행할수록 성장해서 UI가 맘에 안들었었는데 지금보니 정말 맘에 안든다. 슬슬 좀 그럴싸한 UI를 만들 때가 왔는데...
 그리고 SSR을 적용했는데 좀 미스였던 것 같다. 서버와의 통신시간이 매우 길어서 페이지 로딩 속도가 엄청 느리다.
 NextJS 13에서는 Suspense를 기본으로 지원해주기는 하지만 아직은 좀 무리가 있지 않나 싶다.
-
-#### 영상 링크
-
-https://drive.google.com/file/d/1UEPOrccnRc63EmLgzdpwoY75uE3xQ9Qw/view?usp=sharing
