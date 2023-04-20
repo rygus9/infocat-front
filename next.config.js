@@ -3,17 +3,13 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   async rewrites() {
-    if (process.env.NODE_ENV !== 'production') {
-      return [
-        {
-          destination: 'http://localhost:8080/api/v1/:path*',
-          source: '/api/v1/:path*',
-        },
-      ];
-    } else {
-      return [];
+    return {
+      beforeFiles: [{
+        source: "/api/v1/:path*",
+        destination: "http://api.infocat.link/api/v1/:path*"
+      }]
     }
-  },
+  }
 };
 
 module.exports = nextConfig;
