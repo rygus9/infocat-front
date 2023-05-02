@@ -6,7 +6,7 @@ const nextConfig = {
     return {
       beforeFiles: [{
         source: "/api/v1/:path*",
-        destination: "http://api.infocat.link/api/v1/:path*"
+        destination: "https://api.infocat.link/api/v1/:path*"
       }]
     }
   }
